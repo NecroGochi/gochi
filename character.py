@@ -21,8 +21,8 @@ class Character(Sprite):
         self.flip_image = False
 
         self.image_sprite = [
-            pygame.image.load("Images\\nekromanta_1.png"),
-            pygame.image.load("Images\\nekromanta_2.png")
+            pygame.image.load("Images/Heroes/nekromanta_1.png"),
+            pygame.image.load("Images/Heroes/nekromanta_2.png")
         ]
         self.number_image = 0
 
