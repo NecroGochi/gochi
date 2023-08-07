@@ -1,4 +1,4 @@
-from sprite import Sprite
+from sprites.creatures.sprite import Sprite
 import pygame
 import math
 

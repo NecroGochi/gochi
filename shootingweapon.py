@@ -1,6 +1,6 @@
 import pygame
 import math
-from sprite import *
+from sprites.creatures.sprite import *
 
 
 class ShootingWeapon(Sprite):

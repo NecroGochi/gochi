@@ -1,8 +1,8 @@
 import sys
 import random
 from board import *
-from character import *
-from boss import *
+from sprites.creatures.character import *
+from sprites.creatures.boss import *
 from enemies_config import *
 from configure import load_configure_data
 from Menu.language_config import *

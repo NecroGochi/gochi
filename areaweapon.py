@@ -1,5 +1,5 @@
 import pygame
-from sprite import *
+from sprites.creatures.sprite import *
 
 
 class AreaWeapon(Sprite):

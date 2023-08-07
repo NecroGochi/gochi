@@ -1,8 +1,6 @@
 import sys
 import re
-import pygame
-from board import *
-from character import *
+from sprites.creatures.character import *
 
 
 # Initialize Pygame

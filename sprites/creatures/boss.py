@@ -1,4 +1,4 @@
-from enemy import *
+from sprites.creatures.enemy import *
 
 
 class Boss(Enemy):
