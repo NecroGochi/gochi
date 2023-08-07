@@ -4,8 +4,8 @@ from board import *
 from sprites.creatures.character import *
 from sprites.creatures.boss import *
 from sprites.items.shootingweapon import *
-from enemies_config import *
-from configure import load_configure_data
+from Configure.enemies_config import *
+from Configure.configure import load_configure_data
 from Menu.language_config import *
 from Menu.level_up_menu import LevelUpMenu
 from Menu.weapon_level_up_menu import WeaponLevelUpMenu

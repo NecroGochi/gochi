@@ -1,5 +1,5 @@
 import pygame
-from configure import load_configure_data
+from Configure.configure import load_configure_data
 from Menu.main_menu import MainMenu
 from Menu.lobby_menu import LobbyMenu
 from Menu.options_menu import OptionsMenu

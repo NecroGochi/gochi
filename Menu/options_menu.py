@@ -1,7 +1,7 @@
 import pygame
 import sys
 from Menu.menu import Menu
-from configure import change_configure_file
+from Configure.configure import change_configure_file
 
 
 class OptionsMenu(Menu):

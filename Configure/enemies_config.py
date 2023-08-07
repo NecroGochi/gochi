@@ -1,4 +1,4 @@
-PATH_IMAGINES_MONSTERS = "Images\\Monsters\\"
+PATH_IMAGINES_MONSTERS = "Images/Monsters/"
 
 
 Spinach = {

@@ -11,7 +11,7 @@ text_cant_open_configure_file = "Can't open conf.txt"
 def load_configure_data():
     # load conf file
     try:
-        with open("conf.txt", 'r') as conf_file:
+        with open("Configure/conf.txt", 'r') as conf_file:
             configure_data = dict()
             for line in conf_file:
                 configure_data[str(re.findall(KEY_PATTERN, line)[0])] = str(re.findall(VALUE_PATTERN, line)[0])
