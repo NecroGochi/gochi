@@ -14,7 +14,7 @@ class Board:
         self.camera_y = 0
 
         # Set background properties
-        self.background = pygame.image.load("Images\\Plansza.png")
+        self.background = pygame.image.load("Images/Boards/Plansza.png")
         self.background = pygame.transform.scale_by(self.background, 1)
         self.background_x = self.camera_x - 960
         self.background_y = self.camera_y - 540
