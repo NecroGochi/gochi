@@ -1,6 +1,5 @@
-from orbitingweapon import *
-from shootingweapon import *
-from areaweapon import *
+from sprites.items.orbitingweapon import *
+from sprites.items.areaweapon import *
 import pygame
 
 
