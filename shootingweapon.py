@@ -26,7 +26,7 @@ class ShootingWeapon(Sprite):
         self.speed = 10
         self.bonus_level = [5]
         self.hit = True
-        self.image_weapon = pygame.image.load("Images\\karta.png")
+        self.image_weapon = pygame.image.load("Images/Monsters/karta.png")
 
     def render(self, window, color, board_camera_x, board_camera_y):
         for each in self.hitbox:

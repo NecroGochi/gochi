@@ -23,7 +23,7 @@ class OrbitingWeapon(Sprite):
         self.speed = 0.02
         self.bonus_level = [2, 0.02]
         self.hit = True
-        self.image_weapon = pygame.image.load("Images\\ksiazka.png")
+        self.image_weapon = pygame.image.load("Images/Monsters/ksiazka.png")
 
     def render(self, window, color, board_camera_x, board_camera_y):
         for each in self.hitbox:
