@@ -6,6 +6,7 @@ from Configure.configure import change_configure_file
 
 class OptionsMenu(Menu):
 
+    # colors
     red = (255, 0, 0)
 
     def __init__(self, menu_options, window_width, window_height, font_title, font_options):
