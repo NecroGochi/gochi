@@ -137,5 +137,5 @@ while running:
             ])
             lobby_menu.change_the_language_of_character_class_name_to_polish()
         options_menu.clear_screen()
-        options_menu.render_options(white)
+        options_menu.render_options()
         options_menu.update_display()

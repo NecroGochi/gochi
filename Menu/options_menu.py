@@ -64,17 +64,17 @@ class OptionsMenu(Menu):
     def clear_screen(self):
         self.window.fill(self.black)
 
-    def render_options(self, color_selected_button):
+    def render_options(self):
         for i, option in enumerate(self.menu_options):
-            color_option = (100, 100, 100)
+            color_option = self.grey
             if i == self.selected_option:
-                color_option = color_selected_button
+                color_option = self.white
             if i == 0:
                 self.render_name_field(color_option)
                 self.render_text("Player: ", color_option, i, -100)
             elif i == 1:
-                color_polish = (100, 100, 100)
-                color_english = (100, 100, 100)
+                color_polish = self.grey
+                color_english = self.grey
                 if self.language == self.languages[0]:
                     color_polish = color_option
                     self.render_text_with_line(self.languages[0], color_polish, i, -50)
