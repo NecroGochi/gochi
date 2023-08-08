@@ -12,6 +12,9 @@ class Menu:
     def render_text(self, _string, color, number_position, shift):
         pass
 
+    def render_title(self, color):
+        pass
+
     def update_display(self):
         pass
 
