@@ -3,7 +3,7 @@ from Configure.configure import load_configure_data
 from Menu.main_menu import MainMenu
 from Menu.lobby_menu import LobbyMenu
 from Menu.options_menu import OptionsMenu
-from Menu.language_config import *
+from Configure.language_config import *
 from game import game
 from campaign import running_campaign
 

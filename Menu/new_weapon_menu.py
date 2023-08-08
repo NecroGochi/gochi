@@ -1,7 +1,6 @@
 import pygame
 import sys
 from Menu.menu import Menu
-from Menu.language_config import ENGLISH_CHARACTER_CLASS, POLISH_CHARACTER_CLASS
 
 
 class NewWeaponMenu(Menu):

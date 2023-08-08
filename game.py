@@ -6,7 +6,7 @@ from sprites.creatures.boss import *
 from sprites.items.shootingweapon import *
 from Configure.enemies_config import *
 from Configure.configure import load_configure_data
-from Menu.language_config import *
+from Configure.language_config import *
 from Menu.level_up_menu import LevelUpMenu
 from Menu.weapon_level_up_menu import WeaponLevelUpMenu
 from Menu.new_weapon_menu import NewWeaponMenu
