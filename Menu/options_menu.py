@@ -67,19 +67,22 @@ class OptionsMenu(Menu):
     def render_options(self):
         for position_number, option in enumerate(self.menu_options):
             color = self.is_selected(position_number)
-            if position_number == 0:
-                self.render_name_field(color)
-                self.render_text("Player: ", color, position_number, -100)
-            elif position_number == 1:
-                self.choose_language(color, position_number)
-            else:
-                self.render_text(option, color, position_number, 0)
+            self.render_option(position_number, option, color)
 
     def is_selected(self, position_number):
         if position_number == self.selected_option:
             return self.white
         else:
             return self.grey
+
+    def render_option(self, position_number, option, color):
+        if position_number == 0:
+            self.render_name_field(color)
+            self.render_text("Player: ", color, position_number, -100)
+        elif position_number == 1:
+            self.choose_language(color, position_number)
+        else:
+            self.render_text(option, color, position_number, 0)
 
     def choose_language(self, color_option, position_number):
         color_polish = self.grey
