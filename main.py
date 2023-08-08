@@ -69,7 +69,7 @@ selected_option = 0
 # Menus
 main_menu = MainMenu(main_menu_options, window_width, window_height, font_title, font_options)
 lobby_menu = LobbyMenu(lobby_menu_options, window_width, window_height, font_title, font_options)
-options_menu = OptionsMenu(options_menu_options, window_width, window_height, font_title, font_options)
+#options_menu = OptionsMenu(options_menu_options, window_width, window_height, font_title, font_options)
 
 # Game loop
 running = True
@@ -103,8 +103,8 @@ while running:
         if menu_state == 'end':
             menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path, images)
 
-    if menu_state == 'options':
-        menu_state, language = options_menu.events_handler(menu_state)
+    '''if menu_state == 'options':
+        language = options_menu.events_handler()
 
         if language == "english":
             # Set menu options
@@ -138,4 +138,4 @@ while running:
             lobby_menu.change_the_language_of_character_class_name_to_polish()
         options_menu.clear_screen()
         options_menu.render_options()
-        options_menu.update_display()
+        options_menu.update_display()'''

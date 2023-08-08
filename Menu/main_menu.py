@@ -1,6 +1,8 @@
 import pygame
 import sys
 from Menu.menu import Menu
+from Menu.options_menu import OptionsMenu
+from Configure.language_config import *
 
 
 class MainMenu(Menu):
@@ -44,7 +46,15 @@ class MainMenu(Menu):
                     elif self.selected_option == 1:
                         menu_state = 'campaign'
                     elif self.selected_option == 2:
-                        menu_state = 'options'
+                        # Option menu
+                        language = OptionsMenu(self.window_width, self.window_height,
+                                    self.font_title, self.font_options).run_loop()
+                        if language == "english":
+                            # Set menu options
+                            self.update_menu_options(ENGLISH_MAIN_MENU_OPTIONS)
+                        else:
+                            # Set menu options
+                            self.update_menu_options(POLISH_MAIN_MENU_OPTIONS)
                     elif self.selected_option == 3:
                         # Exit
                         pygame.quit()
