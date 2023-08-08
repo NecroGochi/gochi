@@ -47,8 +47,8 @@ class MainMenu(Menu):
                         menu_state = 'campaign'
                     elif self.selected_option == 2:
                         # Option menu
-                        language = OptionsMenu(self.window_width, self.window_height,
-                                    self.font_title, self.font_options).run_loop()
+                        language = OptionsMenu(self.window_width, self.window_height, self.font_title,
+                                               self.font_options).run_loop()
                         if language == "english":
                             # Set menu options
                             self.update_menu_options(ENGLISH_MAIN_MENU_OPTIONS)
