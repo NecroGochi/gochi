@@ -65,26 +65,29 @@ class OptionsMenu(Menu):
         self.window.fill(self.black)
 
     def render_options(self):
-        for i, option in enumerate(self.menu_options):
+        for position_number, option in enumerate(self.menu_options):
             color_option = self.grey
-            if i == self.selected_option:
+            if position_number == self.selected_option:
                 color_option = self.white
-            if i == 0:
+            if position_number == 0:
                 self.render_name_field(color_option)
-                self.render_text("Player: ", color_option, i, -100)
-            elif i == 1:
-                color_polish = self.grey
-                color_english = self.grey
-                if self.language == self.languages[0]:
-                    color_polish = color_option
-                    self.render_text_with_line(self.languages[0], color_polish, i, -50)
-                    self.render_text(self.languages[1], color_english, i, 50)
-                if self.language == self.languages[1]:
-                    color_english = color_option
-                    self.render_text(self.languages[0], color_polish, i, -50)
-                    self.render_text_with_line(self.languages[1], color_english, i, 50)
+                self.render_text("Player: ", color_option, position_number, -100)
+            elif position_number == 1:
+                self.choose_language(color_option, position_number)
             else:
-                self.render_text(option, color_option, i, 0)
+                self.render_text(option, color_option, position_number, 0)
+
+    def choose_language(self, color_option, position_number):
+        color_polish = self.grey
+        color_english = self.grey
+        if self.language == self.languages[0]:
+            color_polish = color_option
+            self.render_text_with_line(self.languages[0], color_polish, position_number, -50)
+            self.render_text(self.languages[1], color_english, position_number, 50)
+        if self.language == self.languages[1]:
+            color_english = color_option
+            self.render_text(self.languages[0], color_polish, position_number, -50)
+            self.render_text_with_line(self.languages[1], color_english, position_number, 50)
 
     def render_text(self, _string, color, position_number, shift):
         text = self.font_options.render(_string, True, color)
