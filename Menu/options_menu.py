@@ -108,8 +108,8 @@ class OptionsMenu(Menu):
         line_y = text_rect.bottomleft[1] + 2
         pygame.draw.line(self.window, color, (text_rect.left, line_y), (text_rect.right, line_y))
 
-    def render_title(self, color):
-        title_text = self.font_title.render("Pygame Menu", True, color)
+    def render_title(self):
+        title_text = self.font_title.render("Pygame Menu", True, self.white)
         title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
         self.window.blit(title_text, title_text_rect)
 
