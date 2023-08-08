@@ -19,6 +19,14 @@ class MainMenu(Menu):
         self.menu_options = menu_options
         self.selected_option = 0
 
+    def run_loop(self):
+        self.events_handler()
+        self.clear_screen()
+        self.render_options()
+        self.render_title()
+        self.render_version()
+        self.update_display()
+
     def events_handler(self, menu_state):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -43,15 +51,15 @@ class MainMenu(Menu):
                         sys.exit()
         return menu_state
 
-    def clear_screen(self, color):
-        self.window.fill(color)
+    def clear_screen(self):
+        self.window.fill(self.black)
 
-    def render_options(self, color_selected_button):
+    def render_options(self):
         for i, option in enumerate(self.menu_options):
             if i == self.selected_option:
-                color = color_selected_button
+                color = self.white
             else:
-                color = (100, 100, 100)
+                color = self.grey
             self.render_text(option, color, i, 0)
 
     def render_text(self, _string, color, position_number, shift):
@@ -59,13 +67,13 @@ class MainMenu(Menu):
         text_rect = text.get_rect(center=(self.window_width // 2, 200 + position_number * 50))
         self.window.blit(text, text_rect)
 
-    def render_title(self, color):
-        title_text = self.font_title.render("Souls Reaper", True, color)
+    def render_title(self):
+        title_text = self.font_title.render("Souls Reaper", True, self.white)
         title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
         self.window.blit(title_text, title_text_rect)
 
-    def render_version(self, color):
-        title_text = self.font_options.render("Alfa 0.1", True, color)
+    def render_version(self):
+        title_text = self.font_options.render("Alfa 0.1", True, self.white)
         title_text_rect = title_text.get_rect(center=(50, self.window_height - 50))
         self.window.blit(title_text, title_text_rect)
 

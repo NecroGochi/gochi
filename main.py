@@ -77,10 +77,10 @@ while running:
 
     if menu_state == 'main':
         menu_state = main_menu.events_handler(menu_state)
-        main_menu.clear_screen(black)
-        main_menu.render_options(white)
-        main_menu.render_title(white)
-        main_menu.render_version(white)
+        main_menu.clear_screen()
+        main_menu.render_options()
+        main_menu.render_title()
+        main_menu.render_version()
         main_menu.update_display()
 
     '''
