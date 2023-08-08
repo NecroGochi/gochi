@@ -61,8 +61,8 @@ class OptionsMenu(Menu):
                         self.name_player += event.unicode
         return menu_state, self.language
 
-    def clear_screen(self, color):
-        self.window.fill(color)
+    def clear_screen(self):
+        self.window.fill(self.black)
 
     def render_options(self, color_selected_button):
         for i, option in enumerate(self.menu_options):
