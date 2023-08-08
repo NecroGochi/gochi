@@ -6,6 +6,8 @@ from Configure.configure import change_configure_file
 
 class OptionsMenu(Menu):
 
+    red = (255, 0, 0)
+
     def __init__(self, menu_options, window_width, window_height, font_title, font_options):
         # Set the window size
         self.window_width = window_width
@@ -84,6 +86,13 @@ class OptionsMenu(Menu):
         else:
             self.render_text(option, color, position_number, 0)
 
+    def render_name_field(self, color):
+        if self.name_active:
+            color = self.red
+        pygame.draw.rect(self.window, color, self.name_field_rect, 2)
+        name_text = self.font_options.render(self.name_player, True, color)
+        self.window.blit(name_text, (self.name_field_rect.x + 5, self.name_field_rect.y + 5))
+
     def choose_language(self, color_option, position_number):
         color_polish = self.grey
         color_english = self.grey
@@ -112,13 +121,6 @@ class OptionsMenu(Menu):
         title_text = self.font_title.render("Pygame Menu", True, self.white)
         title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
         self.window.blit(title_text, title_text_rect)
-
-    def render_name_field(self, color):
-        if self.name_active:
-            color = (255, 0, 0)
-        pygame.draw.rect(self.window, color, self.name_field_rect, 2)
-        name_text = self.font_options.render(self.name_player, True, color)
-        self.window.blit(name_text, (self.name_field_rect.x + 5, self.name_field_rect.y + 5))
 
     def update_display(self):
         pygame.display.flip()
