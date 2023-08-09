@@ -14,9 +14,6 @@ class OptionsMenu(Menu):
 
     configure_data = load_configure_data()
     language = Language()
-    options_menu = [languages[language.return_language()]['player_name'],
-                    languages[language.return_language()]['language'],
-                    languages[language.return_language()]['back']]
     name_player = ''
 
     def __init__(self, window_width, window_height, font_title, font_options):
@@ -36,6 +33,9 @@ class OptionsMenu(Menu):
         self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
         self.languages = ['english', 'polish']
         self.name_active = False
+        self.options_menu = [languages[self.language.return_language()]['player_name'],
+                             languages[self.language.return_language()]['language'],
+                             languages[self.language.return_language()]['back']]
 
     def run_loop(self):
         not_end_loop = True
