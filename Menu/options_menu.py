@@ -1,9 +1,10 @@
 import pygame
 import sys
 from Menu.menu import Menu
-from Configure.configure import change_configure_file
+from Configure.configure import change_configure_file, load_configure_data
 from Configure.language_config import *
-from Configure.configure import load_configure_data
+from language import Language
+from Configure.new_language_config import *
 
 
 class OptionsMenu(Menu):
@@ -12,20 +13,11 @@ class OptionsMenu(Menu):
     red = (255, 0, 0)
 
     configure_data = load_configure_data()
-    if configure_data["language"] == "english":
-        # Set menu options
-        options_menu_options = [
-            configure_data["player_name"],
-            configure_data["language"],
-            ENGLISH_OPTIONS_MENU_OPTIONS[0]
-        ]
-    else:
-        # Set menu options
-        options_menu_options = [
-            configure_data["player_name"],
-            configure_data["language"],
-            POLISH_OPTIONS_MENU_OPTIONS[0]
-        ]
+    language = Language()
+    options_menu = [languages[language.return_language()]['player_name'],
+                    languages[language.return_language()]['language'],
+                    languages[language.return_language()]['back']]
+    name_player = ''
 
     def __init__(self, window_width, window_height, font_title, font_options):
         # Set the window size
@@ -42,19 +34,16 @@ class OptionsMenu(Menu):
 
         # Create a rectangular box for the name field
         self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
-        self.name_player = self.options_menu_options[0]
-        self.language = self.options_menu_options[1]
-        self.languages = ['english', 'polski']
+        self.languages = ['english', 'polish']
         self.name_active = False
 
     def run_loop(self):
         not_end_loop = True
         while not_end_loop:
-            not_end_loop, language = self.events_handler()
+            not_end_loop = self.events_handler()
             self.clear_screen()
             self.render_options()
             self.update_display()
-        return language
 
     def events_handler(self):
         for event in pygame.event.get():
@@ -63,24 +52,29 @@ class OptionsMenu(Menu):
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    self.selected_option = (self.selected_option - 1) % len(self.options_menu_options)
+                    self.selected_option = (self.selected_option - 1) % len(self.options_menu)
                 elif event.key == pygame.K_DOWN:
-                    self.selected_option = (self.selected_option + 1) % len(self.options_menu_options)
+                    self.selected_option = (self.selected_option + 1) % len(self.options_menu)
                 elif event.key == pygame.K_RETURN:
                     if self.selected_option == 0:
                         # Pressing Enter will toggle the active state of the name field
                         self.name_active = not self.name_active
                     elif self.selected_option == 1:
-                        if self.language == self.languages[0]:
-                            self.language = 'polski'
+                        if self.language.return_language() == self.languages[0]:
+                            self.language.change_language('polish')
+                            self.options_menu = [languages['polish']['player_name'],
+                                                 languages['polish']['language'],
+                                                 languages['polish']['back']]
                         else:
-                            self.language = 'english'
+                            self.language.change_language('english')
+                            self.options_menu = [languages['english']['player_name'],
+                                                 languages['english']['language'],
+                                                 languages['english']['back']]
                     elif self.selected_option == 2:
                         # Back to previous menu
-                        change_configure_file("player_name", self.name_player)
-                        change_configure_file("language", self.language)
-                        self.update_menu_options()
-                        return False, self.language
+                        #change_configure_file("player_name", self.name_player)
+                        #self.update_menu_options()
+                        return False
                 elif event.key == pygame.K_BACKSPACE:
                     # Pressing Backspace will remove the last character from the name field
                     if self.name_active:
@@ -89,15 +83,15 @@ class OptionsMenu(Menu):
                     # Other key presses will append the character to the name field
                     if self.name_active:
                         self.name_player += event.unicode
-        return True, self.language
+        return True
 
     def clear_screen(self):
         self.window.fill(self.black)
 
     def render_options(self):
-        for position_number, option in enumerate(self.options_menu_options):
+        for position_number, option in enumerate(self.options_menu):
             color = self.is_selected(position_number)
-            self.render_option(position_number, option, color)
+            self.render_option(position_number, color)
 
     def is_selected(self, position_number):
         if position_number == self.selected_option:
@@ -105,14 +99,15 @@ class OptionsMenu(Menu):
         else:
             return self.grey
 
-    def render_option(self, position_number, option, color):
+    def render_option(self, position_number, color):
         if position_number == 0:
             self.render_name_field(color)
-            self.render_text("Player: ", color, position_number, -100)
+            self.render_text(self.options_menu[position_number], color, position_number, -100)
         elif position_number == 1:
+            self.render_text(self.options_menu[position_number], color, position_number, -300)
             self.choose_language(color, position_number)
         else:
-            self.render_text(option, color, position_number, 0)
+            self.render_text(self.options_menu[position_number], color, position_number, 0)
 
     def render_name_field(self, color):
         if self.name_active:
@@ -124,11 +119,11 @@ class OptionsMenu(Menu):
     def choose_language(self, color_option, position_number):
         color_polish = self.grey
         color_english = self.grey
-        if self.language == self.languages[0]:
+        if self.language.return_language() == self.languages[0]:
             color_polish = color_option
             self.render_text_with_line(self.languages[0], color_polish, position_number, -50)
             self.render_text(self.languages[1], color_english, position_number, 50)
-        if self.language == self.languages[1]:
+        if self.language.return_language() == self.languages[1]:
             color_english = color_option
             self.render_text(self.languages[0], color_polish, position_number, -50)
             self.render_text_with_line(self.languages[1], color_english, position_number, 50)
@@ -152,20 +147,3 @@ class OptionsMenu(Menu):
 
     def update_display(self):
         pygame.display.flip()
-
-    def update_menu_options(self):
-        configure_data = load_configure_data()
-        if configure_data["language"] == "english":
-            # Set menu options
-            options_menu_options = [
-                configure_data["player_name"],
-                configure_data["language"],
-                ENGLISH_OPTIONS_MENU_OPTIONS[0]
-            ]
-        else:
-            # Set menu options
-            options_menu_options = [
-                configure_data["player_name"],
-                configure_data["language"],
-                POLISH_OPTIONS_MENU_OPTIONS[0]
-            ]

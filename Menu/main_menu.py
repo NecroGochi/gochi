@@ -21,6 +21,7 @@ class MainMenu(Menu):
         self.menu_options = menu_options
         self.selected_option = 0
 
+
     def run_loop(self):
         self.events_handler()
         self.clear_screen()
@@ -47,14 +48,8 @@ class MainMenu(Menu):
                         menu_state = 'campaign'
                     elif self.selected_option == 2:
                         # Option menu
-                        language = OptionsMenu(self.window_width, self.window_height, self.font_title,
-                                               self.font_options).run_loop()
-                        if language == "english":
-                            # Set menu options
-                            self.update_menu_options(ENGLISH_MAIN_MENU_OPTIONS)
-                        else:
-                            # Set menu options
-                            self.update_menu_options(POLISH_MAIN_MENU_OPTIONS)
+                        OptionsMenu(self.window_width, self.window_height, self.font_title,
+                                    self.font_options).run_loop()
                     elif self.selected_option == 3:
                         # Exit
                         pygame.quit()
