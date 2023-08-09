@@ -2,8 +2,7 @@ import pygame
 from Configure.configure import load_configure_data
 from Menu.main_menu import MainMenu
 from Configure.language_config import *
-from game import game
-from campaign import running_campaign
+
 
 # Initialize Pygame
 pygame.init()
@@ -69,24 +68,4 @@ main_menu = MainMenu(main_menu_options, window_width, window_height, font_title,
 # Game loop
 running = True
 while running:
-
-    if menu_state == 'main':
-        menu_state = main_menu.events_handler(menu_state)
-        main_menu.clear_screen()
-        main_menu.render_options()
-        main_menu.render_title()
-        main_menu.render_version()
-        main_menu.update_display()
-
-    if menu_state == "Free_play":
-        menu_state = game(menu_state)
-        menu_state = 'main'
-
-    if menu_state == "campaign":
-        image_path = 'Images\\Campaign_1'
-        images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
-        menu_state = running_campaign(menu_state, 'Scenario\\scenario_01_pl.txt', image_path, images)
-        menu_state = game(menu_state)
-        images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
-        if menu_state == 'end':
-            menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path, images)
+    main_menu.run_loop()

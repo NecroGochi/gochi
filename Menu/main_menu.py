@@ -3,6 +3,8 @@ import sys
 from Menu.menu import Menu
 from Menu.options_menu import OptionsMenu
 from Configure.language_config import *
+from campaign import running_campaign
+from game import game
 
 
 class MainMenu(Menu):
@@ -21,16 +23,18 @@ class MainMenu(Menu):
         self.menu_options = menu_options
         self.selected_option = 0
 
-
     def run_loop(self):
-        self.events_handler()
-        self.clear_screen()
-        self.render_options()
-        self.render_title()
-        self.render_version()
-        self.update_display()
+        not_end_loop = True
+        while not_end_loop:
+            not_end_loop = self.events_handler()
+            self.clear_screen()
+            self.render_options()
+            self.render_title()
+            self.render_version()
+            self.update_display()
 
-    def events_handler(self, menu_state):
+    def events_handler(self):
+        not_end_loop = True
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -43,9 +47,18 @@ class MainMenu(Menu):
                 elif event.key == pygame.K_RETURN:
                     if self.selected_option == 0:
                         # Start Game
-                        menu_state = 'Free_play'
+                        menu_state = 'main_menu'
+                        menu_state = game(menu_state)
                     elif self.selected_option == 1:
-                        menu_state = 'campaign'
+                        menu_state = 'main_menu'
+                        image_path = 'Images\\Campaign_1'
+                        images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
+                        menu_state = running_campaign(menu_state, 'Scenario\\scenario_01_pl.txt', image_path, images)
+                        menu_state = game(menu_state)
+                        images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
+                        if menu_state == 'end':
+                            menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path,
+                                                          images)
                     elif self.selected_option == 2:
                         # Option menu
                         OptionsMenu(self.window_width, self.window_height, self.font_title,
@@ -54,7 +67,7 @@ class MainMenu(Menu):
                         # Exit
                         pygame.quit()
                         sys.exit()
-        return menu_state
+        return not_end_loop
 
     def clear_screen(self):
         self.window.fill(self.black)
