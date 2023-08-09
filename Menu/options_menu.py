@@ -47,7 +47,7 @@ class OptionsMenu(Menu):
     def events_handler(self):
         not_end_loop = True
         for event in pygame.event.get():
-            self.happened(event)
+            not_end_loop = self.happened(event)
         return not_end_loop
 
     def happened(self, event):
