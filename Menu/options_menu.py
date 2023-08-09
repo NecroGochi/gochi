@@ -47,12 +47,18 @@ class OptionsMenu(Menu):
     def events_handler(self):
         not_end_loop = True
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            self.happened(event)
         return not_end_loop
-    
+
+    def happened(self, event):
+        not_end_loop = True
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            not_end_loop = self.triggered(event)
+        return not_end_loop
+
     def triggered(self, event):
         not_end_loop = True
         if event.key == pygame.K_UP:
