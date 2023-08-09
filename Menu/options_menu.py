@@ -34,7 +34,7 @@ class OptionsMenu(Menu):
         self.name_active = False
 
         # Set language choose
-        self.languages = ['english', 'polish']
+        self.languages_choose = ['english', 'polish']
 
     def run_loop(self):
         not_end_loop = True
