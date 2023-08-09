@@ -2,14 +2,16 @@ import pygame
 import sys
 from Menu.menu import Menu
 from Menu.options_menu import OptionsMenu
-from Configure.language_config import *
+from Configure.new_language_config import *
 from campaign import running_campaign
 from game import game
+from language import Language
 
 
 class MainMenu(Menu):
+    language = Language()
 
-    def __init__(self, menu_options, window_width, window_height, font_title, font_options):
+    def __init__(self, window_width, window_height, font_title, font_options):
         # Set the window size
         self.window_width = window_width
         self.window_height = window_height
@@ -20,7 +22,10 @@ class MainMenu(Menu):
         self.font_title = font_title
         self.font_options = font_options
 
-        self.menu_options = menu_options
+        self.menu_options = [languages[self.language.return_language()]['game'],
+                             languages[self.language.return_language()]['campaign'],
+                             languages[self.language.return_language()]['options'],
+                             languages[self.language.return_language()]['exit']]
         self.selected_option = 0
 
     def run_loop(self):
@@ -63,6 +68,11 @@ class MainMenu(Menu):
                         # Option menu
                         OptionsMenu(self.window_width, self.window_height, self.font_title,
                                     self.font_options).run_loop()
+                        self.language.load_configure_language()
+                        self.menu_options = [languages[self.language.return_language()]['game'],
+                                             languages[self.language.return_language()]['campaign'],
+                                             languages[self.language.return_language()]['options'],
+                                             languages[self.language.return_language()]['exit']]
                     elif self.selected_option == 3:
                         # Exit
                         pygame.quit()
