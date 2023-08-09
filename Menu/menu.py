@@ -4,7 +4,7 @@ class Menu:
     white = (255, 255, 255)
     grey = (100, 100, 100)
 
-    def events_handler(self, menu_state):
+    def events_handler(self):
         pass
 
     def clear_screen(self):
