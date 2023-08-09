@@ -59,8 +59,6 @@ class OptionsMenu(Menu):
                     not_end_loop = self.select_option()
                 elif event.key == pygame.K_BACKSPACE:
                     # Pressing Backspace will remove the last character from the name field
-                    if self.name_active:
-                        self.name_player = self.name_player[:-1]
                 else:
                     # Other key presses will append the character to the name field
         return not_end_loop
@@ -76,6 +74,10 @@ class OptionsMenu(Menu):
             change_configure_file("player_name", self.name_player)
             return False
         return True
+
+    def delete_char_player_name(self):
+        if self.name_active:
+            self.name_player = self.name_player[:-1]
 
     def write_char_player_name(self, event):
         if self.name_active:
