@@ -32,11 +32,14 @@ class OptionsMenu(Menu):
         # Create a rectangular box for the name field
         self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
         self.languages = ['english', 'polish']
-        self.name_active = False
         self.options_menu = [languages[self.language.return_language()]['player_name'],
                              languages[self.language.return_language()]['language'],
                              languages[self.language.return_language()]['back']]
 
+        # Set player name rectangular
+        self.name_player = load_configure_data()['player_name']
+        self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
+        self.name_active = False
     def run_loop(self):
         not_end_loop = True
         while not_end_loop:
@@ -72,8 +75,7 @@ class OptionsMenu(Menu):
                                                  languages['english']['back']]
                     elif self.selected_option == 2:
                         # Back to previous menu
-                        #change_configure_file("player_name", self.name_player)
-                        #self.update_menu_options()
+                        change_configure_file("player_name", self.name_player)
                         return False
                 elif event.key == pygame.K_BACKSPACE:
                     # Pressing Backspace will remove the last character from the name field
@@ -102,7 +104,7 @@ class OptionsMenu(Menu):
     def render_option(self, position_number, color):
         if position_number == 0:
             self.render_name_field(color)
-            self.render_text(self.options_menu[position_number], color, position_number, -100)
+            self.render_text(self.options_menu[position_number], color, position_number, -200)
         elif position_number == 1:
             self.render_text(self.options_menu[position_number], color, position_number, -300)
             self.choose_language(color, position_number)
