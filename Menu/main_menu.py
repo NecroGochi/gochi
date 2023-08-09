@@ -101,6 +101,3 @@ class MainMenu(Menu):
 
     def update_display(self):
         pygame.display.flip()
-
-    def update_menu_options(self, new_options):
-        self.menu_options = new_options
