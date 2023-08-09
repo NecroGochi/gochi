@@ -1,11 +1,11 @@
 import pygame
 import sys
-from Menu.menu import Menu
-from Menu.options_menu import OptionsMenu
-from Configure.new_language_config import *
 from campaign import running_campaign
+from Configure.new_language_config import *
 from game import game
 from language import Language
+from Menu.menu import Menu
+from Menu.options_menu import OptionsMenu
 
 
 class MainMenu(Menu):
