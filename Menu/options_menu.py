@@ -63,8 +63,6 @@ class OptionsMenu(Menu):
                         self.name_player = self.name_player[:-1]
                 else:
                     # Other key presses will append the character to the name field
-                    if self.name_active:
-                        self.name_player += event.unicode
         return not_end_loop
     
     def select_option(self):
@@ -78,6 +76,10 @@ class OptionsMenu(Menu):
             change_configure_file("player_name", self.name_player)
             return False
         return True
+
+    def write_char_player_name(self, event):
+        if self.name_active:
+            self.name_player += event.unicode
 
     def select_language_option(self):
         if self.language.return_language() == self.languages_choose[0]:
