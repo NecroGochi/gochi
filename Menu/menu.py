@@ -21,6 +21,3 @@ class Menu:
 
     def update_display(self):
         pass
-
-    def update_menu_options(self, new_options):
-        pass
