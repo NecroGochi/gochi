@@ -24,7 +24,7 @@ def load_configure_data():
 def load_configure_file():
     # load conf file
     try:
-        with open("conf.txt", 'r') as conf_file:
+        with open("Configure/conf.txt", 'r') as conf_file:
             configure_file = []
             for line in conf_file:
                 configure_file.append(line)
@@ -37,7 +37,7 @@ def load_configure_file():
 def change_configure_file(key, value):
     configure_file = load_configure_file()
     try:
-        with open("conf.txt", 'w') as conf_file:
+        with open("Configure/conf.txt", 'w') as conf_file:
             for line in configure_file:
                 if str(re.findall(KEY_PATTERN, line)[0]) != key:
                     conf_file.write(line)
