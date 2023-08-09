@@ -51,18 +51,24 @@ class OptionsMenu(Menu):
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    self.selected_option = (self.selected_option - 1) % len(self.options_menu)
-                elif event.key == pygame.K_DOWN:
-                    self.selected_option = (self.selected_option + 1) % len(self.options_menu)
-                elif event.key == pygame.K_RETURN:
-                    not_end_loop = self.select_option()
-                elif event.key == pygame.K_BACKSPACE:
-                    # Pressing Backspace will remove the last character from the name field
-                else:
-                    # Other key presses will append the character to the name field
         return not_end_loop
     
+    def triggered(self, event):
+        not_end_loop = True
+        if event.key == pygame.K_UP:
+            self.selected_option = (self.selected_option - 1) % len(self.options_menu)
+        elif event.key == pygame.K_DOWN:
+            self.selected_option = (self.selected_option + 1) % len(self.options_menu)
+        elif event.key == pygame.K_RETURN:
+            not_end_loop = self.select_option()
+        elif event.key == pygame.K_BACKSPACE:
+            # Pressing Backspace will remove the last character from the name field
+            self.delete_char_player_name()
+        else:
+            # Other key presses will append the character to the name field
+            self.write_char_player_name(event)
+        return not_end_loop
+
     def select_option(self):
         if self.selected_option == 0:
             # Pressing Enter will toggle the active state of the name field
