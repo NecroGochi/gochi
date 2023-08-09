@@ -8,5 +8,8 @@ class Language:
         self.current_language = new_language
         change_configure_file("language", new_language)
 
+    def load_configure_language(self):
+        self.current_language = load_configure_data()['language']
+
     def return_language(self):
         return self.current_language
