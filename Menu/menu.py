@@ -13,7 +13,7 @@ class Menu:
     def render_options(self):
         pass
 
-    def render_text(self, _string, number_position, shift):
+    def render_text(self, _string, color, number_position, shift):
         pass
 
     def render_title(self):
