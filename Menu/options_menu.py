@@ -59,16 +59,7 @@ class OptionsMenu(Menu):
                         # Pressing Enter will toggle the active state of the name field
                         self.name_active = not self.name_active
                     elif self.selected_option == 1:
-                        if self.language.return_language() == self.languages[0]:
-                            self.language.change_language('polish')
-                            self.options_menu = [languages['polish']['player_name'],
-                                                 languages['polish']['language'],
-                                                 languages['polish']['back']]
-                        else:
-                            self.language.change_language('english')
-                            self.options_menu = [languages['english']['player_name'],
-                                                 languages['english']['language'],
-                                                 languages['english']['back']]
+                        self.select_language_option()
                     elif self.selected_option == 2:
                         # Back to previous menu
                         change_configure_file("player_name", self.name_player)
@@ -82,6 +73,18 @@ class OptionsMenu(Menu):
                     if self.name_active:
                         self.name_player += event.unicode
         return True
+
+    def select_language_option(self):
+        if self.language.return_language() == self.languages_choose[0]:
+            self.language.change_language('polish')
+            self.options_menu = [languages['polish']['player_name'],
+                                 languages['polish']['language'],
+                                 languages['polish']['back']]
+        else:
+            self.language.change_language('english')
+            self.options_menu = [languages['english']['player_name'],
+                                 languages['english']['language'],
+                                 languages['english']['back']]
 
     def clear_screen(self):
         self.window.fill(self.black)
@@ -117,14 +120,14 @@ class OptionsMenu(Menu):
     def choose_language(self, color_option, position_number):
         color_polish = self.grey
         color_english = self.grey
-        if self.language.return_language() == self.languages[0]:
+        if self.language.return_language() == self.languages_choose[0]:
             color_polish = color_option
-            self.render_text_with_line(self.languages[0], color_polish, position_number, -50)
-            self.render_text(self.languages[1], color_english, position_number, 50)
-        if self.language.return_language() == self.languages[1]:
+            self.render_text_with_line(self.languages_choose[0], color_polish, position_number, -50)
+            self.render_text(self.languages_choose[1], color_english, position_number, 50)
+        if self.language.return_language() == self.languages_choose[1]:
             color_english = color_option
-            self.render_text(self.languages[0], color_polish, position_number, -50)
-            self.render_text_with_line(self.languages[1], color_english, position_number, 50)
+            self.render_text(self.languages_choose[0], color_polish, position_number, -50)
+            self.render_text_with_line(self.languages_choose[1], color_english, position_number, 50)
 
     def render_text(self, _string, color, position_number, shift):
         text = self.font_options.render(_string, True, color)
