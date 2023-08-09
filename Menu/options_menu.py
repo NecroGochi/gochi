@@ -1,20 +1,15 @@
 import pygame
 import sys
-from Menu.menu import Menu
 from Configure.configure import change_configure_file, load_configure_data
-from Configure.language_config import *
-from language import Language
 from Configure.new_language_config import *
+from Menu.menu import Menu
+from language import Language
 
 
 class OptionsMenu(Menu):
-
-    # colors
+    # Set static values
     red = (255, 0, 0)
-
-    configure_data = load_configure_data()
     language = Language()
-    name_player = ''
 
     def __init__(self, window_width, window_height, font_title, font_options):
         # Set the window size
@@ -26,12 +21,9 @@ class OptionsMenu(Menu):
         # Set Fonts
         self.font_title = font_title
         self.font_options = font_options
-
         self.selected_option = 0
 
-        # Create a rectangular box for the name field
-        self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
-        self.languages = ['english', 'polish']
+        # Set options
         self.options_menu = [languages[self.language.return_language()]['player_name'],
                              languages[self.language.return_language()]['language'],
                              languages[self.language.return_language()]['back']]
@@ -40,6 +32,10 @@ class OptionsMenu(Menu):
         self.name_player = load_configure_data()['player_name']
         self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
         self.name_active = False
+
+        # Set language choose
+        self.languages = ['english', 'polish']
+
     def run_loop(self):
         not_end_loop = True
         while not_end_loop:
