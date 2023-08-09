@@ -63,7 +63,7 @@ menu_state = 'main'
 selected_option = 0
 
 # Menus
-main_menu = MainMenu(main_menu_options, window_width, window_height, font_title, font_options)
+main_menu = MainMenu(window_width, window_height, font_title, font_options)
 
 # Game loop
 running = True
