@@ -22,6 +22,7 @@ class MainMenu(Menu):
         self.font_title = font_title
         self.font_options = font_options
 
+        # Set menu
         self.menu_options = [languages[self.language.return_language()]['game'],
                              languages[self.language.return_language()]['campaign'],
                              languages[self.language.return_language()]['options'],
