@@ -42,11 +42,15 @@ class MainMenu(Menu):
     def events_handler(self):
         not_end_loop = True
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
+            self.happened(event)
         return not_end_loop
+
+    def happened(self, event):
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            self.triggered(event)
 
     def triggered(self, event):
         if event.key == pygame.K_UP:
