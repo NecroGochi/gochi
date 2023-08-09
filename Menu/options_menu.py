@@ -45,6 +45,7 @@ class OptionsMenu(Menu):
             self.update_display()
 
     def events_handler(self):
+        not_end_loop = True
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -55,15 +56,7 @@ class OptionsMenu(Menu):
                 elif event.key == pygame.K_DOWN:
                     self.selected_option = (self.selected_option + 1) % len(self.options_menu)
                 elif event.key == pygame.K_RETURN:
-                    if self.selected_option == 0:
-                        # Pressing Enter will toggle the active state of the name field
-                        self.name_active = not self.name_active
-                    elif self.selected_option == 1:
-                        self.select_language_option()
-                    elif self.selected_option == 2:
-                        # Back to previous menu
-                        change_configure_file("player_name", self.name_player)
-                        return False
+                    not_end_loop = self.select_option()
                 elif event.key == pygame.K_BACKSPACE:
                     # Pressing Backspace will remove the last character from the name field
                     if self.name_active:
@@ -72,6 +65,18 @@ class OptionsMenu(Menu):
                     # Other key presses will append the character to the name field
                     if self.name_active:
                         self.name_player += event.unicode
+        return not_end_loop
+    
+    def select_option(self):
+        if self.selected_option == 0:
+            # Pressing Enter will toggle the active state of the name field
+            self.name_active = not self.name_active
+        elif self.selected_option == 1:
+            self.select_language_option()
+        elif self.selected_option == 2:
+            # Back to previous menu
+            change_configure_file("player_name", self.name_player)
+            return False
         return True
 
     def select_language_option(self):
