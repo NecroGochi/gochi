@@ -51,34 +51,36 @@ class MainMenu(Menu):
                 elif event.key == pygame.K_DOWN:
                     self.selected_option = (self.selected_option + 1) % len(self.menu_options)
                 elif event.key == pygame.K_RETURN:
-                    if self.selected_option == 0:
-                        # Start Game
-                        menu_state = 'main_menu'
-                        menu_state = game(menu_state)
-                    elif self.selected_option == 1:
-                        menu_state = 'main_menu'
-                        image_path = 'Images\\Campaign_1'
-                        images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
-                        menu_state = running_campaign(menu_state, 'Scenario\\scenario_01_pl.txt', image_path, images)
-                        menu_state = game(menu_state)
-                        images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
-                        if menu_state == 'end':
-                            menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path,
-                                                          images)
-                    elif self.selected_option == 2:
-                        # Option menu
-                        OptionsMenu(self.window_width, self.window_height, self.font_title,
-                                    self.font_options).run_loop()
-                        self.language.load_configure_language()
-                        self.menu_options = [languages[self.language.return_language()]['game'],
-                                             languages[self.language.return_language()]['campaign'],
-                                             languages[self.language.return_language()]['options'],
-                                             languages[self.language.return_language()]['exit']]
-                    elif self.selected_option == 3:
-                        # Exit
-                        pygame.quit()
-                        sys.exit()
         return not_end_loop
+
+    def select_option(self):
+        if self.selected_option == 0:
+            # Start Game
+            menu_state = 'main_menu'
+            menu_state = game(menu_state)
+        elif self.selected_option == 1:
+            menu_state = 'main_menu'
+            image_path = 'Images\\Campaign_1'
+            images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
+            menu_state = running_campaign(menu_state, 'Scenario\\scenario_01_pl.txt', image_path, images)
+            menu_state = game(menu_state)
+            images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
+            if menu_state == 'end':
+                menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path,
+                                              images)
+        elif self.selected_option == 2:
+            # Option menu
+            OptionsMenu(self.window_width, self.window_height, self.font_title,
+                        self.font_options).run_loop()
+            self.language.load_configure_language()
+            self.menu_options = [languages[self.language.return_language()]['game'],
+                                 languages[self.language.return_language()]['campaign'],
+                                 languages[self.language.return_language()]['options'],
+                                 languages[self.language.return_language()]['exit']]
+        elif self.selected_option == 3:
+            # Exit
+            pygame.quit()
+            sys.exit()
 
     def clear_screen(self):
         self.window.fill(self.black)
