@@ -7,6 +7,7 @@ from Menu.menu import Menu
 
 class DefeatedMenu(Menu):
     red = (155, 0, 0)
+    language = Language()
 
     def __init__(self, menu_options, window, window_width, window_height, font_title, font_options):
         # Set the window size
