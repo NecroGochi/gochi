@@ -46,6 +46,13 @@ class WinMenu(Menu):
                 color = (100, 100, 100)
             self.render_text(option, color, i, 0)
 
+    def is_selected(self, position_number):
+        if position_number == self.selected_option:
+            color = self.white
+        else:
+            color = self.grey
+        return color
+
     def render_text(self, _string, color, position_number, shift):
         text = self.font_options.render(_string, True, color)
         text_rect = text.get_rect(center=(self.window_width // 2, 200 + position_number * 50))
