@@ -23,6 +23,16 @@ class WinMenu(Menu):
         self.menu_options = [languages[self.language.return_language()]['exit']]
         self.selected_option = 0
 
+    def run_loop(self):
+        not_end_loop = True
+        self.language.load_configure_language()
+        self.menu_options = [languages[self.language.return_language()]['exit']]
+        while not_end_loop:
+            not_end_loop = self.events_handler()
+            self.clear_screen()
+            self.render_options()
+            self.render_title()
+            self.update_display()
 
     def events_handler(self):
         not_end_loop = True
