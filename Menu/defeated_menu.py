@@ -1,5 +1,7 @@
 import pygame
 import sys
+from Configure.new_language_config import *
+from language import Language
 from Menu.menu import Menu
 
 
