@@ -44,11 +44,14 @@ class NewWeaponMenu(Menu):
 
     def render_options(self, color_selected_button):
         for i, option in enumerate(self.menu_options):
-            if i == self.selected_option:
-                color = color_selected_button
-            else:
-                color = (100, 100, 100)
             self.render_text(option, color, i, 0)
+
+    def is_selected(self, position_number):
+        if position_number == self.selected_option:
+            color = self.white
+        else:
+            color = self.grey
+        return color
 
     def render_text(self, _string, color, position_number, shift):
         text = self.font_options.render(_string, True, color)
