@@ -36,19 +36,18 @@ class DefeatedMenu(Menu):
             self.update_display()
 
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    self.selected_option = (self.selected_option - 1) % len(self.menu_options)
-                elif event.key == pygame.K_DOWN:
-                    self.selected_option = (self.selected_option + 1) % len(self.menu_options)
-                elif event.key == pygame.K_RETURN:
-                    if self.selected_option == 0:
-                        # Back to menu
-                        menu_state = 'main'
-        return menu_state
+            not_end_loop = self.happened(event)
+        return not_end_loop
+
+    def happened(self, event):
+        not_end_loop = True
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            not_end_loop = self.triggered(event)
+        return not_end_loop
+
     def triggered(self, event):
         not_end_loop = True
         if event.key == pygame.K_UP:
