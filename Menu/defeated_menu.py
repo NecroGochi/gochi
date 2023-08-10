@@ -25,6 +25,16 @@ class DefeatedMenu(Menu):
         self.selected_option = 0
 
     def events_handler(self, menu_state):
+    def run_loop(self):
+        not_end_loop = True
+        self.menu_options = [languages[self.language.return_language()]['exit']]
+        while not_end_loop:
+            not_end_loop = self.events_handler()
+            self.clear_screen()
+            self.render_options()
+            self.render_title()
+            self.update_display()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
