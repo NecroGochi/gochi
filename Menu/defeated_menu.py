@@ -4,6 +4,7 @@ from Menu.menu import Menu
 
 
 class DefeatedMenu(Menu):
+    red = (155, 0, 0)
 
     def __init__(self, menu_options, window, window_width, window_height, font_title, font_options):
         # Set the window size
@@ -51,8 +52,8 @@ class DefeatedMenu(Menu):
         text_rect = text.get_rect(center=(self.window_width // 2, 200 + position_number * 50))
         self.window.blit(text, text_rect)
 
-    def render_title(self, color):
-        title_text = self.font_title.render("DEFEATED", True, color)
+    def render_title(self):
+        title_text = self.font_title.render("DEFEATED", True, self.red)
         title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
         self.window.blit(title_text, title_text_rect)
 
