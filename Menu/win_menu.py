@@ -46,6 +46,13 @@ class WinMenu(Menu):
                 color = (100, 100, 100)
             self.render_text(option, color, i, 0)
 
+    def select_option(self):
+        not_end_loop = True
+        if self.selected_option == 0:
+            # Back to menu
+            not_end_loop = False
+        return not_end_loop
+
     def is_selected(self, position_number):
         if position_number == self.selected_option:
             color = self.white
