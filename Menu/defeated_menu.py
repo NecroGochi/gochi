@@ -26,6 +26,7 @@ class DefeatedMenu(Menu):
 
     def run_loop(self):
         not_end_loop = True
+        self.language.load_configure_language()
         self.menu_options = [languages[self.language.return_language()]['exit']]
         while not_end_loop:
             not_end_loop = self.events_handler()
