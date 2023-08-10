@@ -49,6 +49,16 @@ class DefeatedMenu(Menu):
                         # Back to menu
                         menu_state = 'main'
         return menu_state
+    def triggered(self, event):
+        not_end_loop = True
+        if event.key == pygame.K_UP:
+            self.selected_option = (self.selected_option - 1) % len(self.menu_options)
+        elif event.key == pygame.K_DOWN:
+            self.selected_option = (self.selected_option + 1) % len(self.menu_options)
+        elif event.key == pygame.K_RETURN:
+            not_end_loop = self.selected_option()
+        return not_end_loop
+
     def select_option(self):
         not_end_loop = True
         if self.selected_option == 0:
