@@ -439,13 +439,6 @@ def game(menu_state):
     if not_defeated_final_boss:
         defeated_menu.run_loop()
     else:
-        menu_state = 'Win'
-
-    while menu_state == 'Win':
-        menu_state = win_menu.events_handler(menu_state)
-        win_menu.clear_screen(black)
-        win_menu.render_options(white)
-        win_menu.render_title(white)
-        win_menu.update_display()
+        win_menu.run_loop()
 
     return menu_state
