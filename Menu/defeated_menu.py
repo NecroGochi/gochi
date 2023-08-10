@@ -24,7 +24,6 @@ class DefeatedMenu(Menu):
         self.menu_options = [languages[self.language.return_language()]['exit']]
         self.selected_option = 0
 
-    def events_handler(self, menu_state):
     def run_loop(self):
         not_end_loop = True
         self.menu_options = [languages[self.language.return_language()]['exit']]
@@ -35,6 +34,8 @@ class DefeatedMenu(Menu):
             self.render_title()
             self.update_display()
 
+    def events_handler(self):
+        not_end_loop = True
         for event in pygame.event.get():
             not_end_loop = self.happened(event)
         return not_end_loop
