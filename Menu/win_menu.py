@@ -8,7 +8,7 @@ from Menu.menu import Menu
 class WinMenu(Menu):
     language = Language()
 
-    def __init__(self, menu_options, window, window_width, window_height, font_title, font_options):
+    def __init__(self, window, window_width, window_height, font_title, font_options):
         # Set the window size
         self.window_width = window_width
         self.window_height = window_height
@@ -19,7 +19,8 @@ class WinMenu(Menu):
         self.font_title = font_title
         self.font_options = font_options
 
-        self.menu_options = menu_options
+        # Set menu
+        self.menu_options = [languages[self.language.return_language()]['exit']]
         self.selected_option = 0
 
 
