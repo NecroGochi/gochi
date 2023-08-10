@@ -39,8 +39,8 @@ class NewWeaponMenu(Menu):
                         menu_state = "pause"
         return menu_state
 
-    def clear_screen(self, color):
-        self.window.fill(color)
+    def clear_screen(self):
+        self.window.fill(self.black)
 
     def render_options(self, color_selected_button):
         for position_number, option in enumerate(self.menu_options):
