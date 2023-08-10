@@ -59,6 +59,11 @@ class WinMenu(Menu):
     def clear_screen(self):
         self.window.fill(self.black)
 
+    def render_options(self):
+        for position_number, option in enumerate(self.menu_options):
+            color = self.is_selected(position_number)
+            self.render_text(option, color, position_number, 0)
+
     def is_selected(self, position_number):
         if position_number == self.selected_option:
             color = self.white
