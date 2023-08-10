@@ -51,8 +51,8 @@ class WinMenu(Menu):
         text_rect = text.get_rect(center=(self.window_width // 2, 200 + position_number * 50))
         self.window.blit(text, text_rect)
 
-    def render_title(self, color):
-        title_text = self.font_title.render("WIN", True, color)
+    def render_title(self):
+        title_text = self.font_title.render("WIN", True, self.white)
         title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
         self.window.blit(title_text, title_text_rect)
 
