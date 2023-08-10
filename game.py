@@ -443,8 +443,8 @@ def game(menu_state):
 
     while menu_state == 'defeated':
         menu_state = defeated_menu.events_handler(menu_state)
-        defeated_menu.clear_screen(black)
         defeated_menu.render_options(white)
+        defeated_menu.clear_screen()
         defeated_menu.render_title((155, 0, 0))
         defeated_menu.update_display()
 
