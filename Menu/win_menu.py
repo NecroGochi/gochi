@@ -56,6 +56,9 @@ class WinMenu(Menu):
             not_end_loop = False
         return not_end_loop
 
+    def clear_screen(self):
+        self.window.fill(self.black)
+
     def is_selected(self, position_number):
         if position_number == self.selected_option:
             color = self.white
