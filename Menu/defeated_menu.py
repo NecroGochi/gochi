@@ -56,7 +56,7 @@ class DefeatedMenu(Menu):
         elif event.key == pygame.K_DOWN:
             self.selected_option = (self.selected_option + 1) % len(self.menu_options)
         elif event.key == pygame.K_RETURN:
-            not_end_loop = self.selected_option()
+            not_end_loop = self.select_option()
         return not_end_loop
 
     def select_option(self):
