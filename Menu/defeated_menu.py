@@ -20,7 +20,8 @@ class DefeatedMenu(Menu):
         self.font_title = font_title
         self.font_options = font_options
 
-        self.menu_options = menu_options
+        # Set menu
+        self.menu_options = [languages[self.language.return_language()]['exit']]
         self.selected_option = 0
 
     def events_handler(self, menu_state):
