@@ -437,16 +437,9 @@ def game(menu_state):
         pygame.display.flip()
 
     if not_defeated_final_boss:
-        menu_state = 'defeated'
+        defeated_menu.run_loop()
     else:
         menu_state = 'Win'
-
-    while menu_state == 'defeated':
-        menu_state = defeated_menu.events_handler(menu_state)
-        defeated_menu.clear_screen()
-        defeated_menu.render_options()
-        defeated_menu.render_title()
-        defeated_menu.update_display()
 
     while menu_state == 'Win':
         menu_state = win_menu.events_handler(menu_state)
