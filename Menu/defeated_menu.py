@@ -38,12 +38,12 @@ class DefeatedMenu(Menu):
     def clear_screen(self):
         self.window.fill(self.black)
 
-    def render_options(self, color_selected_button):
+    def render_options(self):
         for i, option in enumerate(self.menu_options):
             if i == self.selected_option:
-                color = color_selected_button
+                color = self.white
             else:
-                color = (100, 100, 100)
+                color = self.grey
             self.render_text(option, color, i, 0)
 
     def render_text(self, _string, color, position_number, shift):
