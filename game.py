@@ -306,8 +306,8 @@ def game(menu_state):
     new_weapon_menu_options = new_weapon_menu_options[1:] + new_weapon_menu_options[:1]
     new_weapon_menu = NewWeaponMenu(new_weapon_menu_options, window, window_width, window_height, font_title,
                                     font_options)
-    defeated_menu = DefeatedMenu(defeated_menu_options, window, window_width, window_height, font_title, font_options)
-    win_menu = WinMenu(win_menu_options, window, window_width, window_height, font_title, font_options)
+    defeated_menu = DefeatedMenu(window, window_width, window_height, font_title, font_options)
+    win_menu = WinMenu(window, window_width, window_height, font_title, font_options)
 
     # Game loop
     running = True
