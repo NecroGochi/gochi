@@ -35,8 +35,8 @@ class DefeatedMenu(Menu):
                         menu_state = 'main'
         return menu_state
 
-    def clear_screen(self, color):
-        self.window.fill(color)
+    def clear_screen(self):
+        self.window.fill(self.black)
 
     def render_options(self, color_selected_button):
         for i, option in enumerate(self.menu_options):
