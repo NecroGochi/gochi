@@ -9,7 +9,7 @@ class DefeatedMenu(Menu):
     red = (155, 0, 0)
     language = Language()
 
-    def __init__(self, menu_options, window, window_width, window_height, font_title, font_options):
+    def __init__(self, window, window_width, window_height, font_title, font_options):
         # Set the window size
         self.window_width = window_width
         self.window_height = window_height
