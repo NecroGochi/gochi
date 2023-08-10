@@ -71,9 +71,9 @@ class DefeatedMenu(Menu):
         self.window.fill(self.black)
 
     def render_options(self):
-        for i, option in enumerate(self.menu_options):
-            color = self.is_selected(self.menu_options)
-            self.render_text(option, color, i, 0)
+        for position_number, option in enumerate(self.menu_options):
+            color = self.is_selected(position_number)
+            self.render_text(option, color, position_number, 0)
 
     def is_selected(self, position_number):
         if position_number == self.selected_option:
