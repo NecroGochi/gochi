@@ -1,2 +1,2 @@
-[player_name] = "Deregbruyggnfxg"
+[player_name] = "Deregbru"
 [language] = "polish"

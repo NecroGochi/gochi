@@ -5,11 +5,7 @@ from sprites.creatures.character import *
 from sprites.creatures.boss import *
 from sprites.items.shootingweapon import *
 from Configure.enemies_config import *
-from Configure.configure import load_configure_data
-from Configure.language_config import *
 from Menu.level_up_menu import LevelUpMenu
-from Menu.weapon_level_up_menu import WeaponLevelUpMenu
-from Menu.new_weapon_menu import NewWeaponMenu
 from Menu.defeated_menu import DefeatedMenu
 from Menu.win_menu import WinMenu
 
@@ -277,37 +273,14 @@ def game(menu_state):
     not_defeated_final_boss = True
     show_stat_up = 0
 
-    configure_data = load_configure_data()
-
-    if configure_data["language"] == "english":
-        # Set menu options
-        level_up_menu_options = ENGLISH_LEVEL_UP_MENU
-        weapon_level_up_menu_options = ENGLISH_WEAPON_LEVEL_UP_MENU
-        new_weapon_menu_options = ENGLISH_NEW_WEAPON_MENU
-        defeated_menu_options = ENGLISH_DEFEATED_MENU
-        win_menu_options = ENGLISH_WIN_MENU
-    else:
-        # Set menu options
-        level_up_menu_options = POLISH_LEVEL_UP_MENU
-        weapon_level_up_menu_options = POLISH_WEAPON_LEVEL_UP_MENU
-        new_weapon_menu_options = POLISH_NEW_WEAPON_MENU
-        defeated_menu_options = POLISH_DEFEATED_MENU
-        win_menu_options = POLISH_WIN_MENU
-    new_weapon_menu_options = [new_weapon_menu_options[0]]
-    weapon_level_up_menu_options = [weapon_level_up_menu_options[0]]
-    level_up_menu = LevelUpMenu(level_up_menu_options, window, window_width, window_height, font_title, font_options)
-    for each in [OrbitingWeapon(board.width // 2, board.height // 2)]:
-        weapon_level_up_menu_options.append(each.name)
-    weapon_level_up_menu_options = weapon_level_up_menu_options[1:] + weapon_level_up_menu_options[:1]
-    weapon_level_up_menu = WeaponLevelUpMenu(weapon_level_up_menu_options, window, window_width, window_height,
-                                             font_title, font_options)
-    for each in [ShootingWeapon(0, 0), AreaWeapon(0, 0)]:
-        new_weapon_menu_options.append(each.name)
-    new_weapon_menu_options = new_weapon_menu_options[1:] + new_weapon_menu_options[:1]
-    new_weapon_menu = NewWeaponMenu(new_weapon_menu_options, window, window_width, window_height, font_title,
-                                    font_options)
     defeated_menu = DefeatedMenu(window, window_width, window_height, font_title, font_options)
     win_menu = WinMenu(window, window_width, window_height, font_title, font_options)
+    level_up_menu = LevelUpMenu(window, window_width, window_height, font_title, font_options)
+    level_up_menu.weapon_level_up.add_item_to_menu_option(player.items[0].name)
+    for weapon in new_weapons:
+        level_up_menu.new_weapon_menu.add_item_to_menu_option(weapon.name)
+    print(level_up_menu.new_weapon_menu.menu_options)
+    print(level_up_menu.weapon_level_up.menu_options)
 
     # Game loop
     running = True
@@ -366,40 +339,18 @@ def game(menu_state):
                 # Get level
                 if player.actual_exp > player.max_exp:
                     for level_up in range(player.actual_exp // player.max_exp):
-                        menu_state = "pause"
-                        while menu_state == "pause":
-                            menu_state = level_up_menu.events_handler(menu_state)
-                            level_up_menu.clear_screen(black)
-                            level_up_menu.render_options(white)
-                            level_up_menu.render_title(white)
-                            level_up_menu.update_display()
-                            if menu_state == "player_level_up":
-                                player.grow_stat()
-                                show_stat_up = 100
-                            while menu_state == "weapon_level_up":
-                                menu_state = weapon_level_up_menu.events_handler(menu_state)
-                                weapon_level_up_menu.clear_screen(black)
-                                weapon_level_up_menu.render_options(white)
-                                weapon_level_up_menu.render_title(white)
-                                weapon_level_up_menu.update_display()
-                                if menu_state != 'weapon_level_up' and menu_state != 'pause':
-                                    player.items[int(menu_state)].get_level()
-                                    show_stat_up = 100
-                            while menu_state == "new_weapon":
-                                menu_state = new_weapon_menu.events_handler(menu_state)
-                                new_weapon_menu.clear_screen(black)
-                                new_weapon_menu.render_options(white)
-                                new_weapon_menu.render_title(white)
-                                new_weapon_menu.update_display()
-                                if menu_state != 'new_weapon' and menu_state != 'pause':
-                                    player.items.append(new_weapons[int(menu_state)])
-                                    new_weapon_menu.menu_options.remove(new_weapon_menu.menu_options[int(menu_state)])
-                                    weapon_level_up_menu.menu_options.append(new_weapons[int(menu_state)].name)
-                                    _length = len(weapon_level_up_menu.menu_options)
-                                    weapon_level_up_menu.menu_options = weapon_level_up_menu.menu_options[:_length - 2] + \
-                                                                        [weapon_level_up_menu.menu_options[_length - 1]] +\
-                                                                        [weapon_level_up_menu.menu_options[_length - 2]]
-                                    new_weapons.remove(new_weapons[int(menu_state)])
+                        option_number = level_up_menu.run_loop()
+                        if option_number[0] == 0:
+                            player.grow_stat()
+                            show_stat_up = 100
+                        if option_number[0] == 1:
+                            player.items[option_number[1]].get_level()
+                            show_stat_up = 100
+                        if option_number[0] == 2:
+                            player.items.append(new_weapons[option_number[1]])
+                            level_up_menu.new_weapon_menu.delete_item(new_weapons[option_number[1]].name)
+                            level_up_menu.weapon_level_up.add_item_to_menu_option(new_weapons[option_number[1]].name)
+                            new_weapons.remove(new_weapons[option_number[1]])
                     player.get_level()
 
         if elapsed_seconds % 5 == 0:
