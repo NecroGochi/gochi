@@ -1,15 +1,12 @@
 import pygame
-import sys
 from Configure.configure import change_configure_file, load_configure_data
 from Configure.new_language_config import *
 from Menu.menu import Menu
-from language import Language
 
 
 class OptionsMenu(Menu):
     # Set static values
     red = (255, 0, 0)
-    language = Language()
 
     def __init__(self, window_width, window_height, font_title, font_options):
         # Set the window size
@@ -23,7 +20,8 @@ class OptionsMenu(Menu):
         self.font_options = font_options
         self.selected_option = 0
 
-        # Set options
+        # Set Menu
+        self.title = 'Options'
         self.options_menu = [languages[self.language.return_language()]['player_name'],
                              languages[self.language.return_language()]['language'],
                              languages[self.language.return_language()]['back']]
@@ -43,21 +41,6 @@ class OptionsMenu(Menu):
             self.clear_screen()
             self.render_options()
             self.update_display()
-
-    def events_handler(self):
-        not_end_loop = True
-        for event in pygame.event.get():
-            not_end_loop = self.happened(event)
-        return not_end_loop
-
-    def happened(self, event):
-        not_end_loop = True
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            not_end_loop = self.triggered(event)
-        return not_end_loop
 
     def triggered(self, event):
         not_end_loop = True
@@ -107,19 +90,10 @@ class OptionsMenu(Menu):
                                  languages['english']['language'],
                                  languages['english']['back']]
 
-    def clear_screen(self):
-        self.window.fill(self.black)
-
     def render_options(self):
         for position_number, option in enumerate(self.options_menu):
             color = self.is_selected(position_number)
             self.render_option(position_number, color)
-
-    def is_selected(self, position_number):
-        if position_number == self.selected_option:
-            return self.white
-        else:
-            return self.grey
 
     def render_option(self, position_number, color):
         if position_number == 0:
@@ -130,6 +104,11 @@ class OptionsMenu(Menu):
             self.choose_language(color, position_number)
         else:
             self.render_text(self.options_menu[position_number], color, position_number, 0)
+
+    def render_text(self, _string, color, position_number, shift):
+        text = self.font_options.render(_string, True, color)
+        text_rect = text.get_rect(center=(self.window_width // 2 + shift, 200 + position_number * 50))
+        self.window.blit(text, text_rect)
 
     def render_name_field(self, color):
         if self.name_active:
@@ -150,22 +129,9 @@ class OptionsMenu(Menu):
             self.render_text(self.languages_choose[0], color_polish, position_number, -50)
             self.render_text_with_line(self.languages_choose[1], color_english, position_number, 50)
 
-    def render_text(self, _string, color, position_number, shift):
-        text = self.font_options.render(_string, True, color)
-        text_rect = text.get_rect(center=(self.window_width // 2 + shift, 200 + position_number * 50))
-        self.window.blit(text, text_rect)
-
     def render_text_with_line(self, _string, color, position_number, shift):
         text = self.font_options.render(_string, True, color)
         text_rect = text.get_rect(center=(self.window_width // 2 + shift, 200 + position_number * 50))
         self.window.blit(text, text_rect)
         line_y = text_rect.bottomleft[1] + 2
         pygame.draw.line(self.window, color, (text_rect.left, line_y), (text_rect.right, line_y))
-
-    def render_title(self):
-        title_text = self.font_title.render("Pygame Menu", True, self.white)
-        title_text_rect = title_text.get_rect(center=(self.window_width // 2, 100))
-        self.window.blit(title_text, title_text_rect)
-
-    def update_display(self):
-        pygame.display.flip()
