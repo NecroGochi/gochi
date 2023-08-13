@@ -262,14 +262,13 @@ font_title = pygame.font.Font(None, 64)
 font_options = pygame.font.Font(None, 32)
 
 
-def game(menu_state):
+def game():
     # Set initial player position
     player = Character(board.width, board.height)
     enemies = []
     boss_appear = [True, True, True, True, True]
     new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
     start_time = pygame.time.get_ticks()
-    menu_state = "not pause"
     not_defeated_final_boss = True
     show_stat_up = 0
 
@@ -279,8 +278,6 @@ def game(menu_state):
     level_up_menu.weapon_level_up.add_item_to_menu_option(player.items[0].name)
     for weapon in new_weapons:
         level_up_menu.new_weapon_menu.add_item_to_menu_option(weapon.name)
-    print(level_up_menu.new_weapon_menu.menu_options)
-    print(level_up_menu.weapon_level_up.menu_options)
 
     # Game loop
     running = True
@@ -391,5 +388,3 @@ def game(menu_state):
         defeated_menu.run_loop()
     else:
         win_menu.run_loop()
-
-    return menu_state
