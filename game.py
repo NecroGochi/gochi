@@ -274,6 +274,13 @@ def game():
     else:
         win_menu.run_loop()
 
+def is_not_killed_final_boss(enemy):
+    if enemy.final_boss:
+        return False
+    else:
+        return True
+
+
 def level_up(player, level_up_menu, new_weapons, show_stat_up):
     for level_up in range(player.actual_exp // player.max_exp):
         option_number = level_up_menu.run_loop()
