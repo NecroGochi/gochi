@@ -151,7 +151,7 @@ def game():
     # Set initial player position
     player = Character(board.width, board.height)
     enemies = []
-    boss_appear = [True, True, True, True, True]
+    boss_appear = [False, True, True, True, True, True]
     new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
     start_time = pygame.time.get_ticks()
     not_defeated_final_boss = True
