@@ -273,6 +273,15 @@ def game():
         defeated_menu.run_loop()
     else:
         win_menu.run_loop()
+
+def level_up(player, level_up_menu, new_weapons, show_stat_up):
+    for level_up in range(player.actual_exp // player.max_exp):
+        option_number = level_up_menu.run_loop()
+        show_stat_up = choose_bonus(player, option_number, show_stat_up, new_weapons, level_up_menu)
+    player.get_level()
+    return show_stat_up
+
+
 def choose_bonus(player, option_number, show_stat_up, new_weapons, level_up_menu):
     if option_number[0] == 0:
         player.grow_stat()
