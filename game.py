@@ -61,10 +61,12 @@ def convert_time_to_str(time):
     return str(math.floor(time / 60)) + ":" + str(math.floor(time % 60))
 
 
-def generate_enemies(time, player, enemies, boss_appear):
+def generate_enemies(time, player, enemies, boss_appeared):
     quantity_population = [0, 1, 2]
     positions_x = []
     positions_y = []
+    last_turn = 5
+
     for position in range(0, player.hitbox.x - 200):
         positions_x.append(position)
     for position in range(player.hitbox.x + 200, 1920):
@@ -73,180 +75,30 @@ def generate_enemies(time, player, enemies, boss_appear):
         positions_y.append(position)
     for position in range(player.hitbox.y + 200, 1080):
         positions_y.append(position)
-    if time / 60 < 1:
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Spinach["Size"], Spinach["Color"], Spinach["Speed"],
-                        Spinach["AP"], Spinach["DP"], Spinach["HP"], Spinach["Exp"], Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Dog["Size"], Dog["Color"], Dog["Speed"],
-                        Dog["AP"], Dog["DP"], Dog["HP"], Dog["Exp"], Dog["Image"])
-            enemies.append(foe)
-    if 1 < time / 60 < 2:
-        if boss_appear[0]:
-            boss_appear[0] = False
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Spinach["Size"], Giga_Spinach["Color"],
-                       Giga_Spinach["Speed"], Giga_Spinach["AP"], Giga_Spinach["DP"], Giga_Spinach["HP"],
-                       Giga_Spinach["Exp"], Giga_Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Dog["Size"], Dog["Color"], Dog["Speed"],
-                        Dog["AP"], Dog["DP"], Dog["HP"], Dog["Exp"], Dog["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Cockroach["Size"], Cockroach["Color"], Cockroach["Speed"],
-                        Cockroach["AP"], Cockroach["DP"], Cockroach["HP"], Cockroach["Exp"], Cockroach["Image"])
-            enemies.append(foe)
-    if 2 < time / 60 < 3:
-        if boss_appear[1]:
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Dog["Size"], Giga_Dog["Color"],
-                       Giga_Dog["Speed"], Giga_Dog["AP"], Giga_Dog["DP"], Giga_Dog["HP"],
-                       Giga_Dog["Exp"], Giga_Dog["Image"])
-            enemies.append(foe)
-            boss_appear[1] = False
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Cockroach["Size"], Cockroach["Color"], Cockroach["Speed"],
-                        Cockroach["AP"], Cockroach["DP"], Cockroach["HP"], Cockroach["Exp"], Cockroach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Spinach["Size"], Super_Spinach["Color"],
-                        Super_Spinach["Speed"], Super_Spinach["AP"], Super_Spinach["DP"], Super_Spinach["HP"],
-                        Super_Spinach["Exp"], Super_Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Angry_Dog["Size"], Angry_Dog["Color"], Angry_Dog["Speed"],
-                        Angry_Dog["AP"], Angry_Dog["DP"], Angry_Dog["HP"], Angry_Dog["Exp"], Angry_Dog["Image"])
-            enemies.append(foe)
-    if 3 < time / 60 < 4:
-        if boss_appear[2]:
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Cockroach["Size"], Giga_Cockroach["Color"],
-                       Giga_Cockroach["Speed"], Giga_Cockroach["AP"], Giga_Cockroach["DP"], Giga_Cockroach["HP"],
-                       Giga_Cockroach["Exp"], Giga_Cockroach["Image"])
-            enemies.append(foe)
-            boss_appear[2] = False
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Spinach["Size"], Super_Spinach["Color"],
-                        Super_Spinach["Speed"], Super_Spinach["AP"], Super_Spinach["DP"], Super_Spinach["HP"],
-                        Super_Spinach["Exp"], Super_Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Bookworm["Size"], Bookworm["Color"], Bookworm["Speed"],
-                        Bookworm["AP"], Bookworm["DP"], Bookworm["HP"], Bookworm["Exp"], Bookworm["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Bookworm["Size"], Super_Bookworm["Color"],
-                        Super_Bookworm["Speed"], Super_Bookworm["AP"], Super_Bookworm["DP"], Super_Bookworm["HP"],
-                        Super_Bookworm["Exp"], Super_Bookworm["Image"])
-            enemies.append(foe)
-    if 4 < time / 60 < 5:
-        if boss_appear[3]:
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Bookworm["Size"], Giga_Bookworm["Color"],
-                       Giga_Bookworm["Speed"], Giga_Bookworm["AP"], Giga_Bookworm["DP"], Giga_Bookworm["HP"],
-                       Giga_Bookworm["Exp"], Giga_Bookworm["Image"])
-            enemies.append(foe)
-            boss_appear[3] = False
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Spinach["Size"], Super_Spinach["Color"],
-                        Super_Spinach["Speed"], Super_Spinach["AP"], Super_Spinach["DP"], Super_Spinach["HP"],
-                        Super_Spinach["Exp"], Super_Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Bookworm["Size"], Bookworm["Color"], Bookworm["Speed"],
-                        Bookworm["AP"], Bookworm["DP"], Bookworm["HP"], Bookworm["Exp"], Bookworm["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Bookworm["Size"], Super_Bookworm["Color"],
-                        Super_Bookworm["Speed"], Super_Bookworm["AP"], Super_Bookworm["DP"], Super_Bookworm["HP"],
-                        Super_Bookworm["Exp"], Super_Bookworm["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Ghost["Size"], Ghost["Color"], Ghost["Speed"],
-                        Ghost["AP"], Ghost["DP"], Ghost["HP"], Ghost["Exp"], Ghost["Image"])
-            enemies.append(foe)
-    if 5 < time / 60:
-        if boss_appear[4]:
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Book["Size"], Giga_Book["Color"],
-                       Giga_Book["Speed"], Giga_Book["AP"], Giga_Book["DP"], Giga_Book["HP"],
-                       Giga_Book["Exp"], Giga_Book["Image"])
-            foe.is_final_boss()
-            enemies.append(foe)
-            boss_appear[4] = False
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Spinach["Size"], Giga_Spinach["Color"],
-                       Giga_Spinach["Speed"], Giga_Spinach["AP"], Giga_Spinach["DP"], Giga_Spinach["HP"],
-                       Giga_Spinach["Exp"], Giga_Spinach["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Dog["Size"], Giga_Dog["Color"],
-                       Giga_Dog["Speed"], Giga_Dog["AP"], Giga_Dog["DP"], Giga_Dog["HP"],
-                       Giga_Dog["Exp"], Giga_Dog["Image"])
-            enemies.append(foe)
-        quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Boss(enemy_position_x, enemy_position_y, Giga_Cockroach["Size"], Giga_Cockroach["Color"],
-                       Giga_Cockroach["Speed"], Giga_Cockroach["AP"], Giga_Cockroach["DP"], Giga_Cockroach["HP"],
-                       Giga_Cockroach["Exp"], Giga_Cockroach["Image"])
-            enemies.append(foe)
+
+    monsters = [[Spinach, Dog],
+                [Dog, Cockroach],
+                [Cockroach, Super_Spinach, Angry_Dog],
+                [Super_Spinach, Bookworm, Super_Bookworm],
+                [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
+                [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
+
+    boss_monsters = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
+
+    turn = math.floor(time/60)
+
+    if turn >= last_turn:
+        enemies.extend(respawn_in_game(monsters[last_turn], boss_monsters[last_turn], positions_x, positions_y,
+                                       quantity_population, boss_appeared[last_turn], True))
+    else:
+        enemies.extend(respawn_in_game(monsters[turn], boss_monsters[turn], positions_x, positions_y,
+                                       quantity_population, boss_appeared[turn], False))
+
+    boss_appeared[turn] = False
+
+    return boss_appeared
+
+
 def respawn_in_game(monsters, boss_monster, positions_x, positions_y, quantity_population, boss_appeared, is_last_wave):
     enemies = []
     enemies.extend(respawn_boss(boss_monster, positions_x, positions_y, boss_appeared, is_last_wave))
