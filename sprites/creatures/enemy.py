@@ -29,10 +29,6 @@ class Enemy(Sprite):
         image = pygame.transform.scale(image, (self.size, self.size))
         image = pygame.transform.flip(image, self.flip_image, False)
 
-        '''pygame.draw.rect(window, self.color,
-                         (self.hitbox.x - board_camera_x,
-                          self.hitbox.y - board_camera_y, self.size,
-                          self.size))'''
         window.blit(image, (self.hitbox.x - board_camera_x,
                             self.hitbox.y - board_camera_y))
 
