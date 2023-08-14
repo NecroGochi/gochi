@@ -274,6 +274,13 @@ def game():
     else:
         win_menu.run_loop()
 
+def collide_enemy_with_weapon(weapon, enemy, player):
+    if weapon.type == "Rect":
+        enemy.collide_weapon(weapon.hitbox[0], player.items[0].power + player.ap)
+    if weapon.type == "Circle":
+        enemy.collide_weapon_circle(weapon.hitbox[0], player.items[0].power + player.ap)
+
+
 def killed_enemy(enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up):
     if enemy.boss:
         not_killed_final_boss = is_not_killed_final_boss(enemy)
