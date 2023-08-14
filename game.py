@@ -274,6 +274,14 @@ def game():
     else:
         win_menu.run_loop()
 
+def move_enemy(player, enemy):
+    if board.border_y1 == player.hitbox.y or board.border_y2 == player.hitbox.y:
+        player.velocity_y = 0
+    if board.border_x1 == player.hitbox.x or board.border_x2 == player.hitbox.x:
+        player.velocity_x = 0
+    enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
+
+
 def collide(enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up, elapsed_seconds):
     for weapon in player.items:
         collide_enemy_with_weapon(weapon, enemy, player)
