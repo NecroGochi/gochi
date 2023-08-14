@@ -274,6 +274,63 @@ def game():
     else:
         win_menu.run_loop()
 
+
+def game_loop(player, start_time, enemies, show_stat_up, boss_appear, level_up_menu, new_weapons,
+              not_killed_final_boss):
+    for event in pygame.event.get():
+        happened(event, player)
+    # Calculate game time
+    current_time = pygame.time.get_ticks()
+    elapsed_time = current_time - start_time
+    elapsed_seconds = round(elapsed_time / 1000, 0)
+
+    player.collide_board(board.border_x1, board.border_x2, board.border_y1, board.border_y2)
+    player.update_position()
+    for item in player.items:
+        item.move(player.hitbox.x, player.hitbox.y)
+    for enemy in enemies:
+        move_enemy(player, enemy)
+    for enemy in enemies:
+        not_killed_final_boss, show_stat_up = collide(enemy, enemies, player, level_up_menu, new_weapons,
+                                                      not_killed_final_boss, show_stat_up, elapsed_seconds)
+
+    if elapsed_seconds % 5 == 0:
+        generate = True
+    else:
+        generate = False
+
+    if generate:
+        boss_appear = generate_enemies(elapsed_seconds, player, enemies, boss_appear)
+
+    # Update the camera position based on the player's position
+    board.update_camera_position(player.hitbox.x, player.hitbox.y)
+    # Update the background position based on the player's position
+    board.update_background_position()
+    # Clear the screen
+    window.fill(black)
+    window.blit(board.background, (board.background_x, board.background_y))
+
+    # Render game objects based on the camera position
+    for item in player.items:
+        item.render(window, (50, 50, 155), board.camera_x, board.camera_y)
+    player.render(window, white, board.camera_x, board.camera_y)
+    for enemy in enemies:
+        enemy.render(window, board.camera_x, board.camera_y)
+
+    if show_stat_up != 0:
+        show_stat_up -= 1
+        player.render_text("Stat up", (0, 0, 0), window, board.camera_x, board.camera_y)
+
+    # player information
+    display_time(elapsed_seconds, (0, 0, 0))
+    display_level(player.level, (0, 0, 0))
+    display_exp_bar(player)
+    # Update the display
+    pygame.display.flip()
+
+    return not_killed_final_boss, boss_appear
+
+
 def happened(event, player):
     if event.type == pygame.QUIT:
         pygame.quit()
