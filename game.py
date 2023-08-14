@@ -274,6 +274,17 @@ def game():
     else:
         win_menu.run_loop()
 
+def killed_enemy(enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up):
+    if enemy.boss:
+        not_killed_final_boss = is_not_killed_final_boss(enemy)
+    enemies.remove(enemy)
+    player.get_exp(enemy.exp)
+    # Get level
+    if player.actual_exp > player.max_exp:
+        show_stat_up = level_up(player, level_up_menu, new_weapons, show_stat_up)
+    return not_killed_final_boss, show_stat_up
+
+
 def is_not_killed_final_boss(enemy):
     if enemy.final_boss:
         return False
