@@ -256,6 +256,19 @@ def generate_enemies(time, player, enemies, boss_appear):
                         Super_Bookworm["Exp"], Super_Bookworm["Image"])
             enemies.append(foe)
     return boss_appear
+
+
+def respawn_boss(monster, positions_x, positions_y, appeared, is_last_wave):
+    boss = []
+    if appeared:
+        enemy_position_x = random.choice(positions_x)
+        enemy_position_y = random.choice(positions_y)
+        boss = [Boss(enemy_position_x, enemy_position_y, monster["Size"], monster["Color"],
+                    monster["Speed"], monster["AP"], monster["DP"], monster["HP"], monster["Exp"], monster["Image"])]
+        boss = is_last_boss(boss[0], is_last_wave)
+    return boss
+
+
 def is_last_boss(boss, is_last_wave):
     if is_last_wave:
         boss.is_final_boss()
