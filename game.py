@@ -273,3 +273,18 @@ def game():
         defeated_menu.run_loop()
     else:
         win_menu.run_loop()
+def choose_bonus(player, option_number, show_stat_up, new_weapons, level_up_menu):
+    if option_number[0] == 0:
+        player.grow_stat()
+        show_stat_up = 100
+    if option_number[0] == 1:
+        player.items[option_number[1]].get_level()
+        show_stat_up = 100
+    if option_number[0] == 2:
+        player.items.append(new_weapons[option_number[1]])
+        level_up_menu.new_weapon_menu.delete_item(new_weapons[option_number[1]].name)
+        level_up_menu.weapon_level_up.add_item_to_menu_option(new_weapons[option_number[1]].name)
+        new_weapons.remove(new_weapons[option_number[1]])
+    return show_stat_up
+
+
