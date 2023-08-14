@@ -43,15 +43,12 @@ class MainMenu(Menu):
             # Start Game
             game()
         elif self.selected_option == 1:
-            menu_state = 'main_menu'
             image_path = 'Images\\Campaign_1'
             images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
-            menu_state = running_campaign(menu_state, 'Scenario\\scenario_01_pl.txt', image_path, images)
-            menu_state = game(menu_state)
+            running_campaign('Scenario\\scenario_01_pl.txt', image_path, images)
+            game()
             images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
-            if menu_state == 'end':
-                menu_state = running_campaign(menu_state, 'Scenario\\scenario_02_pl.txt', image_path,
-                                              images)
+            running_campaign('Scenario\\scenario_02_pl.txt', image_path, images)
         elif self.selected_option == 2:
             # Option menu
             OptionsMenu(self.window_width, self.window_height, self.font_title,
