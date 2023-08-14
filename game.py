@@ -274,6 +274,13 @@ def game():
     else:
         win_menu.run_loop()
 
+def pull_key(event, player):
+    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+        player.velocity_x = 0
+    elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+        player.velocity_y = 0
+
+
 def move_enemy(player, enemy):
     if board.border_y1 == player.hitbox.y or board.border_y2 == player.hitbox.y:
         player.velocity_y = 0
