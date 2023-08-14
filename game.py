@@ -274,6 +274,11 @@ def game():
     else:
         win_menu.run_loop()
 
+def update_items_status(player, is_left):
+    for item in player.items:
+        item.left = is_left
+
+
 def pull_key(event, player):
     if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
         player.velocity_x = 0
