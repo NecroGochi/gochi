@@ -247,6 +247,13 @@ def generate_enemies(time, player, enemies, boss_appear):
                        Giga_Cockroach["Speed"], Giga_Cockroach["AP"], Giga_Cockroach["DP"], Giga_Cockroach["HP"],
                        Giga_Cockroach["Exp"], Giga_Cockroach["Image"])
             enemies.append(foe)
+def respawn_in_game(monsters, boss_monster, positions_x, positions_y, quantity_population, boss_appeared, is_last_wave):
+    enemies = []
+    enemies.extend(respawn_boss(boss_monster, positions_x, positions_y, boss_appeared, is_last_wave))
+    enemies.extend(respawn_in_turn(monsters, positions_x, positions_y, quantity_population))
+    return enemies
+
+
 def respawn_in_turn(monsters, positions_x, positions_y, quantity_population):
     enemies = []
     for monster in monsters:
