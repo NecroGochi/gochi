@@ -256,6 +256,15 @@ def generate_enemies(time, player, enemies, boss_appear):
                         Super_Bookworm["Exp"], Super_Bookworm["Image"])
             enemies.append(foe)
     return boss_appear
+def respawn(monster, positions_x, positions_y, quantity):
+    monsters = []
+    for i in range(quantity):
+        enemy_position_x = random.choice(positions_x)
+        enemy_position_y = random.choice(positions_y)
+        foe = Enemy(enemy_position_x, enemy_position_y, monster["Size"], monster["Color"],
+                    monster["Speed"], monster["AP"], monster["DP"], monster["HP"], monster["Exp"], monster["Image"])
+        monsters.append(foe)
+    return monsters
 
 
 # Set Fonts
