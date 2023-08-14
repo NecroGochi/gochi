@@ -274,6 +274,17 @@ def game():
     else:
         win_menu.run_loop()
 
+def collide(enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up, elapsed_seconds):
+    for weapon in player.items:
+        collide_enemy_with_weapon(weapon, enemy, player)
+    player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.ap)
+    # remove enemy and get exp
+    if enemy.actual_hp <= 0:
+        not_killed_final_boss, show_stat_up = killed_enemy(enemy, enemies, player, level_up_menu, new_weapons,
+                                                           not_killed_final_boss, show_stat_up)
+    return not_killed_final_boss, show_stat_up
+
+
 def collide_enemy_with_weapon(weapon, enemy, player):
     if weapon.type == "Rect":
         enemy.collide_weapon(weapon.hitbox[0], player.items[0].power + player.ap)
