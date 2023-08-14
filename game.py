@@ -274,6 +274,16 @@ def game():
     else:
         win_menu.run_loop()
 
+def happened(event, player):
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        sys.exit()
+    elif event.type == pygame.KEYDOWN:
+        push_key(event, player)
+    elif event.type == pygame.KEYUP:
+        pull_key(event, player)
+
+
 def push_key(event, player):
     if event.key == pygame.K_LEFT:
         player.go_left()
