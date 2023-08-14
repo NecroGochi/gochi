@@ -247,15 +247,12 @@ def generate_enemies(time, player, enemies, boss_appear):
                        Giga_Cockroach["Speed"], Giga_Cockroach["AP"], Giga_Cockroach["DP"], Giga_Cockroach["HP"],
                        Giga_Cockroach["Exp"], Giga_Cockroach["Image"])
             enemies.append(foe)
+def respawn_in_turn(monsters, positions_x, positions_y, quantity_population):
+    enemies = []
+    for monster in monsters:
         quantity = random.choice(quantity_population)
-        for one in range(quantity):
-            enemy_position_x = random.choice(positions_x)
-            enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, Super_Bookworm["Size"], Super_Bookworm["Color"],
-                        Super_Bookworm["Speed"], Super_Bookworm["AP"], Super_Bookworm["DP"], Super_Bookworm["HP"],
-                        Super_Bookworm["Exp"], Super_Bookworm["Image"])
-            enemies.append(foe)
-    return boss_appear
+        enemies.extend(respawn(monster, positions_x, positions_y, quantity))
+    return enemies
 
 
 def respawn_boss(monster, positions_x, positions_y, appeared, is_last_wave):
