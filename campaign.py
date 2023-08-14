@@ -97,10 +97,9 @@ def load_scenario_file(path):
         return dict()
 
 
-def running_campaign(menu_state, text_path, image_path, images):
+def running_campaign(text_path, image_path, images):
     # Set initial player position
     start_time = pygame.time.get_ticks()
-    menu_state = "not pause"
     # Game loop
     running = True
     scenario = load_scenario_file(text_path)
@@ -142,5 +141,3 @@ def running_campaign(menu_state, text_path, image_path, images):
         advance_text(next_line_of_text, next_name)
         # Update the display
         pygame.display.flip()
-    menu_state = 'main'
-    return menu_state
