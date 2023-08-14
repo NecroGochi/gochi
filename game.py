@@ -274,6 +274,19 @@ def game():
     else:
         win_menu.run_loop()
 
+def push_key(event, player):
+    if event.key == pygame.K_LEFT:
+        player.go_left()
+        update_items_status(player, 1)
+    elif event.key == pygame.K_RIGHT:
+        player.go_right()
+        update_items_status(player, 0)
+    elif event.key == pygame.K_UP:
+        player.go_up()
+    elif event.key == pygame.K_DOWN:
+        player.go_down()
+
+
 def update_items_status(player, is_left):
     for item in player.items:
         item.left = is_left
