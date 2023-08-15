@@ -2,13 +2,12 @@ import pygame
 import sys
 from campaign import running_campaign
 from Configure.new_language_config import *
-from game import game
+from game import Game
 from Menu.menu import Menu
 from Menu.options_menu import OptionsMenu
 
 
 class MainMenu(Menu):
-
     def __init__(self, window_width, window_height, font_title, font_options):
         # Set the window size
         self.window_width = window_width
@@ -41,12 +40,14 @@ class MainMenu(Menu):
     def select_option(self):
         if self.selected_option == 0:
             # Start Game
-            game()
+            game = Game(self.window, self.window_width, self.window_height)
+            game.game()
         elif self.selected_option == 1:
             image_path = 'Images\\Campaign_1'
             images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
             running_campaign('Scenario\\scenario_01_pl.txt', image_path, images)
-            game()
+            game = Game(self.window, self.window_width, self.window_height)
+            game.game()
             images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
             running_campaign('Scenario\\scenario_02_pl.txt', image_path, images)
         elif self.selected_option == 2:
