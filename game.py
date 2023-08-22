@@ -163,8 +163,7 @@ class Game:
             player.velocity_x = 0
         enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
 
-    def collide(self, enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up,
-                elapsed_seconds):
+    def collide(self, enemy, enemies, player, level_up_menu, new_weapons, show_stat_up, elapsed_seconds):
         for weapon in player.items:
             self.collide_enemy_with_weapon(weapon, enemy, player)
         player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.attack)
