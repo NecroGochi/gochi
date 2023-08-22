@@ -7,13 +7,13 @@ class Character(Sprite):
     def __init__(self, board_width, board_height):
         # Set player properties
         self.size = 100
-        self.hp = 49000
-        self.actual_hp = 49000
-        self.ap = 13
+        self.health_points = 49000
+        self.actual_health_points = 49000
+        self.attack = 13
         self.defense = 4
         self.speed = 9
-        self.actual_exp = 0
-        self.max_exp = 1000
+        self.actual_experience_points = 0
+        self.max_experience_points = 1000
         self.level = 1
         # hp, ap, defence, speed
         self.bonus_level = [3, 5, 2, 1]
@@ -107,18 +107,18 @@ class Character(Sprite):
 
     def collide_enemy(self, enemy, time, hit, enemy_attack):
         if self.hitbox.colliderect(enemy) and time % 2 == 0 and hit:
-            self.actual_hp = self.actual_hp - (max(1, round(enemy_attack, self.defense)))
+            self.actual_health_points = self.actual_health_points - (max(1, round(enemy_attack, self.defense)))
 
     def get_exp(self, exp):
         self.actual_exp += exp
 
     def get_level(self):
-        self.level = self.level + self.actual_exp // self.max_exp
-        self.actual_exp = self.actual_exp % self.max_exp
-        self.max_exp = self.level * 1000
+        self.level = self.level + self.actual_experience_points // self.max_experience_points
+        self.actual_experience_points = self.actual_experience_points % self.max_experience_points
+        self.max_experience_points = self.level * self.experience_increase_multiplier
 
     def grow_stat(self):
-        self.actual_hp += self.bonus_level[0]
-        self.ap += self.bonus_level[1]
-        self.defense += self.bonus_level[2]
-        self.speed += self.bonus_level[3]
+        self.actual_health_points += self.bonus_level['health']
+        self.attack += self.bonus_level['attack']
+        self.defense += self.bonus_level['defense']
+        self.speed += self.bonus_level['speed']
