@@ -82,8 +82,7 @@ class Character(Sprite):
                           self.actual_hp * self.size / self.hp, 10))
 
     def render_text(self, _string, color, window, board_camera_x, board_camera_y):
-        font_options = pygame.font.Font(None, 32)
-        text = font_options.render(_string, True, color)
+        text = self.font_options.render(_string, True, color)
         text_rect = text.get_rect(center=(self.hitbox.x - board_camera_x - self.render_shit,
                                           self.hitbox.y + self.size - board_camera_y - self.render_shit))
         window.blit(text, text_rect)
