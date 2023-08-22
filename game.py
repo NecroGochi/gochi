@@ -20,6 +20,7 @@ class Game:
     font = pygame.font.Font(None, 32)
     font_title = pygame.font.Font(None, 64)
     font_options = pygame.font.Font(None, 32)
+    not_defeated_final_boss = True
 
     def __init__(self, window, window_width, window_height):
         # Set the window size
@@ -60,7 +61,7 @@ class Game:
         while running and player.actual_health_points > 0 and self.not_defeated_final_boss:
             self.game_loop(player, start_time, enemies, show_stat_up, level_up_menu, new_weapons)
 
-        if not_defeated_final_boss:
+        if self.not_defeated_final_boss:
             defeated_menu.run_loop()
         else:
             win_menu.run_loop()
