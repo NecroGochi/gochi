@@ -240,7 +240,9 @@ class Game:
 
         turn = math.floor(time/60)
 
-        if turn >= last_turn:
+        if turn >= self.number_of_waves:
+            enemies.extend(self.respawn_boss(positions_x, positions_y, self.number_of_waves))
+            enemies.extend(self.respawn_monsters(positions_x, positions_y, quantity_population, self.number_of_waves))
         else:
             enemies.extend(self.respawn_boss(positions_x, positions_y, turn))
             enemies.extend(self.respawn_monsters(positions_x, positions_y, quantity_population, turn))
