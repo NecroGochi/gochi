@@ -270,8 +270,9 @@ class Game:
 
     def respawn_boss(self, monster, positions_x, positions_y, appeared, is_last_wave):
         boss = []
-        if appeared:
         type_boss = self.bosses[turn]
+        if self.is_respawn_bosses[turn]:
+            self.is_respawn_bosses[turn] = False
             enemy_position_x = random.choice(positions_x)
             enemy_position_y = random.choice(positions_y)
             boss = [Boss(enemy_position_x, enemy_position_y, type_boss["Size"], type_boss["Color"],
