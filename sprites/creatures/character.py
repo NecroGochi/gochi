@@ -106,20 +106,20 @@ class Character(Sprite):
         self.hitbox.x += self.velocity_x
         self.hitbox.y += self.velocity_y
 
-    def collide_board(self, board_border_x1, board_border_x2, board_border_y1, board_border_y2):
+    def collide_board(self, down_board_border, up_board_border, right_board_border, left_board_border):
         # board border
-        if board_border_x1 < self.hitbox.x:
+        if down_board_border < self.hitbox.x:
             self.velocity_x = 0
-            self.hitbox.x = board_border_x1
-        if board_border_x2 > self.hitbox.x:
+            self.hitbox.x = down_board_border
+        if up_board_border > self.hitbox.x:
             self.velocity_x = 0
-            self.hitbox.x = board_border_x2
-        if board_border_y1 < self.hitbox.y:
+            self.hitbox.x = up_board_border
+        if right_board_border < self.hitbox.y:
             self.velocity_y = 0
-            self.hitbox.y = board_border_y1
-        if board_border_y2 > self.hitbox.y:
+            self.hitbox.y = right_board_border
+        if left_board_border > self.hitbox.y:
             self.velocity_y = 0
-            self.hitbox.y = board_border_y2
+            self.hitbox.y = left_board_border
 
     def collide_enemy(self, enemy, time, hit, enemy_attack):
         if self.hitbox.colliderect(enemy) and time % 2 == 0 and hit:
