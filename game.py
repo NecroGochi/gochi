@@ -242,9 +242,6 @@ class Game:
 
         if turn >= last_turn:
         else:
-        boss_appeared[turn] = False
-
-        return boss_appeared
             enemies.extend(self.respawn_boss(positions_x, positions_y, turn))
             enemies.extend(self.respawn_monsters(positions_x, positions_y, quantity_population, turn))
 
