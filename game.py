@@ -263,7 +263,7 @@ class Game:
 
     def respawn_monsters(self, positions_x, positions_y, quantity_population, turn):
         enemies = []
-        for monster in monsters:
+        for monster in self.monsters[turn]:
             quantity = random.choice(quantity_population)
             enemies.extend(self.respawn(monster, positions_x, positions_y, quantity))
         return enemies
