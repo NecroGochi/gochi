@@ -25,8 +25,6 @@ class Game:
 
     def __init__(self, window, window_width, window_height):
         # Set the window size
-        # window_width = 192 * 5
-        # window_height = 108 * 5
         self.window_width = window_width
         self.window_height = window_height
         self.window = window
