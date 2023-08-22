@@ -226,7 +226,6 @@ class Game:
         quantity_population = [0, 1, 2]
         positions_x = []
         positions_y = []
-        last_turn = 5
 
         for position in range(0, player.hitbox.x - 200):
             positions_x.append(position)
