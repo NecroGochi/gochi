@@ -257,11 +257,11 @@ class Game:
     def respawn_in_game(self, monsters, boss_monster, positions_x, positions_y, quantity_population, boss_appeared,
                         is_last_wave):
         enemies = []
-        enemies.extend(self.respawn_in_turn(monsters, positions_x, positions_y, quantity_population))
         return enemies
             enemies.extend(self.respawn_boss(positions_x, positions_y, turn))
+            enemies.extend(self.respawn_monsters(positions_x, positions_y, quantity_population, turn))
 
-    def respawn_in_turn(self, monsters, positions_x, positions_y, quantity_population):
+    def respawn_monsters(self, positions_x, positions_y, quantity_population, turn):
         enemies = []
         for monster in monsters:
             quantity = random.choice(quantity_population)
