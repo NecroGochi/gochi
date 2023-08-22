@@ -35,7 +35,7 @@ class Character(Sprite):
         }
         self.flip_image = False
 
-        self.image_sprite = [
+        self.sprite_images = [
             pygame.image.load("Images/Heroes/nekromanta_1.png"),
             pygame.image.load("Images/Heroes/nekromanta_2.png")
         ]
