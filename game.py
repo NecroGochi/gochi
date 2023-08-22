@@ -33,11 +33,11 @@ class Game:
 
         self.bosses = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
         self.monsters = [[Spinach, Dog],
-                    [Dog, Cockroach],
-                    [Cockroach, Super_Spinach, Angry_Dog],
-                    [Super_Spinach, Bookworm, Super_Bookworm],
-                    [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
-                    [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
+                         [Dog, Cockroach],
+                         [Cockroach, Super_Spinach, Angry_Dog],
+                         [Super_Spinach, Bookworm, Super_Bookworm],
+                         [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
+                         [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
         self.number_of_waves = len(self.monsters) - 1
 
     def play(self):
