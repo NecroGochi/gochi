@@ -21,7 +21,7 @@ class MainMenu(Menu):
 
         # Set menu
         self.title = 'Souls Reaper'
-        self.options_menu = [languages[self.language.return_language()]['game'],
+        self.options_menu = [languages[self.language.return_language()]['play'],
                              languages[self.language.return_language()]['campaign'],
                              languages[self.language.return_language()]['options'],
                              languages[self.language.return_language()]['exit']]
@@ -41,13 +41,13 @@ class MainMenu(Menu):
         if self.selected_option == 0:
             # Start Game
             game = Game(self.window, self.window_width, self.window_height)
-            game.game()
+            game.play()
         elif self.selected_option == 1:
             image_path = 'Images\\Campaign_1'
             images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
             running_campaign('Scenario\\scenario_01_pl.txt', image_path, images)
             game = Game(self.window, self.window_width, self.window_height)
-            game.game()
+            game.play()
             images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
             running_campaign('Scenario\\scenario_02_pl.txt', image_path, images)
         elif self.selected_option == 2:
@@ -55,7 +55,7 @@ class MainMenu(Menu):
             OptionsMenu(self.window_width, self.window_height, self.font_title,
                         self.font_options).run_loop()
             self.language.load_configure_language()
-            self.options_menu = [languages[self.language.return_language()]['game'],
+            self.options_menu = [languages[self.language.return_language()]['play'],
                                  languages[self.language.return_language()]['campaign'],
                                  languages[self.language.return_language()]['options'],
                                  languages[self.language.return_language()]['exit']]
