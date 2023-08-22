@@ -125,8 +125,8 @@ class Character(Sprite):
         if self.hitbox.colliderect(enemy) and time % 2 == 0 and hit:
             self.actual_health_points = self.actual_health_points - (max(1, round(enemy_attack, self.defense)))
 
-    def get_exp(self, exp):
-        self.actual_exp += exp
+    def get_experience_points(self, experience_points):
+        self.actual_experience_points += experience_points
 
     def get_level(self):
         self.level = self.level + self.actual_experience_points // self.max_experience_points
