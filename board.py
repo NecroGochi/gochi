@@ -3,6 +3,11 @@ import pygame
 
 class Board:
     def __init__(self, window_width, window_height, border_x1, border_y1, border_x2, border_y2):
+    centering = {
+        'x': 960,
+        'y': 540
+    }
+
         # Set board properties
         self.width = 192 * 10
         self.height = 108 * 10
@@ -30,5 +35,5 @@ class Board:
         self.camera_y = position_player_y - self.camera_height // 2
 
     def update_background_position(self):
-        self.background_x = self.camera_x - 960
-        self.background_y = self.camera_y - 540
+        self.background_x = self.camera_x - self.centering['x']
+        self.background_y = self.camera_y - self.centering['y']
