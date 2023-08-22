@@ -86,8 +86,8 @@ class Game:
         for enemy in enemies:
             self.move_enemy(player, enemy)
         for enemy in enemies:
-            not_killed_final_boss, show_stat_up = self.collide(enemy, enemies, player, level_up_menu, new_weapons,
-                                                               not_killed_final_boss, show_stat_up, elapsed_seconds)
+            show_stat_up = self.collide(enemy, enemies, player, level_up_menu, new_weapons, show_stat_up,
+                                        elapsed_seconds)
 
         if elapsed_seconds % 5 == 0:
             generate = True
@@ -122,8 +122,6 @@ class Game:
         self.display_exp_bar(player)
         # Update the display
         pygame.display.flip()
-
-        return not_killed_final_boss, boss_appear
 
     def happened(self, event, player):
         if event.type == pygame.QUIT:
@@ -172,9 +170,8 @@ class Game:
         player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.attack)
         # remove enemy and get exp
         if enemy.actual_hp <= 0:
-            not_killed_final_boss, show_stat_up = self.killed_enemy(enemy, enemies, player, level_up_menu, new_weapons,
-                                                                    not_killed_final_boss, show_stat_up)
-        return not_killed_final_boss, show_stat_up
+            show_stat_up = self.killed_enemy(enemy, enemies, player, level_up_menu, new_weapons, show_stat_up)
+        return show_stat_up
 
     @staticmethod
     def collide_enemy_with_weapon(weapon, enemy, player):
@@ -183,15 +180,15 @@ class Game:
         if weapon.type == "Circle":
             enemy.collide_weapon_circle(weapon.hitbox[0], player.items[0].power + player.ap)
 
-    def killed_enemy(self, enemy, enemies, player, level_up_menu, new_weapons, not_killed_final_boss, show_stat_up):
+    def killed_enemy(self, enemy, enemies, player, level_up_menu, new_weapons, show_stat_up):
         if enemy.boss:
-            not_killed_final_boss = self.is_not_killed_final_boss(enemy)
+            self.not_defeated_final_boss = self.is_not_killed_final_boss(enemy)
         enemies.remove(enemy)
         player.get_experience_points(enemy.experience)
         # Get level
         if player.actual_experience_points > player.max_experience_points:
             show_stat_up = self.level_up(player, level_up_menu, new_weapons, show_stat_up)
-        return not_killed_final_boss, show_stat_up
+        return show_stat_up
 
     @staticmethod
     def is_not_killed_final_boss(enemy):
