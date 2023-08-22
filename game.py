@@ -52,10 +52,10 @@ class Game:
 
         # Game loop
         running = True
-        while running and player.actual_hp > 0 and not_defeated_final_boss:
             not_defeated_final_boss, boss_appear = self.game_loop(player, start_time, enemies, show_stat_up,
                                                                   boss_appear, level_up_menu, new_weapons,
                                                                   not_defeated_final_boss)
+        while running and player.actual_health_points > 0 and self.not_defeated_final_boss:
 
         if not_defeated_final_boss:
             defeated_menu.run_loop()
@@ -71,7 +71,8 @@ class Game:
         elapsed_time = current_time - start_time
         elapsed_seconds = round(elapsed_time / 1000, 0)
 
-        player.collide_board(self.board.border_x1, self.board.border_x2, self.board.border_y1, self.board.border_y2)
+        player.collide_board(self.board.down_border, self.board.up_border, self.board.right_border,
+                             self.board.left_border)
         player.update_position()
         for item in player.items:
             item.move(player.hitbox.x, player.hitbox.y)
@@ -151,9 +152,9 @@ class Game:
             player.velocity_y = 0
 
     def move_enemy(self, player, enemy):
-        if self.board.border_y1 == player.hitbox.y or self.board.border_y2 == player.hitbox.y:
+        if self.board.right_border == player.hitbox.y or self.board.left_border == player.hitbox.y:
             player.velocity_y = 0
-        if self.board.border_x1 == player.hitbox.x or self.board.border_x2 == player.hitbox.x:
+        if self.board.down_border == player.hitbox.x or self.board.up_border == player.hitbox.x:
             player.velocity_x = 0
         enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
 
@@ -161,7 +162,7 @@ class Game:
                 elapsed_seconds):
         for weapon in player.items:
             self.collide_enemy_with_weapon(weapon, enemy, player)
-        player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.ap)
+        player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.attack)
         # remove enemy and get exp
         if enemy.actual_hp <= 0:
             not_killed_final_boss, show_stat_up = self.killed_enemy(enemy, enemies, player, level_up_menu, new_weapons,
@@ -179,9 +180,9 @@ class Game:
         if enemy.boss:
             not_killed_final_boss = self.is_not_killed_final_boss(enemy)
         enemies.remove(enemy)
-        player.get_exp(enemy.exp)
+        player.get_experience_points(enemy.experience)
         # Get level
-        if player.actual_exp > player.max_exp:
+        if player.actual_experience_points > player.max_experience_points:
             show_stat_up = self.level_up(player, level_up_menu, new_weapons, show_stat_up)
         return not_killed_final_boss, show_stat_up
 
@@ -193,7 +194,7 @@ class Game:
             return True
 
     def level_up(self, player, level_up_menu, new_weapons, show_stat_up):
-        for level_up in range(player.actual_exp // player.max_exp):
+        for level_up in range(player.actual_experience_points // player.max_experience_points):
             option_number = level_up_menu.run_loop()
             show_stat_up = self.choose_bonus(player, option_number, show_stat_up, new_weapons, level_up_menu)
         player.get_level()
@@ -310,7 +311,7 @@ class Game:
         pygame.draw.rect(self.window, self.white, self.experience_bar_dimensions)
         pygame.draw.rect(self.window, self.blue, (self.experience_bar_dimensions[0],
                                                   self.experience_bar_dimensions[1],
-                                                  player.actual_exp * 400 / player.max_exp,
+                                                  player.actual_experience_points * 400 / player.max_experience_points,
                                                   self.experience_bar_dimensions[3]))
 
     @staticmethod
