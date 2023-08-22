@@ -27,8 +27,12 @@ class Character(Sprite):
         self.actual_experience_points = 0
         self.max_experience_points = 1000
         self.level = 1
-        # hp, ap, defence, speed
-        self.bonus_level = [3, 5, 2, 1]
+        self.bonus_level = {
+            'health': 3,
+            'attack': 5,
+            'defense': 2,
+            'speed': 1
+        }
         self.flip_image = False
 
         self.image_sprite = [
