@@ -271,11 +271,13 @@ class Game:
     def respawn_boss(self, monster, positions_x, positions_y, appeared, is_last_wave):
         boss = []
         if appeared:
+        type_boss = self.bosses[turn]
             enemy_position_x = random.choice(positions_x)
             enemy_position_y = random.choice(positions_y)
-            boss = [Boss(enemy_position_x, enemy_position_y, monster["Size"], monster["Color"], monster["Speed"],
-                         monster["AP"], monster["DP"], monster["HP"], monster["Exp"], monster["Image"])]
-            boss = self.is_last_boss(boss[0], is_last_wave)
+            boss = [Boss(enemy_position_x, enemy_position_y, type_boss["Size"], type_boss["Color"],
+                         type_boss["Speed"], type_boss["AP"], type_boss["DP"], type_boss["HP"],
+                         type_boss["Exp"], type_boss["Image"])]
+            boss = self.is_last_boss(boss[0], turn)
         return boss
 
     def is_last_boss(self, boss, turn):
