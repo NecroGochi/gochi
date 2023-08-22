@@ -222,7 +222,7 @@ class Game:
             new_weapons.remove(new_weapons[option_number[1]])
         return show_stat_up
 
-    def generate_enemies(self, time, player, enemies, boss_appeared):
+    def generate_enemies(self, time, player, enemies):
         quantity_population = [0, 1, 2]
         positions_x = []
         positions_y = []
