@@ -253,11 +253,6 @@ class Game:
         boss_appeared[turn] = False
 
         return boss_appeared
-
-    def respawn_in_game(self, monsters, boss_monster, positions_x, positions_y, quantity_population, boss_appeared,
-                        is_last_wave):
-        enemies = []
-        return enemies
             enemies.extend(self.respawn_boss(positions_x, positions_y, turn))
             enemies.extend(self.respawn_monsters(positions_x, positions_y, quantity_population, turn))
 
