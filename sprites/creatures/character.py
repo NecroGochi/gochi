@@ -59,21 +59,16 @@ class Character(Sprite):
         else:
             self.render_hp_bar(window, (155, 0, 0), board_camera_x, board_camera_y)
 
-    def render_character(self, window, color, board_camera_x, board_camera_y):
-        '''pygame.draw.rect(window, color,
-                         (self.hitbox.x - board_camera_x - self.render_shit,
-                          self.hitbox.y - board_camera_y - self.render_shit,
-                          self.size, self.size))
-        '''
-        image = self.image_sprite[self.number_image]
+    def render_character(self, window, board_camera_x, board_camera_y):
+        image = self.sprite_images[self.number_image]
         image = pygame.transform.scale(image, (self.size, self.size))
         image = pygame.transform.flip(image, self.flip_image, False)
         window.blit(image, (self.hitbox.x - board_camera_x - self.render_shit,
-                          self.hitbox.y - board_camera_y - self.render_shit))
-        if self.number_image == 0:
-            self.number_image = 1
-        else:
+                            self.hitbox.y - board_camera_y - self.render_shit))
+        if self.number_image == len(self.sprite_images) - 1:
             self.number_image = 0
+        else:
+            self.number_image += 1
 
     @staticmethod
     def render_bar(bar, window, color):
