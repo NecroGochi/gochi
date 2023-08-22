@@ -4,6 +4,18 @@ import pygame
 
 
 class Character(Sprite):
+    pygame.init()
+
+    black = (0, 0, 0)
+    green = (0, 155, 155)
+    red = (155, 0, 0)
+
+    health_point_y_bar_size = 10
+
+    font_options = pygame.font.Font(None, 32)
+
+    experience_increase_multiplier = 1000
+
     def __init__(self, board_width, board_height):
         # Set player properties
         self.size = 100
