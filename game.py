@@ -257,9 +257,9 @@ class Game:
     def respawn_in_game(self, monsters, boss_monster, positions_x, positions_y, quantity_population, boss_appeared,
                         is_last_wave):
         enemies = []
-        enemies.extend(self.respawn_boss(boss_monster, positions_x, positions_y, boss_appeared, is_last_wave))
         enemies.extend(self.respawn_in_turn(monsters, positions_x, positions_y, quantity_population))
         return enemies
+            enemies.extend(self.respawn_boss(positions_x, positions_y, turn))
 
     def respawn_in_turn(self, monsters, positions_x, positions_y, quantity_population):
         enemies = []
@@ -268,7 +268,7 @@ class Game:
             enemies.extend(self.respawn(monster, positions_x, positions_y, quantity))
         return enemies
 
-    def respawn_boss(self, monster, positions_x, positions_y, appeared, is_last_wave):
+    def respawn_boss(self, positions_x, positions_y, turn):
         boss = []
         type_boss = self.bosses[turn]
         if self.is_respawn_bosses[turn]:
