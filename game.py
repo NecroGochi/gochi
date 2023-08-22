@@ -32,7 +32,6 @@ class Game:
         pygame.display.set_caption("Gochi Game")
         self.board = Board(self.window_width, self.window_height, 1715, 875, 255, 55)
 
-    def game(self):
         self.bosses = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
         self.monsters = [[Spinach, Dog],
                     [Dog, Cockroach],
@@ -40,6 +39,7 @@ class Game:
                     [Super_Spinach, Bookworm, Super_Bookworm],
                     [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
                     [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
+    def play(self):
         # Set initial player position
         player = Character(self.board.width, self.board.height)
         enemies = []
