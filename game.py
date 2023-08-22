@@ -42,7 +42,6 @@ class Game:
         # Set initial player position
         player = Character(self.board.width, self.board.height)
         enemies = []
-        boss_appear = [False, True, True, True, True, True]
         new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
         start_time = pygame.time.get_ticks()
         not_defeated_final_boss = True
@@ -95,7 +94,7 @@ class Game:
             generate = False
 
         if generate:
-            boss_appear = self.generate_enemies(elapsed_seconds, player, enemies, boss_appear)
+            self.generate_enemies(elapsed_seconds, player, enemies)
 
         # Update the camera position based on the player's position
         self.board.update_camera_position(player.hitbox.x, player.hitbox.y)
