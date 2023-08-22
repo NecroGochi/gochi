@@ -4,18 +4,18 @@ import math
 
 
 class Enemy(Sprite):
-    def __init__(self, position_x, position_y, size, color, speed, ap, dp, hp, exp, image):
+    def __init__(self, position_x, position_y, size, color, speed, attack, defense, health, experience, image):
         # Set player properties
         self.size = size
         self.color = color
         self.speed = speed
         self.hit = True
-        self.ap = ap
-        self.dp = dp
-        self.hp = hp
-        self.actual_hp = hp
+        self.attack = attack
+        self.defense = defense
+        self.health_points = health
+        self.actual_health_points = health
         self.boss = False
-        self.exp = exp
+        self.experience = experience
 
         self.image_sprite = pygame.image.load(image)
         self.flip_image = False
@@ -56,9 +56,9 @@ class Enemy(Sprite):
 
     def collide_weapon(self, weapon, weapon_attack):
         if self.hitbox.colliderect(weapon):
-            self.actual_hp = self.actual_hp - (max(1, round(weapon_attack, self.dp)))
+            self.actual_health_points = self.actual_health_points - (max(1, round(weapon_attack, self.defense)))
 
     def collide_weapon_circle(self, weapon, weapon_attack):
         distance = math.sqrt((weapon[0] - self.hitbox.x) ** 2 + (weapon[1] - self.hitbox.y) ** 2)
         if distance < weapon[2] + self.size:
-            self.actual_hp = self.actual_hp - (max(1, round(weapon_attack, self.dp)))
+            self.actual_health_points = self.actual_health_points - (max(1, round(weapon_attack, self.defense)))
