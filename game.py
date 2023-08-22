@@ -20,6 +20,7 @@ class Game:
     font = pygame.font.Font(None, 32)
     font_title = pygame.font.Font(None, 64)
     font_options = pygame.font.Font(None, 32)
+    is_respawn_bosses = [False, True, True, True, True, True]
     not_defeated_final_boss = True
 
     def __init__(self, window, window_width, window_height):
@@ -39,6 +40,8 @@ class Game:
                     [Super_Spinach, Bookworm, Super_Bookworm],
                     [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
                     [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
+        self.number_of_waves = len(self.monsters) - 1
+
     def play(self):
         # Set initial player position
         player = Character(self.board.width, self.board.height)
