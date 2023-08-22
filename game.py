@@ -169,16 +169,16 @@ class Game:
             self.collide_enemy_with_weapon(weapon, enemy, player)
         player.collide_enemy(enemy.hitbox, elapsed_seconds, enemy.hit, enemy.attack)
         # remove enemy and get exp
-        if enemy.actual_hp <= 0:
+        if enemy.actual_health_points <= 0:
             show_stat_up = self.killed_enemy(enemy, enemies, player, level_up_menu, new_weapons, show_stat_up)
         return show_stat_up
 
     @staticmethod
     def collide_enemy_with_weapon(weapon, enemy, player):
         if weapon.type == "Rect":
-            enemy.collide_weapon(weapon.hitbox[0], player.items[0].power + player.ap)
+            enemy.collide_weapon(weapon.hitbox[0], player.items[0].power + player.attack)
         if weapon.type == "Circle":
-            enemy.collide_weapon_circle(weapon.hitbox[0], player.items[0].power + player.ap)
+            enemy.collide_weapon_circle(weapon.hitbox[0], player.items[0].power + player.attack)
 
     def killed_enemy(self, enemy, enemies, player, level_up_menu, new_weapons, show_stat_up):
         if enemy.boss:
