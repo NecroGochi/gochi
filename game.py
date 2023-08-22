@@ -278,9 +278,8 @@ class Game:
             boss = self.is_last_boss(boss[0], is_last_wave)
         return boss
 
-    @staticmethod
-    def is_last_boss(boss, is_last_wave):
-        if is_last_wave:
+    def is_last_boss(self, boss, turn):
+        if turn == self.number_of_waves:
             boss.is_final_boss()
         return [boss]
 
