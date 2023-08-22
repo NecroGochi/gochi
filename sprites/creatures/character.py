@@ -75,11 +75,9 @@ class Character(Sprite):
         else:
             self.number_image = 0
 
-    def render_hp_bar(self, window, color, board_camera_x, board_camera_y):
-        pygame.draw.rect(window, color,
-                         (self.hitbox.x - board_camera_x - self.render_shit,
-                          self.hitbox.y + self.size - board_camera_y - self.render_shit,
-                          self.actual_hp * self.size / self.hp, 10))
+    @staticmethod
+    def render_bar(bar, window, color):
+        pygame.draw.rect(window, color, bar)
 
     def render_text(self, _string, color, window, board_camera_x, board_camera_y):
         text = self.font_options.render(_string, True, color)
