@@ -52,12 +52,19 @@ class Character(Sprite):
         ]
 
     # Function to render the player
-    def render(self, window, color, board_camera_x, board_camera_y):
-        self.render_character(window, color, board_camera_x, board_camera_y)
-        if self.actual_hp > self.actual_hp * 0.1:
-            self.render_hp_bar(window, (0, 155, 155), board_camera_x, board_camera_y)
-        else:
-            self.render_hp_bar(window, (155, 0, 0), board_camera_x, board_camera_y)
+    def render(self, window, board_camera_x, board_camera_y):
+        actual_health_point_bar = (self.hitbox.x - board_camera_x - self.render_shit,
+                                   self.hitbox.y + self.size - board_camera_y - self.render_shit,
+                                   self.actual_health_points * self.size / self.health_points,
+                                   self.health_point_y_bar_size)
+        lost_health_point_bar = (self.hitbox.x - board_camera_x - self.render_shit +
+                                 self.actual_health_points * self.size / self.health_points,
+                                 self.hitbox.y + self.size - board_camera_y - self.render_shit,
+                                 (self.health_points - self.actual_health_points) * self.size / self.health_points,
+                                 self.health_point_y_bar_size)
+        self.render_character(window, board_camera_x, board_camera_y)
+        self.render_bar(actual_health_point_bar, window, self.green)
+        self.render_bar(lost_health_point_bar, window, self.red)
 
     def render_character(self, window, board_camera_x, board_camera_y):
         image = self.sprite_images[self.number_image]
