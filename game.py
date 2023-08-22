@@ -44,7 +44,6 @@ class Game:
         enemies = []
         new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
         start_time = pygame.time.get_ticks()
-        not_defeated_final_boss = True
         show_stat_up = 0
 
         defeated_menu = DefeatedMenu(self.window, self.window_width, self.window_height, self.font_title,
@@ -58,18 +57,15 @@ class Game:
 
         # Game loop
         running = True
-            not_defeated_final_boss, boss_appear = self.game_loop(player, start_time, enemies, show_stat_up,
-                                                                  boss_appear, level_up_menu, new_weapons,
-                                                                  not_defeated_final_boss)
         while running and player.actual_health_points > 0 and self.not_defeated_final_boss:
+            self.game_loop(player, start_time, enemies, show_stat_up, level_up_menu, new_weapons)
 
         if not_defeated_final_boss:
             defeated_menu.run_loop()
         else:
             win_menu.run_loop()
 
-    def game_loop(self, player, start_time, enemies, show_stat_up, boss_appear, level_up_menu, new_weapons,
-                  not_killed_final_boss):
+    def game_loop(self, player, start_time, enemies, show_stat_up, level_up_menu, new_weapons):
         for event in pygame.event.get():
             self.happened(event, player)
         # Calculate game time
