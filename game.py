@@ -32,6 +32,7 @@ class Game:
         self.board = Board(self.window_width, self.window_height, 1715, 875, 255, 55)
 
     def game(self):
+        self.bosses = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
         self.monsters = [[Spinach, Dog],
                     [Dog, Cockroach],
                     [Cockroach, Super_Spinach, Angry_Dog],
@@ -235,8 +236,6 @@ class Game:
             positions_y.append(position)
         for position in range(player.hitbox.y + 200, 1080):
             positions_y.append(position)
-
-        boss_monsters = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
 
         turn = math.floor(time/60)
 
