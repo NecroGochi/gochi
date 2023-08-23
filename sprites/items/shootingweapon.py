@@ -10,6 +10,7 @@ class ShootingWeapon(Sprite):
         self.distance = 300
         self.actual_distance = 0
         self.quantity = 1
+        self.max_quantity = 5
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14) / 2
@@ -17,6 +18,7 @@ class ShootingWeapon(Sprite):
         self.angles_right = [0]
         self.angles_left = [self.angle]
         self.angles = self.angles_left
+        self.angle_offset = 0.1
         self.hitbox = [
             pygame.Rect(position_x * math.cos(self.angles[0]),
                         position_y * math.sin(self.angles[0]), 20, 28)
@@ -64,30 +66,23 @@ class ShootingWeapon(Sprite):
     def get_level(self):
         self.power += self.bonus_level[0]
         self.level += 1
-        if self.level == 2:
-            self.quantity += 1
-            self.angles_right = [self.angle * 1.91, 0.79]
-            self.angles_left = [self.angle * 1.25, self.angle * 0.75]
-            self.choose_angles_by_direction()
-            self.update_hitbox_position()
-        if self.level == 3:
-            self.quantity += 1
-            self.angles_right = [0, self.angle * 0.33, self.angle * 1.66]
-            self.angles_left = [self.angle, self.angle * 0.66, self.angle * 1.33]
-            self.choose_angles_by_direction()
-            self.update_hitbox_position()
-        if self.level == 4:
-            self.quantity += 1
-            self.angles_right = [self.angle * 0.08, self.angle * 0.25, self.angle * 1.92, self.angle * 1.75]
-            self.angles_left = [self.angle * 0.92, self.angle * 0.75, self.angle * 1.08, self.angle * 1.25]
-            self.choose_angles_by_direction()
-            self.update_hitbox_position()
-        if self.level == 5:
-            self.quantity += 1
-            self.angles_right = [0, self.angle * 0.16, self.angle * 0.33, self.angle * 1.83, self.angle * 1.67]
-            self.angles_left = [self.angle, self.angle * 0.83, self.angle * 0.66, self.angle * 1.17, self.angle * 1.33]
-            self.choose_angles_by_direction()
-            self.update_hitbox_position()
+        self.quantity += 1
+        if self.max_quantity >= self.quantity:
+            self.add_item()
+
+    def add_item(self):
+        if self.level % 2 == 0:
+            self.angles_right.pop()
+            self.angles_right.append(self.angle * (0.0 + (self.quantity / 2) * self.angle_offset))
+            self.angles_right.append(self.angle * (2.0 - (self.quantity / 2) * self.angle_offset))
+            self.angles_left.pop()
+            self.angles_left.append(self.angle * (1.0 + (self.quantity / 2) * self.angle_offset))
+            self.angles_left.append(self.angle * (1.0 - (self.quantity / 2) * self.angle_offset))
+        else:
+            self.angles_right.append(0)
+            self.angles_left.append(self.angle)
+        self.choose_angles_by_direction()
+        self.update_hitbox_position()
 
     def update_hitbox_position(self):
         hitbox = []
