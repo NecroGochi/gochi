@@ -49,11 +49,12 @@ class ShootingWeapon(Sprite):
             if self.actual_distance >= self.distance:
                 self.actual_distance = 0
                 self.hitbox.remove(each)
-                if self.left == 1:
-                    self.angles = self.angles_left
-                else:
-                    self.angles = self.angles_right
                 self.hitbox.append(pygame.Rect(player_position_x, player_position_y, 20, 28))
+    def choose_angles(self):
+        if self.left == 1:
+            self.angles = self.angles_left
+        else:
+            self.angles = self.angles_right
 
     def get_level(self):
         self.power += self.bonus_level[0]
