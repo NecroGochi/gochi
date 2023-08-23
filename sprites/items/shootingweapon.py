@@ -68,10 +68,7 @@ class ShootingWeapon(Sprite):
             self.quantity += 1
             self.angles_right = [self.angle * 1.91, 0.79]
             self.angles_left = [self.angle * 1.25, self.angle * 0.75]
-            if self.left == 1:
-                self.angles = self.angles_left
-            else:
-                self.angles = self.angles_right
+            self.choose_angles_by_direction()
             hitbox = []
             for each in self.angles:
                 hitbox.append(pygame.Rect(self.position_x * math.cos(each),
@@ -81,10 +78,7 @@ class ShootingWeapon(Sprite):
             self.quantity += 1
             self.angles_right = [0, self.angle * 0.33, self.angle * 1.66]
             self.angles_left = [self.angle, self.angle * 0.66, self.angle * 1.33]
-            if self.left == 1:
-                self.angles = self.angles_left
-            else:
-                self.angles = self.angles_right
+            self.choose_angles_by_direction()
             hitbox = []
             for each in self.angles:
                 hitbox.append(pygame.Rect(self.position_x * math.cos(each),
@@ -94,10 +88,7 @@ class ShootingWeapon(Sprite):
             self.quantity += 1
             self.angles_right = [self.angle * 0.08, self.angle * 0.25, self.angle * 1.92, self.angle * 1.75]
             self.angles_left = [self.angle * 0.92, self.angle * 0.75, self.angle * 1.08, self.angle * 1.25]
-            if self.left == 1:
-                self.angles = self.angles_left
-            else:
-                self.angles = self.angles_right
+            self.choose_angles_by_direction()
             hitbox = []
             for each in self.angles:
                 hitbox.append(pygame.Rect(self.position_x * math.cos(each),
@@ -107,14 +98,9 @@ class ShootingWeapon(Sprite):
             self.quantity += 1
             self.angles_right = [0, self.angle * 0.16, self.angle * 0.33, self.angle * 1.83, self.angle * 1.67]
             self.angles_left = [self.angle, self.angle * 0.83, self.angle * 0.66, self.angle * 1.17, self.angle * 1.33]
-            if self.left == 1:
-                self.angles = self.angles_left
-            else:
-                self.angles = self.angles_right
+            self.choose_angles_by_direction()
             hitbox = []
             for each in self.angles:
                 hitbox.append(pygame.Rect(self.position_x * math.cos(each),
                                           self.position_y * math.sin(each), 20, 28))
             self.hitbox = hitbox
-
-    def
