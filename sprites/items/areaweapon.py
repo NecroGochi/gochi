@@ -24,10 +24,6 @@ class AreaWeapon(Sprite):
             image = self.image_weapon
             image = pygame.transform.scale(image, (each[2] * self.image_scale, each[2] * self.image_scale))
             image.set_alpha(200)
-            '''
-            pygame.draw.circle(window, color, (each[0] - board_camera_x + self.render_shift,
-                                               each[1] - board_camera_y + self.render_shift), each[2])
-            '''
             window.blit(image, (each[0] - board_camera_x - self.render_image_shift,
                                 each[1] - board_camera_y - self.render_image_shift))
 
