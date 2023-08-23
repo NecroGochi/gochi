@@ -15,7 +15,6 @@ class AreaWeapon(Sprite):
         self.power = 1
         self.bonus_level = [1, 10]
         self.render_shift = 10
-        # 90
         self.render_image_shift = 90
         self.image_weapon = pygame.image.load("Images/Monsters/mrozona_kawa.png")
 
