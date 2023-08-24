@@ -7,32 +7,17 @@ from Menu.menu import Menu
 class OptionsMenu(Menu):
     # Set static values
     red = (255, 0, 0)
+    title = 'Options'
+    name_active = False
+    name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
+    languages_choose = ['english', 'polish']
 
-    def __init__(self, window_width, window_height, font_title, font_options):
-        # Set the window size
-        self.window_width = window_width
-        self.window_height = window_height
-        self.window = pygame.display.set_mode((self.window_width, self.window_height))
-        pygame.display.set_caption("Gochi Game")
-
-        # Set Fonts
-        self.font_title = font_title
-        self.font_options = font_options
-        self.selected_option = 0
-
-        # Set Menu
-        self.title = 'Options'
+    def __init__(self, window, window_width, window_height, font_title, font_options):
+        super().__init__(window, window_width, window_height, font_title, font_options)
         self.options_menu = [languages[self.language.return_language()]['player_name'],
                              languages[self.language.return_language()]['language'],
                              languages[self.language.return_language()]['back']]
-
-        # Set player name rectangular
         self.name_player = load_configure_data()['player_name']
-        self.name_field_rect = pygame.Rect(440 - 100, 185, 200, 30)
-        self.name_active = False
-
-        # Set language choose
-        self.languages_choose = ['english', 'polish']
 
     def run_loop(self):
         not_end_loop = True
