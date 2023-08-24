@@ -5,6 +5,7 @@ from sprites.creatures.character import *
 from sprites.creatures.boss import *
 from sprites.items.shootingweapon import *
 from Configure.enemies_config import *
+from Configure.characters_configure import *
 from Menu.level_up_menu import LevelUpMenu
 from Menu.defeated_menu import DefeatedMenu
 from Menu.win_menu import WinMenu
@@ -39,10 +40,11 @@ class Game:
                          [Super_Spinach, Bookworm, Super_Bookworm, Ghost],
                          [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
         self.number_of_waves = len(self.monsters) - 1
+        self.hero = Necromancer
 
     def play(self):
         # Set initial player position
-        player = Character(self.board.width, self.board.height)
+        player = Character(self.hero, 1, 0, self.board.width, self.board.height)
         enemies = []
         new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
         start_time = pygame.time.get_ticks()
