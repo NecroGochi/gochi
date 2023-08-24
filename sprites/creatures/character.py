@@ -16,6 +16,11 @@ class Character(Sprite):
 
     experience_increase_multiplier = 1000
 
+    flip_image = False
+    number_image = 0
+    velocity_x = 0
+    velocity_y = 0
+
     def __init__(self, board_width, board_height):
         # Set player properties
         self.size = 100
@@ -33,19 +38,15 @@ class Character(Sprite):
             'defense': 2,
             'speed': 1
         }
-        self.flip_image = False
 
         self.sprite_images = [
             pygame.image.load("Images/Heroes/nekromanta_1.png"),
             pygame.image.load("Images/Heroes/nekromanta_2.png")
         ]
-        self.number_image = 0
 
         # shifting the render position - centering the hitbox
         self.render_shit = self.size // 4
         self.hitbox = pygame.Rect(board_width // 2, board_height // 2, self.size // 2, self.size // 2)
-        self.velocity_x = 0
-        self.velocity_y = 0
 
         self.items = [
             OrbitingWeapon(self.hitbox.x, self.hitbox.y),
