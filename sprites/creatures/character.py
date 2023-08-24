@@ -21,28 +21,20 @@ class Character(Sprite):
     velocity_x = 0
     velocity_y = 0
 
-    def __init__(self, board_width, board_height):
+    def __init__(self, hero, level, actual_experience_points, board_width, board_height):
         # Set player properties
-        self.size = 100
-        self.health_points = 49000
-        self.actual_health_points = 49000
-        self.attack = 13
-        self.defense = 4
-        self.speed = 9
-        self.actual_experience_points = 0
-        self.max_experience_points = 1000
-        self.level = 1
-        self.bonus_level = {
-            'health': 3,
-            'attack': 5,
-            'defense': 2,
-            'speed': 1
-        }
+        self.size = hero['Size']
+        self.health_points = hero['HP']
+        self.actual_health_points = hero['HP']
+        self.attack = hero['AP']
+        self.defense = hero['DP']
+        self.speed = hero['Speed']
+        self.actual_experience_points = actual_experience_points
+        self.max_experience_points = hero['Max_Exp']
+        self.level = level
+        self.bonus_level = hero['Bonus_level']
 
-        self.sprite_images = [
-            pygame.image.load("Images/Heroes/nekromanta_1.png"),
-            pygame.image.load("Images/Heroes/nekromanta_2.png")
-        ]
+        self.sprite_images = self.load_images(hero['Images'])
 
         # shifting the render position - centering the hitbox
         self.render_shit = self.size // 4
@@ -51,6 +43,13 @@ class Character(Sprite):
         self.items = [
             OrbitingWeapon(self.hitbox.x, self.hitbox.y),
         ]
+
+    @staticmethod
+    def load_images(images):
+        python_images = []
+        for each in images:
+            python_images.append(pygame.image.load(each))
+        return python_images
 
     # Function to render the player
     def render(self, window, board_camera_x, board_camera_y):
