@@ -8,24 +8,14 @@ from Menu.options_menu import OptionsMenu
 
 
 class MainMenu(Menu):
-    def __init__(self, window_width, window_height, font_title, font_options):
-        # Set the window size
-        self.window_width = window_width
-        self.window_height = window_height
-        self.window = pygame.display.set_mode((self.window_width, self.window_height))
-        pygame.display.set_caption("Gochi Game")
+    title = 'Souls Reaper'
 
-        # Set Fonts
-        self.font_title = font_title
-        self.font_options = font_options
-
-        # Set menu
-        self.title = 'Souls Reaper'
+    def __init__(self, window, window_width, window_height, font_title, font_options):
+        super().__init__(window, window_width, window_height, font_title, font_options)
         self.options_menu = [languages[self.language.return_language()]['play'],
                              languages[self.language.return_language()]['campaign'],
                              languages[self.language.return_language()]['options'],
                              languages[self.language.return_language()]['exit']]
-        self.selected_option = 0
 
     def run_loop(self):
         not_end_loop = True
@@ -52,7 +42,7 @@ class MainMenu(Menu):
             running_campaign('Scenario\\scenario_02_pl.txt', image_path, images)
         elif self.selected_option == 2:
             # Option menu
-            OptionsMenu(self.window_width, self.window_height, self.font_title,
+            OptionsMenu(self.window, self.window_width, self.window_height, self.font_title,
                         self.font_options).run_loop()
             self.language.load_configure_language()
             self.options_menu = [languages[self.language.return_language()]['play'],
