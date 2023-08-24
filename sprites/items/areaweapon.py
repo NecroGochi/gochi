@@ -18,7 +18,7 @@ class AreaWeapon(Sprite):
         self.render_image_shift = 90
         self.image_weapon = pygame.image.load("Images/Monsters/mrozona_kawa.png")
 
-    def render(self, window, color, board_camera_x, board_camera_y):
+    def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
             image = self.image_weapon
             image = pygame.transform.scale(image, (each[2] * self.image_scale, each[2] * self.image_scale))
