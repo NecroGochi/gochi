@@ -1,4 +1,3 @@
-import pygame
 from Configure.new_language_config import *
 from Menu.menu import Menu
 
