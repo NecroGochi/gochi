@@ -5,22 +5,11 @@ from Menu.menu import Menu
 
 
 class WeaponLevelUpMenu(Menu):
+    title = 'Weapon level up!'
 
     def __init__(self, window, window_width, window_height, font_title, font_options):
-        # Set the window size
-        self.window = window
-        self.window_width = window_width
-        self.window_height = window_height
-        pygame.display.set_caption("Level up menu Game")
-
-        # Set Fonts
-        self.font_title = font_title
-        self.font_options = font_options
-
-        # Set Menu
-        self.title = 'Weapon level up!'
+        super().__init__(window, window_width, window_height, font_title, font_options)
         self.options_menu = [languages[self.language.return_language()]['back']]
-        self.selected_option = 0
 
     def run_loop(self):
         not_end_loop = True
