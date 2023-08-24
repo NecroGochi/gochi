@@ -89,7 +89,8 @@ class LevelUpMenu(Menu):
             option_number = [2, item_number]
         return option_number
 
-    def is_choosen(self, item_number):
+    @staticmethod
+    def is_choosen(item_number):
         if item_number == -1:
             return True
         else:
