@@ -5,22 +5,11 @@ from Menu.menu import Menu
 
 class DefeatedMenu(Menu):
     red = (155, 0, 0)
+    title = 'DEFEATED!'
 
     def __init__(self, window, window_width, window_height, font_title, font_options):
-        # Set the window size
-        self.window_width = window_width
-        self.window_height = window_height
-        self.window = window
-        pygame.display.set_caption("Gochi Game")
-
-        # Set Fonts
-        self.font_title = font_title
-        self.font_options = font_options
-
-        # Set menu
-        self.title = 'DEFEATED!'
+        super().__init__(window, window_width, window_height, font_title, font_options)
         self.options_menu = [languages[self.language.return_language()]['exit']]
-        self.selected_option = 0
 
     def run_loop(self):
         not_end_loop = True
