@@ -51,7 +51,7 @@ class LevelUpMenu(Menu):
         option_number = [-1, item_number]
         for event in pygame.event.get():
             option_number = self.happened(event)
-        not_end_loop = self.is_choosen(option_number[1])
+        not_end_loop = self.is_chosen(option_number[1])
         return not_end_loop, option_number
 
     def happened(self, event):
@@ -90,7 +90,7 @@ class LevelUpMenu(Menu):
         return option_number
 
     @staticmethod
-    def is_choosen(item_number):
+    def is_chosen(item_number):
         if item_number == -1:
             return True
         else:
