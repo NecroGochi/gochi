@@ -104,7 +104,7 @@ class Game:
 
         # Render game objects based on the camera position
         for item in player.items:
-            item.render(self.window, self.blue_purple, self.board.camera_x, self.board.camera_y)
+            item.render(self.window, self.board.camera_x, self.board.camera_y)
         player.render(self.window, self.board.camera_x, self.board.camera_y)
         for enemy in enemies:
             enemy.render(self.window, self.board.camera_x, self.board.camera_y)
