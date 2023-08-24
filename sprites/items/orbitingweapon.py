@@ -4,6 +4,8 @@ from sprites.creatures.sprite import *
 
 
 class OrbitingWeapon(Sprite):
+    black = (0, 0, 0)
+
     def __init__(self, position_x, position_y):
         self.name = "Possessed book"
         self.type = "Rect"
@@ -25,11 +27,11 @@ class OrbitingWeapon(Sprite):
         self.hit = True
         self.image_weapon = pygame.image.load("Images/Monsters/ksiazka.png")
 
-    def render(self, window, color, board_camera_x, board_camera_y):
+    def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
             image = self.image_weapon
             image = pygame.transform.scale(image, (each[2], each[3]))
-            pygame.draw.rect(window, color,
+            pygame.draw.rect(window, self.black,
                              (each.x - board_camera_x,
                               each.y - board_camera_y, each.width,
                               each.height))
