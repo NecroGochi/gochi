@@ -3,10 +3,10 @@ from sprites.creatures.enemy import *
 
 class Boss(Enemy):
     health_point_y_bar_size = 10
+    boss = True
+    final_boss = False
 
     def __init__(self, position_x, position_y, size, color, speed, attack, defense, health, experience, image):
-        self.boss = True
-        self.final_boss = False
         super().__init__(position_x, position_y, size, color, speed, attack, defense, health, experience, image)
 
     def render_hp_bar(self, window, color, board_camera_x, board_camera_y):
