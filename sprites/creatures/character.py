@@ -1,4 +1,3 @@
-from sprites.items.orbitingweapon import *
 from sprites.items.areaweapon import *
 import pygame
 
