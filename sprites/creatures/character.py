@@ -40,9 +40,7 @@ class Character(Sprite):
         self.render_shit = self.size // 4
         self.hitbox = pygame.Rect(board_width // 2, board_height // 2, self.size // 2, self.size // 2)
 
-        self.items = [
-            OrbitingWeapon(self.hitbox.x, self.hitbox.y),
-        ]
+        self.items = []
 
     @staticmethod
     def load_images(images):
