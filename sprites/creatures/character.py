@@ -51,6 +51,9 @@ class Character(Sprite):
             python_images.append(pygame.image.load(each))
         return python_images
 
+    def add_item(self, item):
+        self.items.append(item)
+
     # Function to render the player
     def render(self, window, board_camera_x, board_camera_y):
         actual_health_point_bar = (self.hitbox.x - board_camera_x - self.render_shit,
