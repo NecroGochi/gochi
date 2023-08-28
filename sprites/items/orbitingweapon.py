@@ -1,9 +1,9 @@
 import pygame
 import math
-from sprites.creatures.sprite import *
+from sprites.items.weapon import *
 
 
-class OrbitingWeapon(Sprite):
+class OrbitingWeapon(Weapon):
     black = (0, 0, 0)
 
     def __init__(self, position_x, position_y):

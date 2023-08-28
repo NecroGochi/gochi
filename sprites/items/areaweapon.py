@@ -1,8 +1,8 @@
 import pygame
-from sprites.creatures.sprite import *
+from sprites.items.weapon import *
 
 
-class AreaWeapon(Sprite):
+class AreaWeapon(Weapon):
     def __init__(self, position_x, position_y):
         self.name = "Cup of cold coffe"
         self.type = "Circle"
