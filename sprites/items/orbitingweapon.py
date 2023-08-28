@@ -11,11 +11,16 @@ class OrbitingWeapon(Weapon):
     hit = True
     number_image = 0
 
-    def __init__(self, position_x, position_y):
-        self.name = "Possessed book"
-        self.type = "Rect"
-        self.distance = 150
-        self.quantity = 1
+    def __init__(self, item, level, position_x, position_y):
+        self.name = item['Name']
+        self.type = item['Shape']
+        self.distance = item['Distance_from_player']
+        self.quantity = item['Quantity']
+        self.power = item['Power']
+        self.speed = item['Speed']
+        self.bonus_level = item['Bonus_level']
+        self.image_weapon = self.load_images(item['Images'])
+        self.level = level
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14)
@@ -24,11 +29,6 @@ class OrbitingWeapon(Weapon):
             pygame.Rect(self.position_x * math.cos(self.angles[0]),
                         self.position_y * math.sin(self.angles[0]), self.width, self.length),
                        ]
-        self.level = 1
-        self.power = 20
-        self.speed = 0.02
-        self.bonus_level = [2, 0.02]
-        self.image_weapon = pygame.image.load("Images/Monsters/ksiazka.png")
 
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
@@ -50,8 +50,8 @@ class OrbitingWeapon(Weapon):
             number += 1
 
     def get_level(self):
-        self.power += self.bonus_level[0]
-        self.speed += self.bonus_level[1]
+        self.power += self.bonus_level["power"]
+        self.speed += self.bonus_level["speed"]
         self.level += 1
         if self.level <= 6:
             self.quantity += 1
