@@ -5,6 +5,11 @@ from sprites.items.weapon import *
 
 class OrbitingWeapon(Weapon):
     black = (0, 0, 0)
+    left = 1
+    length = 60
+    width = 40
+    hit = True
+    number_image = 0
 
     def __init__(self, position_x, position_y):
         self.name = "Possessed book"
@@ -14,17 +19,15 @@ class OrbitingWeapon(Weapon):
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14)
-        self.left = 1
         self.angles = [self.angle * 0]
         self.hitbox = [
             pygame.Rect(self.position_x * math.cos(self.angles[0]),
-                        self.position_y * math.sin(self.angles[0]), 40, 60),
+                        self.position_y * math.sin(self.angles[0]), self.width, self.length),
                        ]
         self.level = 1
         self.power = 20
         self.speed = 0.02
         self.bonus_level = [2, 0.02]
-        self.hit = True
         self.image_weapon = pygame.image.load("Images/Monsters/ksiazka.png")
 
     def render(self, window, board_camera_x, board_camera_y):
@@ -60,5 +63,5 @@ class OrbitingWeapon(Weapon):
             hitbox = []
             for each in self.angles:
                 hitbox.append(pygame.Rect(self.position_x * math.cos(each),
-                            self.position_y * math.sin(each), 40, 60))
+                                          self.position_y * math.sin(each), self.width, self.length))
             self.hitbox = hitbox
