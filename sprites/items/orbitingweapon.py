@@ -39,7 +39,7 @@ class OrbitingWeapon(Weapon):
 
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
-            image = self.image_weapon
+            image = self.image_weapon[self.number_image]
             image = pygame.transform.scale(image, (each[2], each[3]))
             pygame.draw.rect(window, self.black,
                              (each.x - board_camera_x,
