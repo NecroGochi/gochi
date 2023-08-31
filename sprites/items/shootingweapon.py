@@ -64,12 +64,6 @@ class ShootingWeapon(Weapon):
             self.angles = self.angles_left
         else:
             self.angles = self.angles_right
-
-    def get_level(self):
-        self.power += self.bonus_level[0]
-        self.level += 1
-        self.quantity += 1
-        if self.max_quantity >= self.quantity:
             self.add_item()
 
     def add_item(self):
@@ -92,3 +86,8 @@ class ShootingWeapon(Weapon):
             hitbox.append(pygame.Rect(self.position_x * math.cos(each),
                                       self.position_y * math.sin(each), 20, 28))
         self.hitbox = hitbox
+
+    def get_level(self):
+        self.power += self.bonus_level["power"]
+        self.level += 1
+        self.quantity += 1
