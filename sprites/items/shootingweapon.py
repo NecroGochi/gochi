@@ -9,8 +9,11 @@ class ShootingWeapon(Weapon):
     max_quantity = 5
     left = True
     angle_offset = 0.2
+    length = 28
+    width = 20
     hit = True
     number_image = 0
+    type = 'Shooting'
 
     def __init__(self, position_x, position_y):
         self.name = "Possessed card"
