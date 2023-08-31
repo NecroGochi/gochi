@@ -43,14 +43,14 @@ class ShootingWeapon(Weapon):
             window.blit(image, (each[0] - board_camera_x,
                                 each[1] - board_camera_y))
 
-    def move(self, player_position_x, player_position_y):
+    def move(self, player_position_x, player_position_y, player_velocity_x, player_velocity_y):
         number = 0
+        self.is_range_reached(player_position_x, player_position_y)
         for each in self.hitbox:
-            each.x = player_position_x + (self.actual_distance + self.speed) * math.cos(self.angles[number])
-            each.y = player_position_y + (self.actual_distance + self.speed) * math.sin(self.angles[number])
-            self.actual_distance += self.speed
+            each.x = each.x + self.speed * math.cos(self.angles[number]) + player_velocity_x * 2
+            each.y = each.y + self.speed * math.sin(self.angles[number]) + player_velocity_y * 2
             number += 1
-            self.change_position(each, player_position_x, player_position_y)
+        self.actual_distance += self.speed
 
     def is_range_reached(self, player_position_x, player_position_y):
         if self.actual_distance >= self.distance:
