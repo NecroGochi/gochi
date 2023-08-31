@@ -5,16 +5,18 @@ from sprites.items.weapon import *
 
 class ShootingWeapon(Weapon):
     black = (0, 0, 0)
+    actual_distance = 0
+    max_quantity = 5
     left = True
+    angle_offset = 0.2
+    hit = True
     number_image = 0
 
     def __init__(self, position_x, position_y):
         self.name = "Possessed card"
         self.type = "Rect"
         self.distance = 300
-        self.actual_distance = 0
         self.quantity = 1
-        self.max_quantity = 5
         self.image_weapon = self.load_images(item['Images'])
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
@@ -22,7 +24,6 @@ class ShootingWeapon(Weapon):
         self.angles_right = [0]
         self.angles_left = [self.angle]
         self.angles = self.angles_left
-        self.angle_offset = 0.1
         self.hitbox = [
             pygame.Rect(position_x * math.cos(self.angles[0]),
                         position_y * math.sin(self.angles[0]), 20, 28)
@@ -31,7 +32,6 @@ class ShootingWeapon(Weapon):
         self.power = 20
         self.speed = 10
         self.bonus_level = [5]
-        self.hit = True
 
     @staticmethod
     def load_images(images):
