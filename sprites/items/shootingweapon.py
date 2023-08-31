@@ -32,8 +32,8 @@ class ShootingWeapon(Weapon):
         self.angles_left = [self.angle]
         self.angles = self.angles_left
         self.hitbox = [
-            pygame.Rect(position_x * math.cos(self.angles[0]),
-                        position_y * math.sin(self.angles[0]), 20, 28)
+            pygame.Rect(position_x,
+                        position_y, self.width, self.length)
         ]
 
     @staticmethod
