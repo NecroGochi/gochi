@@ -85,7 +85,7 @@ class Game:
                              self.board.left_border)
         player.update_position()
         for item in player.items:
-            item.move(player.hitbox.x, player.hitbox.y)
+            self.move_item(item, player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
         for enemy in enemies:
             self.move_enemy(player, enemy)
         for enemy in enemies:
