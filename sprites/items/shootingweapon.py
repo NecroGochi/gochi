@@ -53,11 +53,11 @@ class ShootingWeapon(Weapon):
             self.change_position(each, player_position_x, player_position_y)
 
     def change_position(self, item, player_position_x, player_position_y):
+    def is_range_reached(self, player_position_x, player_position_y):
         if self.actual_distance >= self.distance:
+            self.check_quantity()
+            self.initialize_start_position(player_position_x, player_position_y)
             self.actual_distance = 0
-            self.hitbox.remove(item)
-            self.choose_angles_by_direction()
-            self.hitbox.append(pygame.Rect(player_position_x, player_position_y, 20, 28))
 
     def check_quantity(self):
         if self.quantity > len(self.hitbox):
