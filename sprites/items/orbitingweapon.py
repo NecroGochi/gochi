@@ -61,14 +61,17 @@ class OrbitingWeapon(Weapon):
         self.speed += self.bonus_level["speed"]
         self.level += 1
         if self.level <= 6:
-            self.quantity += 1
-            self.angle = float((2.0 / float(self.quantity)) * 3.14)
-            angles = []
-            for each in range(self.quantity):
-                angles.append(self.angle * each)
-            self.angles = angles
-            hitbox = []
-            for each in self.angles:
-                hitbox.append(pygame.Rect(self.position_x * math.cos(each),
-                                          self.position_y * math.sin(each), self.width, self.length))
-            self.hitbox = hitbox
+            self.add_item()
+
+    def add_item(self):
+        self.quantity += 1
+        self.angle = float((2.0 / float(self.quantity)) * 3.14)
+        angles = []
+        for each in range(self.quantity):
+            angles.append(self.angle * each)
+        self.angles = angles
+        hitbox = []
+        for each in self.angles:
+            hitbox.append(pygame.Rect(self.position_x * math.cos(each),
+                                      self.position_y * math.sin(each), self.width, self.length))
+        self.hitbox = hitbox
