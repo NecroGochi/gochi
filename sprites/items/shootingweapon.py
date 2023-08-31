@@ -59,6 +59,8 @@ class ShootingWeapon(Weapon):
             self.choose_angles_by_direction()
             self.hitbox.append(pygame.Rect(player_position_x, player_position_y, 20, 28))
 
+    def check_quantity(self):
+        if self.quantity > len(self.hitbox):
             self.add_item()
 
     def add_item(self):
