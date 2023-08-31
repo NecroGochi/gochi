@@ -73,14 +73,7 @@ class ShootingWeapon(Weapon):
             self.angles_right.append(0)
             self.angles_left.append(self.angle)
         self.choose_angles_by_direction()
-        self.update_hitbox_position()
 
-    def update_hitbox_position(self):
-        hitbox = []
-        for each in self.angles:
-            hitbox.append(pygame.Rect(self.position_x * math.cos(each),
-                                      self.position_y * math.sin(each), 20, 28))
-        self.hitbox = hitbox
     def choose_angles_by_direction(self):
         if self.left:
             self.angles = self.angles_left
