@@ -6,6 +6,7 @@ from sprites.items.weapon import *
 class ShootingWeapon(Weapon):
     black = (0, 0, 0)
     left = True
+    number_image = 0
 
     def __init__(self, position_x, position_y):
         self.name = "Possessed card"
@@ -14,6 +15,7 @@ class ShootingWeapon(Weapon):
         self.actual_distance = 0
         self.quantity = 1
         self.max_quantity = 5
+        self.image_weapon = self.load_images(item['Images'])
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14) / 2
@@ -30,16 +32,11 @@ class ShootingWeapon(Weapon):
         self.speed = 10
         self.bonus_level = [5]
         self.hit = True
-        self.image_weapon = pygame.image.load("Images/Monsters/karta.png")
 
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
-            image = self.image_weapon
+            image = self.image_weapon[self.number_image]
             image = pygame.transform.scale(image, (each[2], each[2]))
-            pygame.draw.rect(window, self.black,
-                             (each.x - board_camera_x,
-                              each.y - board_camera_y, each.height,
-                              each.width))
             window.blit(image, (each[0] - board_camera_x,
                                 each[1] - board_camera_y))
 
