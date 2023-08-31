@@ -159,6 +159,13 @@ class Game:
         elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
             player.velocity_y = 0
 
+    @staticmethod
+    def move_item(item, player_x, player_y, player_velocity_x, player_velocity_y):
+        if item.type == 'Shooting':
+            item.move(player_x, player_y, player_velocity_x, player_velocity_y)
+        else:
+            item.move(player_x, player_y)
+
     def move_enemy(self, player, enemy):
         if self.board.right_border == player.hitbox.y or self.board.left_border == player.hitbox.y:
             player.velocity_y = 0
