@@ -10,10 +10,12 @@ class OrbitingWeapon(Weapon):
     width = 40
     hit = True
     number_image = 0
+    type = "Orbiting"
 
     def __init__(self, item, level, position_x, position_y):
         self.name = item['Name']
-        self.type = item['Shape']
+        self.shape = item['Shape']
+
         self.distance = item['Distance_from_player']
         self.quantity = item['Quantity']
         self.power = item['Power']
