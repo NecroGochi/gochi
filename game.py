@@ -50,7 +50,7 @@ class Game:
         player = Character(self.hero, 1, 0, self.board.width, self.board.height)
         player.add_item(OrbitingWeapon(Book, 1, player.hitbox.x, player.hitbox.y))
         enemies = []
-        new_weapons = [ShootingWeapon(0, 0), AreaWeapon(0, 0)]
+        new_weapons = [ShootingWeapon(Card, 1, 0, 0), AreaWeapon(0, 0)]
         start_time = pygame.time.get_ticks()
         show_stat_up = 0
 
