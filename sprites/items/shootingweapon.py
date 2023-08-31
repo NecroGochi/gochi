@@ -15,12 +15,16 @@ class ShootingWeapon(Weapon):
     number_image = 0
     type = 'Shooting'
 
-    def __init__(self, position_x, position_y):
-        self.name = "Possessed card"
-        self.type = "Rect"
-        self.distance = 300
-        self.quantity = 1
+    def __init__(self, item, level, position_x, position_y):
+        self.name = item['Name']
+        self.shape = item['Shape']
+        self.distance = item['Distance_from_player']
+        self.quantity = item['Quantity']
+        self.power = item['Power']
+        self.speed = item['Speed']
+        self.bonus_level = item['Bonus_level']
         self.image_weapon = self.load_images(item['Images'])
+        self.level = level
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14) / 2
@@ -31,10 +35,6 @@ class ShootingWeapon(Weapon):
             pygame.Rect(position_x * math.cos(self.angles[0]),
                         position_y * math.sin(self.angles[0]), 20, 28)
         ]
-        self.level = 1
-        self.power = 20
-        self.speed = 10
-        self.bonus_level = [5]
 
     @staticmethod
     def load_images(images):
