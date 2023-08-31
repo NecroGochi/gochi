@@ -87,6 +87,12 @@ class ShootingWeapon(Weapon):
                                       self.position_y * math.sin(each), 20, 28))
         self.hitbox = hitbox
 
+    def initialize_start_position(self, player_position_x, player_position_y):
+        self.hitbox = []
+        for each in range(self.quantity):
+            self.choose_angles_by_direction()
+            self.hitbox.append(pygame.Rect(player_position_x, player_position_y, self.width, self.length))
+
     def get_level(self):
         self.power += self.bonus_level["power"]
         self.level += 1
