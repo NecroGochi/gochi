@@ -138,10 +138,10 @@ class Game:
     def push_key(self, event, player):
         if event.key == pygame.K_LEFT:
             player.go_left()
-            self.update_items_status(player, 1)
+            self.update_items_status(player, True)
         elif event.key == pygame.K_RIGHT:
             player.go_right()
-            self.update_items_status(player, 0)
+            self.update_items_status(player, False)
         elif event.key == pygame.K_UP:
             player.go_up()
         elif event.key == pygame.K_DOWN:

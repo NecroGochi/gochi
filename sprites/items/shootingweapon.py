@@ -5,6 +5,7 @@ from sprites.items.weapon import *
 
 class ShootingWeapon(Weapon):
     black = (0, 0, 0)
+    left = True
 
     def __init__(self, position_x, position_y):
         self.name = "Possessed card"
@@ -16,7 +17,6 @@ class ShootingWeapon(Weapon):
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
         self.angle = float((2.0 / float(self.quantity)) * 3.14) / 2
-        self.left = 1
         self.angles_right = [0]
         self.angles_left = [self.angle]
         self.angles = self.angles_left
@@ -59,11 +59,6 @@ class ShootingWeapon(Weapon):
             self.choose_angles_by_direction()
             self.hitbox.append(pygame.Rect(player_position_x, player_position_y, 20, 28))
 
-    def choose_angles_by_direction(self):
-        if self.left == 1:
-            self.angles = self.angles_left
-        else:
-            self.angles = self.angles_right
             self.add_item()
 
     def add_item(self):
@@ -86,6 +81,11 @@ class ShootingWeapon(Weapon):
             hitbox.append(pygame.Rect(self.position_x * math.cos(each),
                                       self.position_y * math.sin(each), 20, 28))
         self.hitbox = hitbox
+    def choose_angles_by_direction(self):
+        if self.left:
+            self.angles = self.angles_left
+        else:
+            self.angles = self.angles_right
 
     def initialize_start_position(self, player_position_x, player_position_y):
         self.hitbox = []

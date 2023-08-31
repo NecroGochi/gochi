@@ -5,7 +5,7 @@ from sprites.items.weapon import *
 
 class OrbitingWeapon(Weapon):
     black = (0, 0, 0)
-    left = 1
+    left = True
     length = 60
     width = 40
     hit = True

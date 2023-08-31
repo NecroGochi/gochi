@@ -6,7 +6,7 @@ class AreaWeapon(Weapon):
     def __init__(self, position_x, position_y):
         self.name = "Cup of cold coffe"
         self.type = "Circle"
-        self.left = 1
+        self.left = True
         self.hitbox = [
             [position_x, position_y, 100]
         ]
