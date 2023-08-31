@@ -43,7 +43,7 @@ class Game:
                          [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
         self.number_of_waves = len(self.monsters) - 1
         self.hero = Necromancer
-        self.item = Book
+        self.item = [Book, Card]
 
     def play(self):
         # Set initial player position
