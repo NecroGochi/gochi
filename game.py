@@ -32,7 +32,7 @@ class Game:
         self.window_height = window_height
         self.window = window
         pygame.display.set_caption("Gochi Game")
-        self.board = Board(self.window_width, self.window_height, 1715, 875, 255, 55)
+        self.board = Board(self.window_width, self.window_height, 1715, 875, 255, 55, "Images/Boards/Plansza.png")
 
         self.bosses = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
         self.monsters = [[Spinach, Dog],
