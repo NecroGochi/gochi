@@ -10,7 +10,8 @@ Book = {
     "Speed": 0.02,
     "Bonus_level": {
             'power': 2,
-            'speed': 0.02
+            'speed': 0.02,
+            'range': 0
         },
     "Images": [PATH_IMAGINES_ITEMS + "ksiazka.png"]
 }
@@ -24,7 +25,8 @@ Card = {
     "Speed": 2.0,
     "Bonus_level": {
             'power': 5,
-            'speed': 0
+            'speed': 0,
+            'range': 0
         },
     "Images": [PATH_IMAGINES_ITEMS + "karta.png"]
 }
