@@ -6,21 +6,22 @@ class Board:
         'x': 960,
         'y': 540
     }
+    scale = 2
+    camera_x = 0
+    camera_y = 0
 
     def __init__(self, window_width, window_height, down_board_border, right_board_border, up_board_border,
-                 left_board_border):
+                 left_board_border, board_picture):
         # Set board properties
-        self.width = 192 * 10
-        self.height = 108 * 10
+        self.width = window_width * self.scale
+        self.height = window_height * self.scale
 
         # Set camera properties
         self.camera_width = window_width
         self.camera_height = window_height
-        self.camera_x = 0
-        self.camera_y = 0
 
         # Set background properties
-        self.background = pygame.image.load("Images/Boards/Plansza.png")
+        self.background = pygame.image.load(board_picture)
         self.background = pygame.transform.scale_by(self.background, 1)
         # 960
         self.background_x = self.camera_x - self.centering['x']
