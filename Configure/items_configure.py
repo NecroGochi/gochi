@@ -28,3 +28,18 @@ Card = {
         },
     "Images": [PATH_IMAGINES_ITEMS + "karta.png"]
 }
+
+Coffee = {
+    "Name": "Cup of cold coffe",
+    "Shape": "Circle",
+    "Distance_from_player": 0,
+    "Quantity": 1,
+    "Power": 1,
+    "Speed": 0,
+    "Bonus_level": {
+            'power': 5,
+            'speed': 0,
+            'range': 10
+        },
+    "Images": [PATH_IMAGINES_ITEMS + "mrozona_kawa.png"]
+}
