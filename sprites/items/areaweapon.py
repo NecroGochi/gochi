@@ -4,27 +4,30 @@ from sprites.items.weapon import *
 
 class AreaWeapon(Weapon):
     type = "Area"
+    left = True
+    radius = 100
+    image_scale = 2
+    render_shift = 10
+    render_image_shift = 90
+    alpha = 200
+    number_image = 0
 
     def __init__(self, position_x, position_y):
         self.name = "Cup of cold coffe"
         self.shape = "Circle"
-        self.left = True
         self.hitbox = [
-            [position_x, position_y, 100]
+            [position_x, position_y, self.radius]
         ]
-        self.image_scale = 2
         self.level = 1
         self.power = 1
         self.bonus_level = [1, 10]
-        self.render_shift = 10
-        self.render_image_shift = 90
         self.image_weapon = pygame.image.load("Images/Monsters/mrozona_kawa.png")
 
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
-            image = self.image_weapon
+            image = self.image_weapon[self.number_image]
             image = pygame.transform.scale(image, (each[2] * self.image_scale, each[2] * self.image_scale))
-            image.set_alpha(200)
+            image.set_alpha(self.alpha)
             window.blit(image, (each[0] - board_camera_x - self.render_image_shift,
                                 each[1] - board_camera_y - self.render_image_shift))
 
