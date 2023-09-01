@@ -12,16 +12,16 @@ class AreaWeapon(Weapon):
     alpha = 200
     number_image = 0
 
-    def __init__(self, position_x, position_y):
-        self.name = "Cup of cold coffe"
-        self.shape = "Circle"
+    def __init__(self, item, level, position_x, position_y):
+        self.name = item["Name"]
+        self.shape = item["Shape"]
+        self.power = item["Power"]
+        self.bonus_level = item["Bonus_level"]
+        self.image_weapon = self.load_images(item['Images'])
+        self.level = level
         self.hitbox = [
             [position_x, position_y, self.radius]
         ]
-        self.level = 1
-        self.power = 1
-        self.bonus_level = [1, 10]
-        self.image_weapon = pygame.image.load("Images/Monsters/mrozona_kawa.png")
 
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
@@ -37,8 +37,8 @@ class AreaWeapon(Weapon):
             each[1] = player_position_y
 
     def get_level(self):
-        self.power += self.bonus_level[0]
+        self.power += self.bonus_level["power"]
         self.level += 1
         if self.level <= 6:
-            self.hitbox[0][2] += self.bonus_level[1]
-            self.render_image_shift += self.bonus_level[1]
+            self.hitbox[0][2] += self.bonus_level["range"]
+            self.render_image_shift += self.bonus_level["range"]
