@@ -23,6 +23,13 @@ class AreaWeapon(Weapon):
             [position_x, position_y, self.radius]
         ]
 
+    @staticmethod
+    def load_images(images):
+        python_images = []
+        for each in images:
+            python_images.append(pygame.image.load(each))
+        return python_images
+
     def render(self, window, board_camera_x, board_camera_y):
         for each in self.hitbox:
             image = self.image_weapon[self.number_image]
