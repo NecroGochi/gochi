@@ -43,14 +43,14 @@ class Game:
                          [Giga_Spinach, Giga_Dog, Giga_Cockroach, Super_Bookworm]]
         self.number_of_waves = len(self.monsters) - 1
         self.hero = Necromancer
-        self.item = [Book, Card]
+        self.item = [Book, Card, Coffee]
 
     def play(self):
         # Set initial player position
         player = Character(self.hero, 1, 0, self.board.width, self.board.height)
         player.add_item(OrbitingWeapon(Book, 1, player.hitbox.x, player.hitbox.y))
         enemies = []
-        new_weapons = [ShootingWeapon(Card, 1, 0, 0), AreaWeapon(0, 0)]
+        new_weapons = [ShootingWeapon(Card, 1, 0, 0), AreaWeapon(Coffee, 1, 0, 0)]
         start_time = pygame.time.get_ticks()
         show_stat_up = 0
 
