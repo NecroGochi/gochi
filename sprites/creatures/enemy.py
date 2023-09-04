@@ -8,10 +8,9 @@ class Enemy(Sprite):
     hit = True
     flip_image = False
 
-    def __init__(self, position_x, position_y, size, color, speed, attack, defense, health, experience, image):
+    def __init__(self, position_x, position_y, size, speed, attack, defense, health, experience, image):
         # Set player properties
         self.size = size
-        self.color = color
         self.speed = speed
         self.attack = attack
         self.defense = defense

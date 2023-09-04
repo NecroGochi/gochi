@@ -3,7 +3,6 @@ PATH_IMAGINES_MONSTERS = "Images/Monsters/"
 
 Spinach = {
     "Name": "Spinach",
-    "Color": (0, 155, 155),
     "Size": 80,
     "Speed": 2,
     "AP": 5,
@@ -15,7 +14,6 @@ Spinach = {
 
 Dog = {
     "Name": "Dog",
-    "Color": (0, 0, 0),
     "Size": 80,
     "Speed": 7,
     "AP": 50,
@@ -27,7 +25,6 @@ Dog = {
 
 Cockroach = {
     "Name": "Cockroach",
-    "Color": (155, 0, 0),
     "Size": 50,
     "Speed": 14,
     "AP": 100,
@@ -39,7 +36,6 @@ Cockroach = {
 
 Super_Spinach = {
     "Name": "Super Spinach",
-    "Color": (100, 200, 200),
     "Size": 80,
     "Speed": 4,
     "AP": 10,
@@ -51,7 +47,6 @@ Super_Spinach = {
 
 Angry_Dog = {
     "Name": "Angry Dog",
-    "Color": (200, 100, 0),
     "Size": 80,
     "Speed": 10,
     "AP": 150,
@@ -63,7 +58,6 @@ Angry_Dog = {
 
 Bookworm = {
     "Name": "Bookworm",
-    "Color": (100, 100, 100),
     "Size": 50,
     "Speed": 8,
     "AP": 100,
@@ -75,7 +69,6 @@ Bookworm = {
 
 Super_Bookworm = {
     "Name": "Bookworm",
-    "Color": (200, 200, 200),
     "Size": 80,
     "Speed": 8,
     "AP": 150,
@@ -87,7 +80,6 @@ Super_Bookworm = {
 
 Ghost = {
     "Name": "Ghost",
-    "Color": (155, 0, 0),
     "Size": 80,
     "Speed": 8,
     "AP": 200,
@@ -101,7 +93,6 @@ Ghost = {
 
 Giga_Spinach = {
     "Name": "Giga Spinach",
-    "Color": (0, 155, 155),
     "Size": 160,
     "Speed": 5,
     "AP": 500,
@@ -113,7 +104,6 @@ Giga_Spinach = {
 
 Giga_Dog = {
     "Name": "Giga Dog",
-    "Color": (0, 0, 0),
     "Size": 160,
     "Speed": 5,
     "AP": 500,
@@ -125,7 +115,6 @@ Giga_Dog = {
 
 Giga_Cockroach = {
     "Name": "Giga Cockroach",
-    "Color": (155, 0, 0),
     "Size": 160,
     "Speed": 6,
     "AP": 600,
@@ -137,7 +126,6 @@ Giga_Cockroach = {
 
 Giga_Bookworm = {
     "Name": "Bookworm",
-    "Color": (100, 100, 100),
     "Size": 160,
     "Speed": 6,
     "AP": 650,
@@ -150,7 +138,6 @@ Giga_Bookworm = {
 # Boss
 Giga_Book = {
     "Name": "Giga Book",
-    "Color": (100, 100, 100),
     "Size": 200,
     "Speed": 7,
     "AP": 700,

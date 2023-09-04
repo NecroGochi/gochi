@@ -265,7 +265,7 @@ class Game:
             self.is_respawn_bosses[turn] = False
             enemy_position_x = random.choice(positions_x)
             enemy_position_y = random.choice(positions_y)
-            boss = [Boss(enemy_position_x, enemy_position_y, type_boss["Size"], type_boss["Color"],
+            boss = [Boss(enemy_position_x, enemy_position_y, type_boss["Size"],
                          type_boss["Speed"], type_boss["AP"], type_boss["DP"], type_boss["HP"],
                          type_boss["Exp"], type_boss["Image"])]
             boss = self.is_last_boss(boss[0], turn)
@@ -282,7 +282,7 @@ class Game:
         for i in range(quantity):
             enemy_position_x = random.choice(positions_x)
             enemy_position_y = random.choice(positions_y)
-            foe = Enemy(enemy_position_x, enemy_position_y, monster["Size"], monster["Color"],
+            foe = Enemy(enemy_position_x, enemy_position_y, monster["Size"],
                         monster["Speed"], monster["AP"], monster["DP"], monster["HP"], monster["Exp"], monster["Image"])
             monsters.append(foe)
         return monsters

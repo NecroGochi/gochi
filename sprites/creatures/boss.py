@@ -6,8 +6,8 @@ class Boss(Enemy):
     boss = True
     final_boss = False
 
-    def __init__(self, position_x, position_y, size, color, speed, attack, defense, health, experience, image):
-        super().__init__(position_x, position_y, size, color, speed, attack, defense, health, experience, image)
+    def __init__(self, position_x, position_y, size, speed, attack, defense, health, experience, image):
+        super().__init__(position_x, position_y, size, speed, attack, defense, health, experience, image)
 
     def render_hp_bar(self, window, color, board_camera_x, board_camera_y):
         pygame.draw.rect(window, color,
