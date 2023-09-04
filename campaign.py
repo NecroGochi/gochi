@@ -3,141 +3,137 @@ import re
 from sprites.creatures.character import *
 
 
-# Initialize Pygame
-pygame.init()
+class Campaign:
+    # colors:
+    black = (0, 0, 0)
+    white = (255, 255, 255)
 
-# Set the window size
-window_width = 192 * 5
-window_height = 108 * 5
-window = pygame.display.set_mode((window_width, window_height))
-pygame.display.set_caption("Camera Scrolling")
+    # Set the text display area
+    text_padding = 20
+    text_font = pygame.font.Font(None, 32)
 
-# Set the text display area
-text_area_width = window_width
-text_area_height = 170
-text_area_x = (window_width - text_area_width) // 2
-text_area_y = (window_height - text_area_height) // 2 + 200
-text_area_color = (255, 255, 255)
-text_color = (0, 0, 0)
-text_padding = 20
-text_font = pygame.font.Font(None, 32)
+    # Set the name display area
+    name_padding = 20
+    name_font = pygame.font.Font(None, 36)
 
-# Set the name display area
-name_area_width = 150
-name_area_height = 40
-name_area_x = (window_width - text_area_width) // 2
-name_area_y = (window_height - text_area_height) // 2 + 160
-name_area_color = (255, 255, 255)
-name_color = (0, 0, 0)
-name_padding = 20
-name_font = pygame.font.Font(None, 36)
+    pattern = re.compile(r'(\[(.*)\])?([/>]{3})?(.*)')
+    running = False
 
-pattern = re.compile(r'(\[(.*)\])?([/>]{3})?(.*)')
-
-
-def display_text(text):
-    # Clear the text area
-    pygame.draw.rect(window, text_area_color, (text_area_x, text_area_y, text_area_width, text_area_height))
-    # Render the text
-    lines = text.split('$')
-    y = text_area_y + text_padding
-    for line in lines:
-        text_surface = text_font.render(line, True, text_color)
-        window.blit(text_surface, (text_area_x + text_padding, y))
-        y += text_surface.get_height() + text_padding
-
-    # Update the display
-    #pygame.display.flip()
-
-
-def display_name(text):
-    # Clear the text area
-    pygame.draw.rect(window, name_area_color, (name_area_x, name_area_y, name_area_width, name_area_height))
-
-    # Render the text
-    lines = text.split('$')
-    y = name_area_y + name_padding
-    for line in lines:
-        name_surface = name_font.render(line, True, name_color)
-        window.blit(name_surface, (name_area_x + name_padding, y))
-        y += name_surface.get_height() + name_padding
-
-    # Update the display
-    #pygame.display.flip()
-
-
-def advance_text(next_line_of_text, next_name):
-    display_text(next_line_of_text)
-    if next_name != '':
-        display_name(next_name)
-
-
-# Set colors
-black = (0, 0, 0)
-white = (255, 255, 255)
-
-# Set font
-font = pygame.font.Font(None, 32)
-
-# Set Fonts
-font_title = pygame.font.Font(None, 64)
-font_options = pygame.font.Font(None, 32)
-
-
-def load_scenario_file(path):
-    # load conf file
-    try:
-        with open(path, 'r', encoding='utf-8') as scenario:
-            scenario_file = []
-            for line in scenario:
-                scenario_file.append(line)
-            return scenario_file
-    except IOError:
-        print("Scenario didn't open")
-        return dict()
-
-
-def running_campaign(text_path, image_path, images):
-    # Set initial player position
-    start_time = pygame.time.get_ticks()
-    # Game loop
-    running = True
-    scenario = load_scenario_file(text_path)
-    next_line_of_text = ""
-    next_name = ""
-    next_picture = ""
+    # Set text
     line = 0
-    num_image = 0
-    count_images = len(images)
-    scale_x = 240
-    scale_y = 392
-    image = pygame.transform.scale(pygame.image.load(image_path + '\\' + images[num_image]), (scale_x, scale_y))
-    image_x = 360
-    image_y = 0
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    # Advance the text when the Space key is pressed
-                    if line < len(scenario):
-                        prepared_text = re.findall(pattern, scenario[line])
-                        next_picture = prepared_text[0][2]
-                        next_line_of_text = prepared_text[0][3]
-                        next_name = prepared_text[0][1]
-                        line += 1
-                    else:
-                        running = False
-                    if next_picture == '>>>' and count_images > num_image + 1:
-                        num_image += 1
-                        image = pygame.transform.scale(pygame.image.load(image_path + '\\' + images[num_image]),
-                                                       (scale_x, scale_y))
+    next_line_of_text = ''
+    next_name = ''
 
-        # Clear the screen
-        window.fill(black)
-        window.blit(image, (image_x, image_y))
-        advance_text(next_line_of_text, next_name)
-        # Update the display
-        pygame.display.flip()
+    # Set picture
+    num_image = 0
+    image_scale = {
+        'x': 240,
+        'y': 392
+    }
+    image_position = {
+        'x': 360,
+        'y': 0
+    }
+
+    def __init__(self, window, window_width, window_height, image_path, images):
+        self.window = window
+        self.window_width = window_width
+        self.window_height = window_height
+        # Set the text display area
+        self.text_area = pygame.Rect(0, self.window_height // 4 * 3,
+                                     window_width, 170)
+        # Set the name display area
+        self.name_area = pygame.Rect(0, self.window_height // 4 * 3 - 40,
+                                     150, 40)
+        self.image_path = image_path
+        self.images = images
+        self.image = pygame.transform.scale(pygame.image.load(self.image_path + '\\' + self.images[self.num_image]),
+                                            (self.image_scale['x'], self.image_scale['y']))
+        self.count_images = len(images)
+
+    def display_text(self, text):
+        # Clear the text area
+        pygame.draw.rect(self.window, self.white, self.text_area)
+        # Render the text
+        text_lines = text.split('$')
+        current_line = self.text_area.y + self.text_padding
+        for text_line in text_lines:
+            text_surface = self.text_font.render(text_line, True, self.black)
+            self.window.blit(text_surface, (self.text_area.x + self.text_padding, current_line))
+            current_line += text_surface.get_height() + self.text_padding
+
+    def display_name(self, text):
+        # Clear the text area
+        pygame.draw.rect(self.window, self.white, self.name_area)
+        # Render the text
+        text_lines = text.split('$')
+        current_line = self.name_area.y + self.name_padding
+        for text_line in text_lines:
+            name_surface = self.name_font.render(text_line, True, self.black)
+            self.window.blit(name_surface, (self.name_area.x + self.name_padding, current_line))
+            current_line += name_surface.get_height() + self.name_padding
+
+    def advance_text(self, next_line_of_text, next_name):
+        self.display_text(next_line_of_text)
+        if next_name != '':
+            self.display_name(next_name)
+
+    @staticmethod
+    def load_scenario_file(path):
+        # load conf file
+        try:
+            with open(path, 'r', encoding='utf-8') as scenario:
+                scenario_file = []
+                for line in scenario:
+                    scenario_file.append(line)
+                return scenario_file
+        except IOError:
+            print("Scenario didn't open")
+            return dict()
+
+    def running_campaign(self, text_path):
+        # Game loop
+        scenario = self.load_scenario_file(text_path)
+        self.image = pygame.transform.scale(pygame.image.load(self.image_path + '\\' + self.images[self.num_image]),
+                                            (self.image_scale['x'], self.image_scale['y']))
+        self.running = True
+        while self.running:
+            self.events_handler(scenario)
+
+            # Clear the screen
+            self.window.fill(self.black)
+            self.window.blit(self.image, (self.image_position['x'], self.image_position['y']))
+            self.advance_text(self.next_line_of_text, self.next_name)
+            # Update the display
+            pygame.display.flip()
+
+    def events_handler(self, scenario):
+        for event in pygame.event.get():
+            self.happened(event, scenario)
+
+    def happened(self, event, scenario):
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            self.triggered(event, scenario)
+
+    def triggered(self, event, scenario):
+        if event.key == pygame.K_SPACE:
+            # Advance the text when the Space key is pressed
+            self.next_scene(scenario)
+
+    def next_scene(self, scenario):
+        next_picture = ''
+        if self.line < len(scenario):
+            prepared_text = re.findall(self.pattern, scenario[self.line])
+            next_picture = prepared_text[0][2]
+            self.next_line_of_text = prepared_text[0][3]
+            self.next_name = prepared_text[0][1]
+            self.line += 1
+        else:
+            self.running = False
+        if next_picture == '>>>' and self.count_images > self.num_image + 1:
+            self.num_image += 1
+            self.image = pygame.transform.scale(pygame.image.load(self.image_path + '\\' + self.images[self.num_image]),
+                                                (self.image_scale['x'], self.image_scale['y']))
