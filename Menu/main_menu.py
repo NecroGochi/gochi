@@ -1,6 +1,6 @@
 import pygame
 import sys
-from campaign import running_campaign
+from campaign import Campaign
 from Configure.new_language_config import *
 from game import Game
 from Menu.menu import Menu
@@ -35,11 +35,13 @@ class MainMenu(Menu):
         elif self.selected_option == 1:
             image_path = 'Images\\Campaign_1'
             images = ['dream_TradingCard.jpg', 'dream_TradingCard(1).jpg', 'dream_TradingCard(3).jpg']
-            running_campaign('Scenario\\scenario_01_pl.txt', image_path, images)
+            campaign = Campaign(self.window, self.window_width, self.window_height, image_path, images)
+            campaign.running_campaign('Scenario\\scenario_01_pl.txt')
             game = Game(self.window, self.window_width, self.window_height)
             game.play()
             images = ['dream_TradingCard(3).jpg', 'dream_TradingCard(4).jpg']
-            running_campaign('Scenario\\scenario_02_pl.txt', image_path, images)
+            campaign = Campaign(self.window, self.window_width, self.window_height, image_path, images)
+            campaign.running_campaign('Scenario\\scenario_02_pl.txt')
         elif self.selected_option == 2:
             # Option menu
             OptionsMenu(self.window, self.window_width, self.window_height, self.font_title,
