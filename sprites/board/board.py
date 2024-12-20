@@ -10,8 +10,7 @@ class Board:
     camera_x = 0
     camera_y = 0
 
-    def __init__(self, window_width, window_height, down_board_border, right_board_border, up_board_border,
-                 left_board_border, board_picture):
+    def __init__(self, window_width, window_height, obstacles, board_picture):
         # Set board properties
         self.width = window_width * self.scale
         self.height = window_height * self.scale
@@ -28,10 +27,13 @@ class Board:
         self.background_y = self.camera_y - self.centering['y']
 
         # Set border
-        self.down_border = down_board_border
-        self.right_border = right_board_border
-        self.up_border = up_board_border
-        self.left_border = left_board_border
+        #self.down_border = down_board_border
+        #self.right_border = right_board_border
+        #self.up_border = up_board_border
+        #self.left_border = left_board_border
+
+        #Set obstacles
+        self.obstacles = obstacles
 
     def update_camera_position(self, position_player_x, position_player_y):
         self.camera_x = position_player_x - self.camera_width // 2
