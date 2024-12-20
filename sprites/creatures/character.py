@@ -106,20 +106,6 @@ class Character(Sprite):
         self.hitbox.x += self.velocity_x
         self.hitbox.y += self.velocity_y
 
-    def collide_board(self, down_board_border, up_board_border, right_board_border, left_board_border):
-        # board border
-        if down_board_border < self.hitbox.x:
-            self.velocity_x = 0
-            self.hitbox.x = down_board_border
-        if up_board_border > self.hitbox.x:
-            self.velocity_x = 0
-            self.hitbox.x = up_board_border
-        if right_board_border < self.hitbox.y:
-            self.velocity_y = 0
-            self.hitbox.y = right_board_border
-        if left_board_border > self.hitbox.y:
-            self.velocity_y = 0
-            self.hitbox.y = left_board_border
     def collide_obstacles(self, obstacles):
         for obstacle in obstacles:
             if self.hitbox.colliderect(obstacle):
