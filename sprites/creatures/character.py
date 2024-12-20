@@ -120,6 +120,13 @@ class Character(Sprite):
         if left_board_border > self.hitbox.y:
             self.velocity_y = 0
             self.hitbox.y = left_board_border
+    def collide_obstacles(self, obstacles):
+        for obstacle in obstacles:
+            if self.hitbox.colliderect(obstacle):
+                self.hitbox.x -= self.velocity_x
+                self.hitbox.y -= self.velocity_y
+                self.velocity_x = 0
+                self.velocity_y = 0
 
     def collide_enemy(self, enemy, time, hit, enemy_attack):
         if self.hitbox.colliderect(enemy) and time % 2 == 0 and hit:
