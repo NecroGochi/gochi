@@ -52,11 +52,27 @@ class Enemy(Sprite):
         else:
             self.flip_image = False
 
-    def collide_weapon(self, weapon, weapon_attack):
+    def collide_weapon(self, weapon, attack_points):
         if self.hitbox.colliderect(weapon):
-            self.actual_health_points = self.actual_health_points - (max(1, round(weapon_attack, self.defense)))
+            self.actual_health_points = self.actual_health_points - (max(1, round(attack_points - self.defense, 0)))
 
-    def collide_weapon_circle(self, weapon, weapon_attack):
-        distance = math.sqrt((weapon[0] - self.hitbox.x) ** 2 + (weapon[1] - self.hitbox.y) ** 2)
-        if distance < weapon[2] + self.size:
-            self.actual_health_points = self.actual_health_points - (max(1, round(weapon_attack, self.defense)))
+    def collide_weapon_circle(self, weapon_position, attack_points):
+        if self.calculate_delta_for_x(weapon_position) >= 0 or self.calculate_delta_for_y(weapon_position) >= 0:
+            self.actual_health_points = self.actual_health_points - (max(1, round(attack_points - self.defense, 0)))
+
+    def calculate_delta_for_x(self, weapon_position):
+        a = 1
+        b = float(-2.0 * float(weapon_position[0]))
+        c = float(weapon_position[0]) ** 2 - (float(weapon_position[2]) ** 2 -
+                                              (float(weapon_position[1]) - float(self.hitbox.y)) ** 2)
+        delta = b ** 2 - (4 * a * c)
+        return delta
+
+    def calculate_delta_for_y(self, weapon_position):
+        a = 1
+        b = float(-2.0 * float(weapon_position[1]))
+        c = float(weapon_position[1]) ** 2 - (float(weapon_position[2]) ** 2 -
+                                              (float(weapon_position[0]) - float(self.hitbox.x)) ** 2)
+        delta = b ** 2 - (4 * a * c)
+        return delta
+
