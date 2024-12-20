@@ -1,6 +1,6 @@
 import sys
 import random
-from board import *
+from sprites.board.board import *
 from sprites.creatures.character import *
 from sprites.creatures.boss import *
 from sprites.items.shootingweapon import *
@@ -32,7 +32,9 @@ class Game:
         self.window_height = window_height
         self.window = window
         pygame.display.set_caption("Gochi Game")
-        self.board = Board(self.window_width, self.window_height, 1715, 875, 255, 55, "Images/Boards/Plansza.png")
+        obstacles = [pygame.Rect(0, 0, 1920, 55), pygame.Rect(0, 900, 1920, 55), pygame.Rect(200, 0, 55, 1080),
+                     pygame.Rect(1750, 0, 55, 1080)]
+        self.board = Board(self.window_width, self.window_height, obstacles, "Images/Boards/Plansza.png")
 
         self.bosses = [None, Giga_Spinach, Giga_Dog, Giga_Cockroach, Giga_Bookworm, Giga_Book]
         self.monsters = [[Spinach, Dog],
@@ -81,8 +83,7 @@ class Game:
         elapsed_time = current_time - start_time
         elapsed_seconds = round(elapsed_time / 1000, 0)
 
-        player.collide_board(self.board.down_border, self.board.up_border, self.board.right_border,
-                             self.board.left_border)
+        player.collide_obstacles(self.board.obstacles)
         player.update_position()
         for item in player.items:
             self.move_item(item, player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
