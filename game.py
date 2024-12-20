@@ -87,7 +87,7 @@ class Game:
         for item in player.items:
             self.move_item(item, player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
         for enemy in enemies:
-            self.move_enemy(player, enemy)
+            enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
         for enemy in enemies:
             show_stat_up = self.collide(enemy, enemies, player, level_up_menu, new_weapons, show_stat_up,
                                         elapsed_seconds)
@@ -165,13 +165,6 @@ class Game:
             item.move(player_x, player_y, player_velocity_x, player_velocity_y)
         else:
             item.move(player_x, player_y)
-
-    def move_enemy(self, player, enemy):
-        if self.board.right_border == player.hitbox.y or self.board.left_border == player.hitbox.y:
-            player.velocity_y = 0
-        if self.board.down_border == player.hitbox.x or self.board.up_border == player.hitbox.x:
-            player.velocity_x = 0
-        enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
 
     def collide(self, enemy, enemies, player, level_up_menu, new_weapons, show_stat_up, elapsed_seconds):
         for weapon in player.items:
