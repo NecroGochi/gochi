@@ -50,7 +50,7 @@ class Game:
     def play(self):
         # Set initial player position
         player = Character(self.hero, 1, 0, self.board.width, self.board.height)
-        player.add_item(OrbitingWeapon(Book, 1, player.hitbox.x, player.hitbox.y))
+        player.add_item(OrbitingWeapon(Book, 1, player.hitbox[0].x, player.hitbox[0].y))
         enemies = []
         new_weapons = [ShootingWeapon(Card, 1, 0, 0), AreaWeapon(Coffee, 1, 0, 0)]
         start_time = pygame.time.get_ticks()
@@ -86,9 +86,9 @@ class Game:
         player.collide_obstacles(self.board.obstacles)
         player.update_position()
         for item in player.items:
-            self.move_item(item, player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
+            self.move_item(item, player.hitbox[0].x, player.hitbox[0].y, player.velocity_x, player.velocity_y)
         for enemy in enemies:
-            enemy.move(player.hitbox.x, player.hitbox.y, player.velocity_x, player.velocity_y)
+            enemy.move(player.hitbox[0].x, player.hitbox[0].y, player.velocity_x, player.velocity_y)
         for enemy in enemies:
             show_stat_up = self.collide(enemy, enemies, player, level_up_menu, new_weapons, show_stat_up,
                                         elapsed_seconds)
@@ -102,7 +102,7 @@ class Game:
             self.generate_enemies(elapsed_seconds, player, enemies)
 
         # Update the camera position based on the player's position
-        self.board.update_camera_position(player.hitbox.x, player.hitbox.y)
+        self.board.update_camera_position(player.hitbox[0].x, player.hitbox[0].y)
         # Update the background position based on the player's position
         self.board.update_background_position()
         # Clear the screen
@@ -112,7 +112,7 @@ class Game:
         # Render game objects based on the camera position
         for item in player.items:
             item.render(self.window, self.board.camera_x, self.board.camera_y)
-        player.render(self.window, self.board.camera_x, self.board.camera_y)
+        player.render_character(self.window, self.board.camera_x, self.board.camera_y)
         for enemy in enemies:
             enemy.render(self.window, self.board.camera_x, self.board.camera_y)
 
@@ -227,13 +227,13 @@ class Game:
         positions_x = []
         positions_y = []
 
-        for position in range(0, player.hitbox.x - 200):
+        for position in range(0, player.hitbox[0].x - 200):
             positions_x.append(position)
-        for position in range(player.hitbox.x + 200, 1920):
+        for position in range(player.hitbox[0].x + 200, 1920):
             positions_x.append(position)
-        for position in range(0, player.hitbox.y - 200):
+        for position in range(0, player.hitbox[0].y - 200):
             positions_y.append(position)
-        for position in range(player.hitbox.y + 200, 1080):
+        for position in range(player.hitbox[0].y + 200, 1080):
             positions_y.append(position)
 
         turn = math.floor(time/60)

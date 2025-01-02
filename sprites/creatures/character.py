@@ -15,8 +15,6 @@ class Character(Sprite):
 
     experience_increase_multiplier = 1000
 
-    flip_image = False
-    number_image = 0
     velocity_x = 0
     velocity_y = 0
 
@@ -33,50 +31,38 @@ class Character(Sprite):
         self.level = level
         self.bonus_level = hero['Bonus_level']
 
-        self.sprite_images = self.load_images(hero['Images'])
+        self.images = self.load_images(hero['Images'])
 
         # shifting the render position - centering the hitbox
-        self.render_shit = self.size // 4
-        self.hitbox = pygame.Rect(board_width // 2, board_height // 2, self.size // 2, self.size // 2)
+        self.render_image_shift = self.size // 4
+        self.hitbox = [pygame.Rect(board_width // 2, board_height // 2, self.size // 2, self.size // 2)]
 
         self.items = []
-
-    @staticmethod
-    def load_images(images):
-        python_images = []
-        for each in images:
-            python_images.append(pygame.image.load(each))
-        return python_images
+        self.number_image = 0
+        self.image_scale = 2
 
     def add_item(self, item):
         self.items.append(item)
         self.items[len(self.items)-1].left = self.items[0].left
 
     # Function to render the player
-    def render(self, window, board_camera_x, board_camera_y):
-        actual_health_point_bar = (self.hitbox.x - board_camera_x - self.render_shit,
-                                   self.hitbox.y + self.size - board_camera_y - self.render_shit,
+    def render_character(self, window, board_camera_x, board_camera_y):
+        actual_health_point_bar = (self.hitbox[0].x - board_camera_x - self.render_image_shift,
+                                   self.hitbox[0].y + self.size - board_camera_y - self.render_image_shift,
                                    self.actual_health_points * self.size / self.health_points,
                                    self.health_point_y_bar_size)
-        lost_health_point_bar = (self.hitbox.x - board_camera_x - self.render_shit +
+        lost_health_point_bar = (self.hitbox[0].x - board_camera_x - self.render_image_shift +
                                  self.actual_health_points * self.size / self.health_points,
-                                 self.hitbox.y + self.size - board_camera_y - self.render_shit,
+                                 self.hitbox[0].y + self.size - board_camera_y - self.render_image_shift,
                                  (self.health_points - self.actual_health_points) * self.size / self.health_points,
                                  self.health_point_y_bar_size)
-        self.render_character(window, board_camera_x, board_camera_y)
-        self.render_bar(actual_health_point_bar, window, self.green)
-        self.render_bar(lost_health_point_bar, window, self.red)
-
-    def render_character(self, window, board_camera_x, board_camera_y):
-        image = self.sprite_images[self.number_image]
-        image = pygame.transform.scale(image, (self.size, self.size))
-        image = pygame.transform.flip(image, self.flip_image, False)
-        window.blit(image, (self.hitbox.x - board_camera_x - self.render_shit,
-                            self.hitbox.y - board_camera_y - self.render_shit))
-        if self.number_image == len(self.sprite_images) - 1:
+        if self.number_image == len(self.images) - 1:
             self.number_image = 0
         else:
             self.number_image += 1
+        self.render(window, board_camera_x, board_camera_y)
+        self.render_bar(actual_health_point_bar, window, self.green)
+        self.render_bar(lost_health_point_bar, window, self.red)
 
     @staticmethod
     def render_bar(bar, window, color):
@@ -84,8 +70,8 @@ class Character(Sprite):
 
     def render_text(self, _string, color, window, board_camera_x, board_camera_y):
         text = self.font_options.render(_string, True, color)
-        text_rect = text.get_rect(center=(self.hitbox.x - board_camera_x - self.render_shit,
-                                          self.hitbox.y + self.size - board_camera_y - self.render_shit))
+        text_rect = text.get_rect(center=(self.hitbox[0].x - board_camera_x - self.render_image_shift,
+                                          self.hitbox[0].y + self.size - board_camera_y - self.render_image_shift))
         window.blit(text, text_rect)
 
     def go_left(self):
@@ -103,19 +89,19 @@ class Character(Sprite):
         self.velocity_y = -self.speed
 
     def update_position(self):
-        self.hitbox.x += self.velocity_x
-        self.hitbox.y += self.velocity_y
+        self.hitbox[0].x += self.velocity_x
+        self.hitbox[0].y += self.velocity_y
 
     def collide_obstacles(self, obstacles):
         for obstacle in obstacles:
-            if self.hitbox.colliderect(obstacle):
-                self.hitbox.x -= self.velocity_x
-                self.hitbox.y -= self.velocity_y
+            if self.hitbox[0].colliderect(obstacle):
+                self.hitbox[0].x -= self.velocity_x
+                self.hitbox[0].y -= self.velocity_y
                 self.velocity_x = 0
                 self.velocity_y = 0
 
     def collide_enemy(self, enemy, time, hit, enemy_attack):
-        if self.hitbox.colliderect(enemy) and time % 2 == 0 and hit:
+        if self.hitbox[0].colliderect(enemy[0]) and time % 2 == 0 and hit:
             self.actual_health_points = self.actual_health_points - (max(1, round(enemy_attack, self.defense)))
 
     def get_experience_points(self, experience_points):

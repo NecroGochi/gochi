@@ -12,7 +12,6 @@ class ShootingWeapon(Weapon):
     length = 28
     width = 20
     hit = True
-    number_image = 0
     type = 'Shooting'
 
     def __init__(self, item, level, position_x, position_y):
@@ -23,7 +22,7 @@ class ShootingWeapon(Weapon):
         self.power = item['Power']
         self.speed = item['Speed']
         self.bonus_level = item['Bonus_level']
-        self.image_weapon = self.load_images(item['Images'])
+        self.images = self.load_images(item['Images'])
         self.level = level
         self.position_x = position_x + self.distance
         self.position_y = position_y + self.distance
@@ -36,27 +35,18 @@ class ShootingWeapon(Weapon):
                         position_y, self.width, self.length)
         ]
 
-    @staticmethod
-    def load_images(images):
-        python_images = []
-        for each in images:
-            python_images.append(pygame.image.load(each))
-        return python_images
-
-    def render(self, window, board_camera_x, board_camera_y):
-        for each in self.hitbox:
-            image = self.image_weapon[self.number_image]
-            image = pygame.transform.scale(image, (each[2], each[2]))
-            window.blit(image, (each[0] - board_camera_x,
-                                each[1] - board_camera_y))
-
     def move(self, player_position_x, player_position_y, player_velocity_x, player_velocity_y):
         number = 0
         self.is_range_reached(player_position_x, player_position_y)
         for each in self.hitbox:
+            previous_x = each.x
             each.x = each.x + self.speed * math.cos(self.angles[number]) + player_velocity_x * 2
             each.y = each.y + self.speed * math.sin(self.angles[number]) + player_velocity_y * 2
             number += 1
+            if previous_x > each.x:
+                self.flip_image = True
+            else:
+                self.flip_image = False
         self.actual_distance += self.speed
 
     def is_range_reached(self, player_position_x, player_position_y):

@@ -9,7 +9,7 @@ Spinach = {
     "DP": 50,
     "HP": 100,
     "Exp": 20,
-    "Image": PATH_IMAGINES_MONSTERS + "szpinak_monster.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "szpinak_monster.png"]
 }
 
 Dog = {
@@ -20,7 +20,7 @@ Dog = {
     "DP": 5,
     "HP": 50,
     "Exp": 30,
-    "Image": PATH_IMAGINES_MONSTERS + "pies.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "pies.png"]
 }
 
 Cockroach = {
@@ -31,7 +31,7 @@ Cockroach = {
     "DP": 100,
     "HP": 1,
     "Exp": 1,
-    "Image": PATH_IMAGINES_MONSTERS + "karaluch.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "karaluch.png"]
 }
 
 Super_Spinach = {
@@ -42,7 +42,7 @@ Super_Spinach = {
     "DP": 100,
     "HP": 200,
     "Exp": 40,
-    "Image": PATH_IMAGINES_MONSTERS + "super_szpinak_monster.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "super_szpinak_monster.png"]
 }
 
 Angry_Dog = {
@@ -53,7 +53,7 @@ Angry_Dog = {
     "DP": 15,
     "HP": 150,
     "Exp": 150,
-    "Image": PATH_IMAGINES_MONSTERS + "mad_pies.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "mad_pies.png"]
 }
 
 Bookworm = {
@@ -64,7 +64,7 @@ Bookworm = {
     "DP": 100,
     "HP": 600,
     "Exp": 200,
-    "Image": PATH_IMAGINES_MONSTERS + "mol.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "mol.png"]
 }
 
 Super_Bookworm = {
@@ -75,7 +75,7 @@ Super_Bookworm = {
     "DP": 150,
     "HP": 800,
     "Exp": 500,
-    "Image": PATH_IMAGINES_MONSTERS + "super_mol.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "super_mol.png"]
 }
 
 Ghost = {
@@ -86,7 +86,7 @@ Ghost = {
     "DP": 150,
     "HP": 800,
     "Exp": 300,
-    "Image": PATH_IMAGINES_MONSTERS + "ghost.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "ghost.png"]
 }
 
 # Midboss
@@ -99,7 +99,7 @@ Giga_Spinach = {
     "DP": 500,
     "HP": 1000,
     "Exp": 200,
-    "Image": PATH_IMAGINES_MONSTERS + "giga_szpinak_monster.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "giga_szpinak_monster.png"]
 }
 
 Giga_Dog = {
@@ -110,7 +110,7 @@ Giga_Dog = {
     "DP": 50,
     "HP": 2500,
     "Exp": 400,
-    "Image": PATH_IMAGINES_MONSTERS + "giga_pies.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "giga_pies.png"]
 }
 
 Giga_Cockroach = {
@@ -121,7 +121,7 @@ Giga_Cockroach = {
     "DP": 600,
     "HP": 3000,
     "Exp": 1000,
-    "Image": PATH_IMAGINES_MONSTERS + "\giga_karaluch.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "\giga_karaluch.png"]
 }
 
 Giga_Bookworm = {
@@ -132,7 +132,7 @@ Giga_Bookworm = {
     "DP": 650,
     "HP": 4000,
     "Exp": 2000,
-    "Image": PATH_IMAGINES_MONSTERS + "giga_mol.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "giga_mol.png"]
 }
 
 # Boss
@@ -144,5 +144,5 @@ Giga_Book = {
     "DP": 700,
     "HP": 21000,
     "Exp": 7000,
-    "Image": PATH_IMAGINES_MONSTERS + "giga_book.png"
+    "Image": [PATH_IMAGINES_MONSTERS + "giga_book.png"]
 }
