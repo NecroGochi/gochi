@@ -22,17 +22,10 @@ class Board:
         # Set background properties
         self.background = pygame.image.load(board_picture)
         self.background = pygame.transform.scale_by(self.background, 1)
-        # 960
         self.background_x = self.camera_x - self.centering['x']
         self.background_y = self.camera_y - self.centering['y']
 
-        # Set border
-        #self.down_border = down_board_border
-        #self.right_border = right_board_border
-        #self.up_border = up_board_border
-        #self.left_border = left_board_border
-
-        #Set obstacles
+        # Set obstacles
         self.obstacles = obstacles
 
     def update_camera_position(self, position_player_x, position_player_y):
