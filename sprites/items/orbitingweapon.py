@@ -43,10 +43,6 @@ class OrbitingWeapon(Weapon):
         for each in self.hitbox:
             image = self.image_weapon[self.number_image]
             image = pygame.transform.scale(image, (each[2], each[3]))
-            pygame.draw.rect(window, self.black,
-                             (each.x - board_camera_x,
-                              each.y - board_camera_y, each.width,
-                              each.height))
             window.blit(image, (each[0] - board_camera_x,
                                 each[1] - board_camera_y))
 
