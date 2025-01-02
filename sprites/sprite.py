@@ -1,10 +1,9 @@
 import pygame
-import os
 
 
 class Sprite:
     hitbox = []
-    images = [pygame.image.load(os.path.join('Images/Heroes/', 'nekromanta_1.png'))]
+    images = []
     number_image = 0
     image_scale = 1
     alpha = 255
