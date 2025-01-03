@@ -179,9 +179,11 @@ class Game:
     @staticmethod
     def collide_enemy_with_weapon(weapon, enemy, player):
         if weapon.shape == "Rect":
-            enemy.collide_weapon(weapon.hitbox[0], player.items[0].power + player.attack)
+            for each in weapon.hitbox:
+                enemy.collide_weapon(each, player.items[0].power + player.attack)
         if weapon.shape == "Circle":
-            enemy.collide_weapon_circle(weapon.hitbox[0], player.items[0].power + player.attack)
+            for each in weapon.hitbox:
+                enemy.collide_weapon_circle(each, player.items[0].power + player.attack)
 
     def killed_enemy(self, enemy, enemies, player, level_up_menu, new_weapons, show_stat_up):
         if enemy.boss:
